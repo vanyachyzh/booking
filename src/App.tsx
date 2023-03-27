@@ -1,25 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import jwtDecode from 'jwt-decode';
 import logo from './logo.svg';
 import './App.css';
+import { GoogleLogin } from '@react-oauth/google';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="App">
+        <div id='signInButton'>nl</div>
+      </div>
+      <GoogleLogin
+        onSuccess={credentialResponse => {
+          console.log(credentialResponse);
+          const userObject = jwtDecode(credentialResponse.credential || "");
+          console.log(userObject)
+        }}
+        onError={() => {
+          console.log('Login Failed');
+        }}
+      />
+    </>
   );
 }
 
