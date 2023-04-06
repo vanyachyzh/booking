@@ -1,0 +1,138 @@
+@import './../../../src/styles/variables.scss';
+@import './../../../src/styles/fonts.scss';
+
+.card {
+  box-shadow: 0px 0px 9px rgba(97, 97, 97, 0.03), 0px 0px 8px rgba(97, 97, 97, 0.1), 0px 0px 6px rgba(97, 97, 97, 0.17), 0px 0px 3px rgba(97, 97, 97, 0.2), 0px 0px 0px rgba(97, 97, 97, 0.2);
+  border: 2px solid black;
+  // margin: 25px;
+  border-radius: $rounding;
+  width: 1038px;
+  border: 1px solid #F1F3F5;
+  padding: 24px;
+  display: flex;
+  gap: 24px;
+  background-color: #fff;
+
+
+  &__carousel {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  &__info {
+    width: 470px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+  }
+
+  &__name {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  &__map {
+    display: block;
+  }
+
+  &__section {
+    // height: min-content;
+    // width: 100%;
+    // border: 1px solid greenyellow;
+  }
+
+  &__stars {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  &__star {
+    width: 16px;
+    height: 16px;
+    background: url("./../../images/iconss/gray-star-filled.svg") center no-repeat;
+  }
+
+  &__features {}
+
+  &__feature {
+    display: inline-block;
+    margin: 0 8px 8px 0;
+    padding: 3px 8px;
+    border: none;
+    // color: #2DC954;
+    background: #EAFAEE;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  // &__views {
+  //   display: block;
+  //   margin-bottom: 8px;
+  // }
+
+  &__popular {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  &__rating {
+    display: block;
+    width: 43px;
+    height: 42px;
+    background: #0AA778;
+    border-radius: $rounding;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    font-style: 20px;
+    font-weight: 500;
+  }
+
+  &__section1 {
+    padding-left: 8px;
+    width: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    height: min-content;
+  }
+
+
+  &__payment {
+    width: 164px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    flex-wrap: wrap;
+    padding-left: 24px;
+    border-left: 1px solid #EFEFEF
+  }
+
+  &__price {
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  &__per {
+    display: block;
+  }
+
+  &__btn {
+    width: 140px;
+    height: 54px;
+    border-radius: 10px;
+    text-align: start;
+    border: none;
+    outline: none;
+    padding-left: 40px;
+    background: url("./../../images/iconss/arrow-right.svg") right 40px center no-repeat #1098F7;
+    cursor: pointer;
+  }
+}

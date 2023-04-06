@@ -1,8 +1,17 @@
 .homepage {
-  width: 100%;
+  margin: 0 auto;
   height: 100vh;
-  background-color: rgb(228, 228, 115);
+}
+
+.containerr {
+  background: linear-gradient(
+    to right,
+    white 0%,
+    white 50%,
+    #F1F3F5 50%,
+    #F1F3F5 100%
+  );
   display: flex;
-  align-items: center;
   justify-content: center;
+  gap: 29px;
 }

@@ -1,10 +1,23 @@
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import { HomePage } from './pages/HomePage';
 import { HotelPage } from './pages/HotelPage';
 import { PaymentPage } from './pages/PaymentPage';
 
 function App() {
+
+  // useEffect(() => {
+  //   fetch("http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/1/reviews", {
+  //     method: "POST",
+  //     body: {
+  //       "authorName": "John Doe",
+  //       "date": "2023-03-27T12:30:00",
+  //       "rating": 4,
+  //       "text": "Nice hotel, would stay again"
+  //   }
+  //   })
+  // }, [])
   return (
     <>
       <Routes>

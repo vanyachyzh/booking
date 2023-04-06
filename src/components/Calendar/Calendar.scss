@@ -1,0 +1,114 @@
+@import './../../../src/styles/variables.scss';
+@import './../../../src/styles/fonts.scss';
+
+$days: "1" 0,
+  "2" 44px,
+  "3" 88px,
+  "4" 132px,
+  "5" 176px,
+  "6" 220px,
+  "7" 264px;
+
+$month-length: 28, 29, 30, 31;
+
+$square-size: 44px;
+$duration: 500ms;
+
+.wrapper {
+  padding: auto;
+  width: min-content;
+}
+
+.week {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $square-size;
+    height: $square-size;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    transition: background-color $duration, transform $duration;
+    cursor: pointer;
+  }
+}
+
+.month {
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 110%;
+  margin-bottom: 24px;
+}
+
+.calendar {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 308px;
+
+  @each $day,
+  $margin in $days {
+    &--start-day--#{$day} {
+      .calendar__cell:first-child {
+        margin-left: $margin;
+      }
+    }
+  }
+
+  @each $day in $month-length {
+    &--month-length--#{$day} {
+      @for $i from $day +1 through 32 {
+        .calendar__cell:nth-child(#{$i}) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.cell {
+  display: block;
+  transition: background-color $duration, transform $duration;
+  cursor: pointer;
+
+  @for $i from 1 through 31 {
+    &:nth-child(#{$i}):before {
+      content: $i + "";
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: $square-size;
+      height: $square-size;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      margin: auto;
+      text-align: center;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 140%;
+      color: $gray;
+    }
+  }
+
+  &:hover:before {
+    background-color: $green;
+    border-radius: $rounding;
+    color: #fff;
+  }
+
+  &:nth-child(n+32) {
+    display: none;
+  }
+}

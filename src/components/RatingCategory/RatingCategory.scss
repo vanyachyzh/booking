@@ -1,0 +1,60 @@
+@import './../../../src/styles/variables.scss';
+@import './../../../src/styles/fonts.scss';
+
+.rcategory {
+
+  &__title {
+    margin-bottom: 24px;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__checkbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+
+  }
+  
+  &__checkbox+label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+  }
+  
+  &__checkbox+label::before {
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 54px;
+    height: 38px;
+    padding-left: 12px;
+    border: 1px solid #adb5bd;
+    background: url("./../../images/iconss/star-filled-gold.svg") 25px 11px no-repeat;
+  }
+
+  &__checkbox--1+label::before { content: '1';}
+  &__checkbox--2+label::before { content: '2';}
+  &__checkbox--3+label::before { content: '3';}
+  &__checkbox--4+label::before { content: '4';}
+  &__checkbox--5+label::before { content: '5';}
+
+  &__checkbox+label:hover::before {
+    border: 1px solid $blueHover;
+  }
+  
+  &__checkbox:checked+label::before {
+    border-color: $blueActive;
+    background-color: #DDF1FF;
+    background-image: url("./../../images/iconss/star-filled-gold.svg");
+  }
+}
