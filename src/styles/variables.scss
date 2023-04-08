@@ -1,3 +1,24 @@
+// Calendar
+
+$days:
+  "1" 0,
+  "2" 44px,
+  "3" 88px,
+  "4" 132px,
+  "5" 176px,
+  "6" 220px,
+  "7" 264px;
+
+$month-length: 28, 29, 30, 31;
+
+$square-size: 44px;
+$duration: 500ms;
+
+$grayX: #F7F9FB;
+$grayXX: #CED4DA;
+$grayXXX: #868E96;
+
+
 $blue: #1098f7;
 $green: #0aa778;
 $light-green: #2dc954;

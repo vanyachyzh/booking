@@ -7,8 +7,19 @@ import { Header } from '../../components/Header';
 import { HotelCard } from '../../components/HotelCard';
 import { HotelList } from '../../components/HotelList';
 import { ExtendedHotelInfo } from '../../types/HotelInfo';
+// import { Input } from '../../components/Field';
+import { LogIn} from '../../components/LogIn';
+import { SignUp } from '../../components/SignUp';
+import { User } from '../../types';
+import { SearchBar } from '../../components/SearchBar';
+import { CalendarButton } from '../../components/CalendarButton';
 
-export const HomePage: React.FC = () => {
+
+type Props = {
+  setUser: React.Dispatch<React.SetStateAction<User | null>>
+}
+
+export const HomePage: React.FC<Props> = ({ setUser }) => {
 
   const [hotels, setHotels] = useState<ExtendedHotelInfo[] | null>(null);
 
@@ -67,13 +78,26 @@ export const HomePage: React.FC = () => {
     ]
   }
 
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
 
   return (
     <>
+
       <div className='homepage'>
         <Header
+          setUser={setUser}
+        />
+
+        {/* <CalendarButton
+          // isOpen={isOpen}
+          // setIsOpen={setIsOpen}
+        /> */}
+
+        <SearchBar
           cards={hotels}
           setCards={setHotels}
+          setUser={setUser}
         />
 
         <div className="containerr">
@@ -81,15 +105,18 @@ export const HomePage: React.FC = () => {
           <SideBar />
 
           <div className='homepage__cards'>
-            {/* <HotelList
-              hotels={[hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp]}
-            /> */}
 
             <HotelList
-              hotels={hotels}
-            /> 
+              hotels={[hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp]}
+            />
 
-            {/* <HotelCard hotel={hotelTemp}/>
+
+
+            {/* <HotelList
+              hotels={hotels}
+            />
+
+            <HotelCard hotel={hotelTemp}/>
 
             <HotelCard hotel={hotelTemp}/>
 

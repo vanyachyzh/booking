@@ -1,0 +1,122 @@
+@import './../../../src/styles/variables.scss';
+@import './../../../src/styles/fonts.scss';
+
+
+.field {
+  // width: 554px;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__label {
+    width: 200px;
+    margin-bottom: 4px;
+  }
+
+  &__error {
+    display: inline-block;
+    width: 200px;
+
+    padding-left: 20px;
+    background: url("./../../images/iconss/alert-circle.svg") left center no-repeat;
+    color: #E23A3A;
+  }
+
+  &__warning {
+    display: inline-block;
+    width: 300px;
+
+    padding-left: 20px;
+    background: url("./../../images/iconss/alert-triangle.svg") left center no-repeat;
+    color: #FFD324;
+  }
+
+
+
+  &__input {
+    margin-bottom: 2px;
+    position: relative;
+    height: 54px;
+
+    padding-left: 16px;
+    border: 1.5px solid transparent;
+    outline: none;
+    border-radius: $rounding;
+    background: #F7F9FB;
+
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    font-family: 'Satoshi';
+    color: #868E96;
+
+    transition: $transition;
+
+    &::placeholder {
+      font-size: 16px;
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 500;
+      color: $gray;
+    }
+
+    &:hover {
+      // color: #868E96;
+      background: #DEE2E6;
+    }
+
+    &:focus {
+      border: 1.5px solid $blue;
+      background: #fff;
+      color: #212529;
+    }
+
+    &--success {
+      border: 1px solid #2DC954;
+
+      background: url("./../../images/iconss/circle-check.svg") right 19px center no-repeat;
+    }
+
+    &--success:focus {
+      border: 1px solid #2DC954;
+
+      background: url("./../../images/iconss/circle-check.svg") right 19px center no-repeat;
+    }
+
+    &--success:hover {
+      border: 1px solid #2DC954;
+
+      background: url("./../../images/iconss/circle-check.svg") right 19px center no-repeat;
+    }
+
+    &--warning {
+      color: #FFD324;
+
+      // background: url("./../../images/iconss/circle-check.svg") right center no-repeat;
+    }
+  }
+}
+
+
+// .eye {
+//   width: 24px;
+//   height: 24px;
+//   position: absolute;
+//   right: 17px;
+//   top: 43px;
+//   border: none;
+//   outline: none;
+//   cursor: pointer;
+
+//   background: url("./../../images/iconss/eye-default.svg") center / 24px 24px no-repeat transparent;
+
+//   &:hover {
+//     background: url("./../../images/iconss/eye-hover.svg") center / 24px 24px no-repeat;
+//   }
+
+//   &:focus {
+//     background: url("./../../images/iconss/eye-active.svg") center / 24px 24px no-repeat;
+//   }
+// }

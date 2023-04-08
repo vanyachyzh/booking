@@ -191,11 +191,15 @@ export const SideBar: React.FC = () => {
           defaultValue={budgetFrom}
           onChange={onBudgetFromChange}
           className='side-bar__budget-from'
-          type="text"
+          type="number"
+          min={0}
+          step={1}
           placeholder='From'
         />
-        <input    name='Budget'       defaultValue={budgetTo}
-          onChange={onBudgetToChange} className='side-bar__budget-to' type="text" placeholder='To' />
+        <input              type="number"
+          min={0}
+          step={1} name='Budget'       defaultValue={budgetTo}
+          onChange={onBudgetToChange} className='side-bar__budget-to'  placeholder='To' />
       </div>
 
       <div className='side-bar__category'>

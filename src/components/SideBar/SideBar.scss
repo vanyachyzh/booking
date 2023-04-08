@@ -72,6 +72,10 @@
       color: $gray;
     }
 
+    &:focus::placeholder {
+      color: transparent;
+    }
+
     &:hover {
       border: 1.5px solid #495057;
       background: #fff;
@@ -102,6 +106,10 @@
       font-family: 'Satoshi', sans-serif;
       font-weight: 500;
       color: $gray;
+    }
+
+    &:focus::placeholder {
+      color: transparent;
     }
 
     &:hover {

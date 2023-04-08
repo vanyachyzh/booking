@@ -9,7 +9,6 @@
 
 .header {
   width: 100%;
-  border: 1px solid rgba(214, 213, 213, 0.352);
 
   &__container-x {
     padding: 126px 0;
@@ -109,16 +108,21 @@
     }
   }
 
+  &__date-btn {
+    width: 173px;
+  }
+
   &__in-btn {
-    width: 169px;
+    width: 173px;
     height: 54px;
-    padding-right: 18px;
+    padding-left: 48px;
 
     border: 1.5px solid #fff;
     border-radius: $rounding;
     background: url("./../../images/iconss/calendar-up.svg") 13px center / 24px 24px no-repeat #fff;
 
-    text-align: end;
+    text-align: start;
+    cursor: pointer;
 
     &:active {
       border: 1.5px solid $blue;
@@ -127,15 +131,17 @@
   }
 
   &__out-btn {
-    width: 169px;
+    width: 173px;
     height: 54px;
-    padding-right: 18px;
+    padding-left: 48px;
 
     border: 1.5px solid #fff;
     border-radius: $rounding;
     background: url("./../../images/iconss/calendar-up.svg") 13px center / 24px 24px no-repeat #fff;
 
-    text-align: end;
+
+    text-align: start;
+    cursor: pointer;
 
     &:active {
       border: 1.5px solid $blue;
@@ -207,7 +213,7 @@
     }
   }
 
-  &__months {
+  &__calendars {
     position: absolute;
     right: -194px;
     top: 85px;
@@ -247,6 +253,7 @@
     top: 192px;
     background: url("./../../images/iconss/chevron-left.svg") center no-repeat;
     border: none;
+    cursor: pointer;
   }
 
   &__button--next {
@@ -255,6 +262,7 @@
     top: 192px;
     background: url("./../../images/iconss/chevron-right.svg") center no-repeat;
     border: none;
+    cursor: pointer;
   }
 
   &__search-btn {
