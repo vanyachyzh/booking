@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../../App';
 import { Link, useOutletContext, useSearchParams, useNavigate } from 'react-router-dom';
-import { Calendarjjjjj } from '../Calendar';
 import './SearchBar.scss'
 import { getSearchWith, getSimilarCities } from '../../utils';
 import { ExtendedHotelInfo } from '../../types/HotelInfo';
 import Logo from './../../images/Logo InnJoy.svg';
 import { User, BookingDate } from '../../types';
-import { Calendar } from '../GPTCalendar';
+import { Calendar } from '../Calendar';
 import { CalendarButton } from '../CalendarButton';
+import { CalendarUpIcon } from '../Icon/Icon';
+import { CapacitySelector } from '../CapacitySelector';
 // import DateRangeSelector from '../GPTCalendar/GPTCalendar';
 // import Calendar from 'react-calendar';
 
@@ -202,6 +203,7 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
 
             <div className="header__date-btn">
               <CalendarButton
+                type='up'
                 isOpen={isFirstOpen}
                 setIsOpen={setIsFirstOpen}
                 setIsAnother={setIsSecondOpen}
@@ -244,6 +246,7 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
 
             <div className="header__date-btn">
               <CalendarButton
+                type='down'
                 isOpen={isSecondOpen}
                 setIsOpen={setIsSecondOpen}
                 setIsAnother={setIsFirstOpen}
@@ -284,25 +287,7 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
               Capacity
             </span>
 
-            <div className='header__capacity text-xx-gray-500'>
-              <button
-                className='header__minus'
-                type="button"
-                onClick={() => setPeopleAmount(prev => prev - 1 < 1 ? 1 : prev - 1)}
-              >
-              </button>
-
-              <span className='header__amount'>
-                {peopleAmount}
-              </span>
-
-              <button
-                className='header__plus'
-                type="button"
-                onClick={() => setPeopleAmount(prev => prev + 1)}
-              >
-              </button>
-            </div>
+            <CapacitySelector />
           </div>
 
           <button className='header__search-btn button'>

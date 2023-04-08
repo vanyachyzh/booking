@@ -1,0 +1,46 @@
+@import './../../../src/styles/variables.scss';
+@import './../../../src/styles/fonts.scss';
+
+.capacity-selector {
+  display: flex;
+  width: 118px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 54px;
+  padding: 0 16px;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: $rounding;
+  cursor: pointer;
+  transition: $transition;
+  text-align: start;
+
+  &__amount {
+    width: 30px;
+    text-align: center;
+    user-select: none;
+  }
+
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    background-color: $grayX;
+    border-radius: 100%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $grayXX;
+    }
+  }
+
+  &--active {
+    color: #000;
+  }
+}

@@ -11,6 +11,7 @@
   &__sort {
     display: block;
     width: max-content;
+    user-select: none;
   }
 
   &__select {

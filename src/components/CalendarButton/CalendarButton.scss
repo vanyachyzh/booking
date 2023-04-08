@@ -7,12 +7,13 @@
   height: 54px;
   padding-left: 48px;
   padding-right: 18px;
-  background-color: $grayX;
+  background-color: #fff;
   border: 1px solid transparent;
   border-radius: $rounding;
   cursor: pointer;
   transition: $transition;
   text-align: start;
+  user-select: none;
 
   &__img {
     position: absolute;
@@ -22,11 +23,12 @@
     cursor: pointer;
   }
 
-  &:hover {
-    border: 1px solid $blueDefault;
-  }
-
   &--active {
     color: #000;
+  }
+
+  &:hover {
+    background-color: $grayX;
+    border: 1px solid $grayXXXX;
   }
 }

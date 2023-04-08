@@ -5,11 +5,13 @@ import './CalendarButton.scss'
 import Carousel from '../Carousel/Carousel';
 import { ExtendedHotelInfo } from '../../types';
 import Image from './../../images/iconss/calendar-up.svg'
-import { CalendarUpIcon } from '../Icon/Icon';
+import { MinusIcon, CalendarUpIcon, CalendarDownIcon } from '../Icon/Icon';
 import classNames from 'classnames';
+import { IconState } from '../../types';
 
 
 type Props = {
+  type: 'up' | 'down',
   title: string,
   dropdown: React.ReactNode,
   isOpen: boolean,
@@ -18,8 +20,9 @@ type Props = {
 };
 
 
-export const CalendarButton: React.FC<Props> = ({ title, dropdown, isOpen, setIsOpen, setIsAnother }) => {
+export const CalendarButton: React.FC<Props> = ({ title, dropdown, isOpen, setIsOpen, setIsAnother, type }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [iconSate, setIconState] = useState<IconState>(IconState.Default)
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
@@ -30,7 +33,7 @@ export const CalendarButton: React.FC<Props> = ({ title, dropdown, isOpen, setIs
 
   useEffect(() => {
     if (isOpen) {
-      setIconColor('#1098F7')
+      setIconState(IconState.Active);
     }
   }, [isOpen])
 
@@ -51,26 +54,27 @@ export const CalendarButton: React.FC<Props> = ({ title, dropdown, isOpen, setIs
       && !clickedElement.classList.contains('calendar-button__dropdown')
       ) {
       setIsOpen(false)
-      setIconColor('#868E96')
+      setIconState(IconState.Default);
     }
   };
 
   const handleClick = (): void => {
     setIsOpen(prev => !prev);
     setIsAnother(false);
+    // setIconState(IconState.Default);
   };
 
   const onMouseOver = () => {
-    setIconColor('#1098F7');
+    setIconState(IconState.Hover);
   };
 
   const onMouseOut = () => {
     if (!isOpen) {
-      setIconColor('#868E96');
+      setIconState(IconState.Default);
     }
   };
 
-  const [iconColor, setIconColor] = useState('#868E96');
+  // const [iconColor, setIconColor] = useState('#868E96');
 
   return (
     <>
@@ -85,7 +89,9 @@ export const CalendarButton: React.FC<Props> = ({ title, dropdown, isOpen, setIs
         )}
       >
         <div className='calendar-button__img'>
-          <CalendarUpIcon color={iconColor} />
+          {type === 'up'
+            ? (<CalendarUpIcon state={iconSate} />)
+            : (<CalendarDownIcon state={iconSate} />)}
         </div>
         {title}
       </button>
@@ -98,7 +104,6 @@ export const CalendarButton: React.FC<Props> = ({ title, dropdown, isOpen, setIs
           {dropdown}
         </div>
       )}
-
     </>
   )
 

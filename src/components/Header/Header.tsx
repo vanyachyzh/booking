@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../../App';
 import { Link, useOutletContext, useSearchParams, useNavigate } from 'react-router-dom';
-import { Calendarjjjjj } from '../Calendar';
 import './Header.scss'
 import { getSearchWith, getSimilarCities } from '../../utils';
 import { ExtendedHotelInfo } from '../../types/HotelInfo';

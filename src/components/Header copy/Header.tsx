@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../../App';
 import { Link, useOutletContext, useSearchParams, useNavigate } from 'react-router-dom';
-import { Calendarjjjjj } from '../Calendar';
 import './Header.scss'
 import { getSearchWith, getSimilarCities } from '../../utils';
 import { ExtendedHotelInfo } from '../../types/HotelInfo';
@@ -208,70 +207,6 @@ export const Header: React.FC<Props> = ({ cards, setCards, setUser }) => {
             )}
           </div>
 
-
-          <div className='header__item'>
-            <span className='header__inscription text-x-white-500'>
-              Check-in
-            </span>
-
-            <button
-              className='header__in-btn text-xx-gray-500'
-              onClick={() => {
-                setIsInVisible(prev => !prev)
-                setIsOutVisible(false);
-              }}
-            >Choose a date</button>
-            {isInVisible && (
-              <div className='header__months'>
-                <input
-                  onClick={handleClickPrev}
-                  type="button"
-                  className="header__button--prev"
-                />
-
-                <Calendarjjjjj date={currentDate} />
-                <Calendarjjjjj date={nextDate} />
-
-                <input
-                  onClick={handleClickNext}
-                  type="button"
-                  className="header__button--next"
-                />
-              </div>
-            )}
-          </div>
-
-          <div className='header__item'>
-            <span className='header__inscription text-x-white-500'>
-              Check-out
-            </span>
-
-            <button
-              className='header__out-btn text-xx-gray-500'
-              onClick={() => {
-                setIsOutVisible(prev => !prev)
-                setIsInVisible(false);
-              }}
-            >Choose a date</button>
-
-            {isOutVisible && (
-              <div className='header__months'>
-                <input
-                  type="button"
-                  className="header__button--prev"
-                />
-
-                <Calendarjjjjj date={currentDate} />
-                <Calendarjjjjj date={nextDate} />
-
-
-                <input
-                  type="button"
-                  className="header__button--next"
-                />
-              </div>
-            )}
-          </div>
 
           <div className='header__item'>
             <span className='header__inscription text-x-white-500'>
