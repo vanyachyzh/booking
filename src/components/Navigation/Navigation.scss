@@ -1,0 +1,19 @@
+@import './../../../src/styles/variables.scss';
+@import './../../../src/styles/fonts.scss';
+
+
+.navigation {
+  padding: 17px 0 17px 56px;
+  background-color: $grayXX;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  &__link {
+    padding-right: 20px;
+    margin-right: 8px;
+    display: block;
+    width: min-content;
+    background: url("./../../images/iconss/chevron-small-right.svg") right no-repeat;
+  }
+}

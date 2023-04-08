@@ -3,7 +3,7 @@
 
 
 .field {
-  // width: 554px;
+  width: 350px;
 
   position: relative;
 
@@ -14,6 +14,19 @@
   &__label {
     width: 200px;
     margin-bottom: 4px;
+  }
+
+  &__eye {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
   }
 
   &__error {
@@ -37,6 +50,7 @@
 
 
   &__input {
+
     margin-bottom: 2px;
     position: relative;
     height: 54px;
@@ -73,6 +87,16 @@
       color: #212529;
     }
 
+    &--active {
+      border: 1.5px solid $blue;
+      background: #fff;
+      color: #212529;
+    }
+
+    &--hidden {
+      font-variant: 'circular';
+    }
+
     &--success {
       border: 1px solid #2DC954;
 
@@ -94,7 +118,6 @@
     &--warning {
       color: #FFD324;
 
-      // background: url("./../../images/iconss/circle-check.svg") right center no-repeat;
     }
   }
 }

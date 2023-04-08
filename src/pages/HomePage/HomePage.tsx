@@ -8,11 +8,13 @@ import { HotelCard } from '../../components/HotelCard';
 import { HotelList } from '../../components/HotelList';
 import { ExtendedHotelInfo } from '../../types/HotelInfo';
 // import { Input } from '../../components/Field';
-import { LogIn} from '../../components/LogIn';
+import { LogIn } from '../../components/LogIn';
 import { SignUp } from '../../components/SignUp';
 import { User } from '../../types';
 import { SearchBar } from '../../components/SearchBar';
 import { CalendarButton } from '../../components/CalendarButton';
+import { Field } from '../../components/Field';
+import { Navigation } from '../../components/Navigation';
 
 
 type Props = {
@@ -80,7 +82,7 @@ export const HomePage: React.FC<Props> = ({ setUser }) => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-
+  const [v, setV] = useState('HELLODDD')
   return (
     <>
 
@@ -88,6 +90,16 @@ export const HomePage: React.FC<Props> = ({ setUser }) => {
         <Header
           setUser={setUser}
         />
+
+        <Navigation />
+{/* 
+        <Field
+          value={v}
+          setValue={setV}
+          placeholder='Enter your email address'
+          helper='Invalid email'
+          type='password'
+        /> */}
 
         {/* <CalendarButton
           // isOpen={isOpen}

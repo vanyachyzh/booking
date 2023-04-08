@@ -9,6 +9,7 @@ import { User } from './types';
 import { ErrorPage } from './pages/ErrorPage';
 import { SuccesPage } from './pages/SuccessPage';
 import { LogIn } from './components/LogIn';
+import { PhotoPage } from './pages/PhotoPage';
 
 export const AuthContext = React.createContext<User | null>(null);
 
@@ -45,6 +46,7 @@ function App() {
             <Route path="login" element={<LogIn setUser={setUser}/>} />
             <Route path="signup" element={<SignUp setUser={setUser} />} />
             <Route path="payment" element={<PaymentPage />} />
+            <Route path="photos" element={<PhotoPage setUser={setUser} />} />
             <Route path="*" element={<SuccesPage setUser={setUser}/>} />
           </Route>
         </Routes>
