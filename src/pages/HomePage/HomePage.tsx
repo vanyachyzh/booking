@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { getSomething, postComment } from '../../api/booking';
 import './HomePage.scss'
 import { SideBar } from '../../components/SideBar';
@@ -23,15 +23,58 @@ type Props = {
 
 export const HomePage: React.FC<Props> = ({ setUser }) => {
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  // const ratingAll = searchParams.getAll("rating");
+  // const priceFrom = searchParams.get('priceFrom') || '';
+  // const priceTo = searchParams.get('priceTo') || '';
+  // const rating = searchParams.get('rating') || '';
+  // const apartmentType = searchParams.get('apartmentType') || '';
+  // const stars = searchParams.get('stars') || '';
+
   const [hotels, setHotels] = useState<ExtendedHotelInfo[] | null>(null);
 
 
   useEffect(() => {
-    fetch('http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/all')
+    const url = 'http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/all'
+    console.log(url)
+    fetch(url)
       .then(r => r.json())
       // .then(r => console.log(r))
       .then(r => setHotels(r))
   }, [])
+
+
+  useEffect(() => {
+    if ("" !== searchParams.toString()) {
+      const url = `http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/filters?${searchParams.toString()}`;
+      fetch(url)
+        .then(r => r.json())
+        // .then(r => console.log(r))
+        .then(r => setHotels(r))
+      console.log(url)
+    } else {
+      const url = 'http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/all'
+      console.log(url)
+      fetch(url)
+        .then(r => r.json())
+        // .then(r => console.log(r))
+        .then(r => setHotels(r))
+    }
+
+  }, [searchParams])
+
+  const onPressButton = () => {
+    fetch('http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/sort?sortBy=price desc', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(hotels)
+    })
+      .then(r => r.json())
+      .then(r => console.log(r))
+  }
 
 
   const hotelTemp = {
@@ -87,12 +130,12 @@ export const HomePage: React.FC<Props> = ({ setUser }) => {
     <>
 
       <div className='homepage'>
+        <button onClick={onPressButton}>POSTTTTTTTT</button>
         <Header
           setUser={setUser}
         />
 
-        <Navigation />
-{/* 
+        {/* 
         <Field
           value={v}
           setValue={setV}
@@ -118,25 +161,16 @@ export const HomePage: React.FC<Props> = ({ setUser }) => {
 
           <div className='homepage__cards'>
 
-            <HotelList
-              hotels={[hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp]}
-            />
-
-
-
             {/* <HotelList
+              hotels={[hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp, hotelTemp]}
+            /> */}
+
+
+
+            <HotelList
               hotels={hotels}
             />
 
-            <HotelCard hotel={hotelTemp}/>
-
-            <HotelCard hotel={hotelTemp}/>
-
-            <HotelCard hotel={hotelTemp}/>
-
-            <HotelCard hotel={hotelTemp}/>
-
-            <HotelCard hotel={hotelTemp}/> */}
 
           </div>
 

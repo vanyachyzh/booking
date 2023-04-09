@@ -12,7 +12,7 @@ import './FilterSelector.scss'
 
 export const FilterSelector = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const city = searchParams.get('city') || '';
+  const filter = searchParams.get('filter') || '';
   const [isOpen, setIsOpen] = useState(false);
 
 
@@ -41,12 +41,12 @@ export const FilterSelector = () => {
   };
 
 
-  const insertCity = (city: string) => {
+  const insertCity = (filter: string) => {
 
     setSearchParams(
       getSearchWith(
         searchParams,
-        { city },
+        { filter },
       ),
     );
   }
@@ -63,7 +63,7 @@ export const FilterSelector = () => {
             { 'filter__select--active': isOpen },
             )}
         >
-          { city ? city : 'Recommended'}
+          { filter ? filter : 'Recommended'}
         </button>
 
 
