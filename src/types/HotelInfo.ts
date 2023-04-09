@@ -10,6 +10,9 @@ export interface HotelInfo {
   rating: number,
   stars: number,
   telephone: string,
+  amenities: string[],
+  allReviews: number,
+  price: string 
 };
 
 export interface ExtendedHotelInfo extends HotelInfo {

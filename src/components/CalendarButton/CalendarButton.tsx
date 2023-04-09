@@ -79,6 +79,7 @@ export const CalendarButton: React.FC<Props> = ({ title, dropdown, isOpen, setIs
   return (
     <>
       <button
+        type="button"
         onClick={handleClick}
         onMouseOver={onMouseOver}
         onMouseOut={onMouseOut}

@@ -18,6 +18,8 @@ export const SideBar: React.FC = () => {
   const apartmentType = searchParams.get('apartmentType') || '';
   const stars = searchParams.get('stars') || '';
 
+  console.log(filteredKeysArray)
+
   const multipleCheckboxHandler = (
     searchParameterKey: string,
     searchParameterValue: string,
@@ -138,23 +140,26 @@ export const SideBar: React.FC = () => {
 
       <div className='side-bar__filter'>
         {filteredKeysArray.map(key => {
-          if (key) {
+          if (key === 'priceMin'
+            || key === 'priceMax'
+            || key === 'apartmentType'
+            || key === 'stars'
+            || key === 'rating'
+            ) {
             return (
               <button
                 className='side-bar__delete-btn'
                 onClick={() => uncheckCategory(key)}
               >
-                {key}
+                {key === 'priceMin' && 'Budget'}
+                {key === 'priceMax' && 'Budget'}
+                {key === 'apartmentType' && 'Type of property'}
+                {key === 'stars' && 'Property class'}
+                {key === 'rating' && 'Guest rating'}
               </button>
             )
           }
         })}
-      </div>
-
-      <div className='side-bar__category'>
-        <RatingCategory
-          handler={singleCheckboxHandler}
-        />
       </div>
 
       <span className='side-bar__title text-xx-black-700'>Budget</span>
@@ -178,7 +183,7 @@ export const SideBar: React.FC = () => {
           type="number"
           min={0}
           step={1}
-          placeholder='From'
+          placeholder='To'
         />
       </div>
 
@@ -196,12 +201,12 @@ export const SideBar: React.FC = () => {
               "TOWNHOUSE"]
           }
           values={
-            ["BED",
-              "TEPEE",
-              "APARTMENT",
-              "VILLA",
-              "ROOM",
-              "TOWNHOUSE"]
+            ["Bed",
+              "Tere",
+              "Apartament",
+              "Villa",
+              "Room",
+              "Townhouse"]
           }
         />
       </div>
@@ -213,21 +218,26 @@ export const SideBar: React.FC = () => {
           title="Guest rating"
           searchParameterKey="rating"
           searchParameterValues={
-            ["1",
-              "2",
-              "3",
+            ["10",
+              "8",
+              "6",
               "4",
-              "5",
-              "6"]
+              "2"
+            ]
           }
           values={
-            ["1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6"]
+            ["10 Excellent",
+              "8+ Good",
+              "6+ Okay",
+              "4+ Poor",
+              "2+ Terrible"]
           }
+        />
+      </div>
+
+      <div className='side-bar__category'>
+        <RatingCategory
+          handler={singleCheckboxHandler}
         />
       </div>
     </form>

@@ -25,4 +25,8 @@
   &:active {
     background-color: $blueActive;
   }
+
+  &:disabled {
+    background-color: #DDF1FF;
+  }
 }

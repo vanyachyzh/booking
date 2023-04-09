@@ -11,22 +11,18 @@ import { IconState } from '../../types';
 
 
 type Props = {
-  type: 'up' | 'down',
-  title: string,
-  dropdown: React.ReactNode,
-  isOpen: boolean,
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  setIsAnother: React.Dispatch<React.SetStateAction<boolean>>,
+  value: number,
+  setValue: React.Dispatch<React.SetStateAction<number>>
 };
 
 const MIN_AMOUNT_PEOPLE = 1;
 const MAX_AMOUNT_PEOPLE = 20;
 
 
-export const CapacitySelector = () => {
+export const CapacitySelector: React.FC<Props> = ({ value, setValue}) => {
   const [iconSateL, setIconStateL] = useState<IconState>(IconState.DefaultGray)
   const [iconSateR, setIconStateR] = useState<IconState>(IconState.DefaultGray)
-  const [amount, setAmount] = useState(MIN_AMOUNT_PEOPLE);
+  // const [amount, setAmount] = useState(MIN_AMOUNT_PEOPLE);
 
 
   return (
@@ -37,7 +33,7 @@ export const CapacitySelector = () => {
         onMouseLeave={() => setIconStateL(IconState.DefaultGray)}
         className='capacity-selector__btn'
         type="button"
-        onClick={() => setAmount(prev => prev - 1 > MIN_AMOUNT_PEOPLE
+        onClick={() => setValue(prev => prev - 1 > MIN_AMOUNT_PEOPLE
           ? prev - 1
           : MIN_AMOUNT_PEOPLE)}
       >
@@ -45,7 +41,7 @@ export const CapacitySelector = () => {
       </button>
 
       <span className='capacity-selector__amount'>
-        {amount}
+        {value}
       </span>
 
       <button
@@ -53,7 +49,7 @@ export const CapacitySelector = () => {
         onMouseLeave={() => setIconStateR(IconState.DefaultGray)}
         className='capacity-selector__btn'
         type="button"
-        onClick={() => setAmount(prev => prev + 1 < MAX_AMOUNT_PEOPLE
+        onClick={() => setValue(prev => prev + 1 < MAX_AMOUNT_PEOPLE
           ? prev + 1
           : MAX_AMOUNT_PEOPLE)}
       >

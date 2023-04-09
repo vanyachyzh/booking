@@ -93,6 +93,7 @@ export const Calendar: React.FC<Props> = ({ currentDate, bookingDate, setBooking
       )}
       >
         <button
+        type="button"
           key={i}
           className={classNames(
             'day',

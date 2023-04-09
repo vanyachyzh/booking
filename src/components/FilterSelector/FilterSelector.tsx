@@ -4,15 +4,17 @@ import { Link, useParams, useSearchParams } from 'react-router-dom';
 import className from 'classnames';
 import { getSearchWith } from '../../utils';
 import './FilterSelector.scss'
+import { ExtendedHotelInfo, HotelInfo } from '../../types';
 
-// type Props = {
-//   users: User[] | null,
-//   setSelectedPost: React.Dispatch<React.SetStateAction<Post | null>>,
-// };
+type Props = {
+  hotels: ExtendedHotelInfo[],
+  setHotels: React.Dispatch<React.SetStateAction<ExtendedHotelInfo[] | null>>
+}
 
-export const FilterSelector = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const filter = searchParams.get('filter') || '';
+export const FilterSelector: React.FC<Props> = ({ hotels, setHotels }) => {
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // const filter = searchParams.get('filter') || '';
+  const [currentSort, setCurrentSort]= useState('')
   const [isOpen, setIsOpen] = useState(false);
 
 
@@ -29,8 +31,6 @@ export const FilterSelector = () => {
     console.log(clickedElement)
     if (!clickedElement.classList.contains('filter')
       && !clickedElement.classList.contains('filter__select')
-      && !clickedElement.classList.contains('filter__list')
-      && !clickedElement.classList.contains('filter__option')
       ) {
       setIsOpen(false)
     }
@@ -40,18 +40,32 @@ export const FilterSelector = () => {
     setIsOpen(prev => !prev);
   };
 
+  const sorts = [
+    {key: 'price', order: 'asc', name: 'Price (lowest first)'},
+    {key: 'price', order: 'desc', name: 'Price (highest first)'},
+    {key: 'rating', order: 'asc', name: 'Guest rating (lowest first)'},
+    {key: 'rating', order: 'desc', name: 'Guest rating (highest first)'},
+    {key: 'recommended', order: 'asc', name: 'Recommended (lowest first)'},
+    {key: 'recommended', order: 'desc', name: 'Recommended (highest first)'},
+    {key: 'stars', order: 'asc', name: 'Property class (lowest first)'},
+    {key: 'stars', order: 'desc', name: 'Property class (highest first)'},
+  ]
 
-  const insertCity = (filter: string) => {
-
-    setSearchParams(
-      getSearchWith(
-        searchParams,
-        { filter },
-      ),
-    );
+  const onPressButton = (type: string, order: string, name: string) => {
+    fetch(`http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/sort?sortBy=${type} ${order}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(hotels)
+    })
+      .then(r => r.json())
+      .then(r => {
+        setHotels(r);
+        setCurrentSort(name);
+      })
   }
-
-  const filters = ['hjfhsdjfh0', 'sdsdsada', 'sdadas']
 
   return (
       <div className='filter'>
@@ -63,19 +77,19 @@ export const FilterSelector = () => {
             { 'filter__select--active': isOpen },
             )}
         >
-          { filter ? filter : 'Recommended'}
+          { currentSort || 'Out of order'}
         </button>
 
 
         {isOpen && (
           <div className='filter__list'>
-            {filters.map(city => (
+            {sorts.map(sort => (
               <button
-                onClick={() => insertCity(city)}
-                key={city}
+                onClick={() => onPressButton(sort.key, sort.order, sort.name)}
+                key={sort.name}
                 className="filter__option text-x-black-500"
               >
-                {city}
+                {sort.name}
               </button>
             ))}
           </div>

@@ -83,7 +83,7 @@
     border: 1.5px solid #fff;
     outline: none;
     border-radius: $rounding;
-    background: url("./../../images/iconss/map-pin-default.svg") 15px 14px / 24px 24px no-repeat #fff;
+    background: #fff;
 
     font-family: 'Satoshi', sans-serif;
     font-weight: 500;
@@ -99,12 +99,10 @@
 
     &:hover {
       border: 1.5px solid #495057;
-      background: url("./../../images/iconss/map-pin-hover.svg") 15px 14px / 24px 24px no-repeat #fff;
     }
 
     &:focus {
       border: 1.5px solid $blue;
-      background: url("./../../images/iconss/map-pin-active.svg") 15px 14px / 24px 24px no-repeat #fff;
     }
   }
 
@@ -149,25 +147,25 @@
     }
   }
 
-  &__option {
-    margin-bottom: 8px;
-    display: block;
-    width: 100%;
+  // &__option {
+  //   margin-bottom: 8px;
+  //   display: block;
+  //   width: 100%;
 
-    padding: 10px 0 10px 72px;
-    background-color: transparent;
-    border: none;
-    background: url("./../../images/iconss/map-pin-default.svg") 24px center / 32px no-repeat #fff;
+  //   padding: 10px 0 10px 72px;
+  //   background-color: transparent;
+  //   border: none;
+  //   background: url("./../../images/iconss/map-pin-default.svg") 24px center / 32px no-repeat #fff;
 
-    text-align: start;
-    cursor: pointer;
-    transition: $transition;
+  //   text-align: start;
+  //   cursor: pointer;
+  //   transition: $transition;
 
 
-    &:hover {
-      background: url("./../../images/iconss/map-pin-active.svg") 24px center / 32px no-repeat #F1F3F5;
-    }
-  }
+  //   &:hover {
+  //     background: url("./../../images/iconss/map-pin-active.svg") 24px center / 32px no-repeat #F1F3F5;
+  //   }
+  // }
 
   &__profile {
     position: relative;
@@ -239,6 +237,14 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+  }
+
+  &__icon {
+    position: absolute;
+    bottom: 16px;
+    left: 17px;
+    // background-color: red;
+    z-index: 7;
   }
 
   &__amount {
