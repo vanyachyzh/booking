@@ -2,7 +2,9 @@
 @import './../../../src/styles/fonts.scss';
 @import './../../../src/styles/button.scss';
 
+
 .photo-page {
+  position: relative;
   width: 100%;
 
   &__photos {
@@ -35,6 +37,12 @@
   }
 
   &__nav {
-    margin-bottom: 24px;
+    margin-bottom: 17px;
+  }
+
+  &__btn {
+    padding-left: 30px;
+    margin: 0 0 27px 56px;
+    background: url("./../../images/iconss/back-arrow.svg") left 0 center no-repeat;
   }
 }
