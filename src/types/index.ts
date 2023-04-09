@@ -5,3 +5,4 @@ export * from './Error';
 export * from './User';
 export * from './BookingDate';
 export * from './IconState';
+export * from './Category';

@@ -44,24 +44,24 @@ export const HomePage: React.FC<Props> = ({ setUser }) => {
   }, [])
 
 
-  useEffect(() => {
-    if ("" !== searchParams.toString()) {
-      const url = `http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/filters?${searchParams.toString()}`;
-      fetch(url)
-        .then(r => r.json())
-        // .then(r => console.log(r))
-        .then(r => setHotels(r))
-      console.log(url)
-    } else {
-      const url = 'http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/all'
-      console.log(url)
-      fetch(url)
-        .then(r => r.json())
-        // .then(r => console.log(r))
-        .then(r => setHotels(r))
-    }
+  // useEffect(() => {
+  //   if ("" !== searchParams.toString()) {
+  //     const url = `http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/filters?${searchParams.toString()}`;
+  //     fetch(url)
+  //       .then(r => r.json())
+  //       // .then(r => console.log(r))
+  //       .then(r => setHotels(r))
+  //     console.log(url)
+  //   } else {
+  //     const url = 'http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/all'
+  //     console.log(url)
+  //     fetch(url)
+  //       .then(r => r.json())
+  //       // .then(r => console.log(r))
+  //       .then(r => setHotels(r))
+  //   }
 
-  }, [searchParams])
+  // }, [searchParams])
 
   const onPressButton = () => {
     fetch('http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/sort?sortBy=price desc', {
