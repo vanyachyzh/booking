@@ -1,6 +1,7 @@
 @import './../../../src/styles/variables.scss';
 @import './../../../src/styles/fonts.scss';
 @import './../../../src/styles/button.scss';
+@import './../../../src/styles/CSStransition.scss';
 
 .container {
   width: 1440px;
@@ -13,7 +14,7 @@
   &__container-x {
     padding: 126px 0;
 
-    background: url("./../../images/Backgroung\ Iamge\ 1\ \(montains\).png") bottom center / cover no-repeat;
+    background: url("./../../images/unsplash_gE08jRp3Qw4.svg") center / cover no-repeat;
   }
 
   // &__nav {
@@ -42,7 +43,7 @@
     gap: 24px;
 
     border-radius: $rounding;
-    background-color: rgba(2, 33, 24, 0.8);
+    background-color: rgba(2, 33, 24, 0.5);
   }
 
   &__item {
@@ -78,7 +79,7 @@
     position: relative;
     width: 554px;
     height: 54px;
-    padding-left: 44px;
+    padding-left: 48px;
 
     border: 1.5px solid #fff;
     outline: none;
@@ -89,12 +90,22 @@
     font-weight: 500;
     font-size: 16px;
     transition: $transition;
+    
 
     &::placeholder {
       font-size: 16px;
       font-family: 'Satoshi', sans-serif;
       font-weight: 500;
       color: $gray;
+      transition: $transition;
+    }
+
+    &:hover::placeholder {
+      color: #495057;
+    }
+
+    &:focus::placeholder {
+      color: transparent;
     }
 
     &:hover {
@@ -103,6 +114,7 @@
 
     &:focus {
       border: 1.5px solid $blue;
+      color: #212529;
     }
   }
 
@@ -146,26 +158,42 @@
       background: url("./../../images/iconss/calendar-up-a.svg") 13px center / 24px 24px no-repeat #fff;
     }
   }
+  &__option-container {
+    position: relative;
+    margin-bottom: 8px;
 
-  // &__option {
-  //   margin-bottom: 8px;
-  //   display: block;
-  //   width: 100%;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 
-  //   padding: 10px 0 10px 72px;
-  //   background-color: transparent;
-  //   border: none;
-  //   background: url("./../../images/iconss/map-pin-default.svg") 24px center / 32px no-repeat #fff;
+  &__option {
 
-  //   text-align: start;
-  //   cursor: pointer;
-  //   transition: $transition;
+    display: block;
+    width: 100%;
 
+    padding: 10px 0 10px 72px;
+    background-color: transparent;
+    border: none;
+    background: #fff;
 
-  //   &:hover {
-  //     background: url("./../../images/iconss/map-pin-active.svg") 24px center / 32px no-repeat #F1F3F5;
-  //   }
-  // }
+    text-align: start;
+    cursor: pointer;
+    transition: $transition;
+
+    &:hover {
+      background: #F1F3F5;
+    }
+  }
+
+  &__icon-option {
+    position: absolute;
+    top: 50%;
+    left: 29px;
+    width: 32px;
+    height: 32px;
+    transform: translateY(-50%);
+  }
 
   &__profile {
     position: relative;

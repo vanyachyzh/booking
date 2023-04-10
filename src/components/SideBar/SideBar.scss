@@ -1,5 +1,6 @@
 @import './../../../src/styles/variables.scss';
 @import './../../../src/styles/fonts.scss';
+@import './../../../src/styles/CSStransition.scss';
 
 
 .side-bar {
@@ -20,7 +21,10 @@
     border-radius: 4px;
     color: $gray;
     background: url("./../../images/iconss/x.svg") right 8px center / 20px no-repeat #F7F9FB;
-
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-size: 14px;
+    line-height: 140%;
     font-weight: 500;
     font-size: 14px;
     line-height: 140%;
@@ -64,12 +68,14 @@
     font-family: 'Satoshi', sans-serif;
     font-weight: 500;
     font-size: 16px;
+    transition: $transition;
 
     &::placeholder {
       font-size: 16px;
       font-family: 'Satoshi', sans-serif;
       font-weight: 500;
       color: $gray;
+      transition: $transition;
     }
 
     &:focus::placeholder {
@@ -100,12 +106,14 @@
     font-family: 'Satoshi', sans-serif;
     font-weight: 500;
     font-size: 16px;
+    transition: $transition;
 
     &::placeholder {
       font-size: 16px;
       font-family: 'Satoshi', sans-serif;
       font-weight: 500;
       color: $gray;
+      transition: $transition;
     }
 
     &:focus::placeholder {
@@ -152,6 +160,7 @@
 
   &__category {
     margin-bottom: 40px;
+    transition: margin 0.3s ease-out;
   }
 
   &__adjusments {
@@ -165,4 +174,46 @@
     width: 16px;
     background: url("../../images/icons/Adjusments.svg") no-repeat center;
   }
+}
+
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in-out;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}
+
+
+.my-element-enter {
+  opacity: 0;
+  transform: translateY(-50px);
+}
+
+.my-element-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.my-element-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.my-element-exit-active {
+  opacity: 0;
+  transform: translateY(-50px);
+  transition: opacity 300ms, transform 300ms;
 }

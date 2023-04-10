@@ -7,6 +7,22 @@ import { ExtendedHotelInfo } from '../../types';
 import { FilterSelector } from '../FilterSelector';
 import { useSearchParams } from 'react-router-dom';
 
+function reverseTransformString(str: string) {
+  // Замінюємо всі входження "%20" на пробіли за допомогою методу replace() та регулярного виразу.
+  str = str.replace(/%20/g, ' ');
+
+  // Розділяємо рядок на слова за допомогою методу split() та пробілу.
+  const words = str.split(' ');
+
+  // Перетворюємо першу літеру кожного слова на велику, а інші - на малу.
+  const transformedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
+
+  // Об'єднуємо слова знову разом за допомогою методу join().
+  const transformedString = transformedWords.join(' ');
+
+  return transformedString;
+}
+
 type Props = {
   hotels: ExtendedHotelInfo[] | null
   setHotels: React.Dispatch<React.SetStateAction<ExtendedHotelInfo[] | null>>
@@ -29,7 +45,7 @@ export const HotelList: React.FC<Props> = ({ hotels, setHotels }) => {
     <div className="hotel-list">
       <div className="hotel-list__top-section">
         <span className='hotel-list__amount title-x-black-700'>
-          {`${capitalizeWords(city) || 'Somewhere'}: ${hotels?.length} properties`}
+          {`${reverseTransformString(city) || 'Somewhere'}: ${hotels?.length} properties`}
         </span>
         <div className='hotel-list__section-x'>
           <FilterSelector

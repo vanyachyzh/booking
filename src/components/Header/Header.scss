@@ -11,6 +11,11 @@
   width: 100%;
   border: 1px solid rgba(214, 213, 213, 0.352);
 
+  &__icon {
+    transition: $transition;
+    
+  }
+
   &__container-x {
     padding: 126px 0;
 
@@ -55,19 +60,6 @@
     flex-wrap: wrap;
   }
 
-  &__list {
-    position: absolute;
-    right: 0;
-    top: 85px;
-    z-index: 2;
-
-    width: 100%;
-
-    padding: 24px 0;
-    background-color: #fff;
-    border-radius: $rounding;
-    box-shadow: $shadow;
-  }
 
   &__inscription {
     display: block;
@@ -106,26 +98,6 @@
     &:active {
       border: 1.5px solid $blue;
       background: url("./../../images/iconss/calendar-up-a.svg") 13px center / 24px 24px no-repeat #fff;
-    }
-  }
-
-  &__option {
-    margin-bottom: 8px;
-    display: block;
-    width: 100%;
-
-    padding: 10px 0 10px 72px;
-    background-color: transparent;
-    border: none;
-    background: url("./../../images/iconss/map-pin-default.svg") 24px center / 32px no-repeat #fff;
-
-    text-align: start;
-    cursor: pointer;
-    transition: $transition;
-
-
-    &:hover {
-      background: url("./../../images/iconss/map-pin-active.svg") 24px center / 32px no-repeat #F1F3F5;
     }
   }
 

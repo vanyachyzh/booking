@@ -13,9 +13,10 @@
   background-color: #fff;
   border: 1px solid transparent;
   border-radius: $rounding;
-  cursor: pointer;
+  cursor: default;
   transition: $transition;
   text-align: start;
+
 
   &__amount {
     width: 30px;
@@ -37,6 +38,14 @@
 
     &:hover {
       background-color: $grayXX;
+    }
+
+    &:disabled {
+      cursor: default;
+    }
+
+    &:hover:disabled {
+      background-color: $grayX;
     }
   }
 

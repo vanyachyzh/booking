@@ -40,6 +40,7 @@
     padding-left: 12px;
     border: 1px solid #adb5bd;
     background: url("./../../images/iconss/star-filled-gold.svg") 25px 11px no-repeat;
+    transition: $transition;
   }
 
   &__checkbox--1+label::before { content: '1';}

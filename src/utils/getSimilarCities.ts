@@ -1,4 +1,4 @@
-import { ExtendedHotelInfo } from "../types/HotelInfo";
+import { ExtendedHotelInfo, HotelInfo } from "../types/HotelInfo";
 
 // export function getSimilarCities(cities: ExtendedHotelInfo[] | null, query: string): string[] {
 //   const filteredCities = cities?.filter((city) =>
@@ -32,18 +32,21 @@ export function getSimilarCities(
 //   return matchingCities;
 // }
 
-export function searchCityByQuery(hotels: ExtendedHotelInfo[] | null, query: string): string[] {
+export function searchCityByQuery(
+  hotels: HotelInfo[] | null,
+  query: string
+): string[] {
   if (!hotels) {
     return [];
   }
 
-  const matchingCities = hotels.filter(hotel => hotel.city.toLowerCase().includes(query.toLowerCase()))
-                               .map(hotel => hotel.city)
-                               .filter((city, index, cities) => cities.indexOf(city) === index)
-                               .slice(0, 4);
+  const matchingCities = hotels
+    .filter((hotel) => hotel.city.toLowerCase().includes(query.toLowerCase()))
+    .map((hotel) => hotel.city)
+    .filter((city, index, cities) => cities.indexOf(city) === index)
+    .slice(0, 4);
   return matchingCities;
 }
-
 
 // function removeDuplicates(arr: string[] | undefined): string[] {
 //   return Array.from(new Set(arr));

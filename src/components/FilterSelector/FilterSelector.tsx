@@ -1,5 +1,7 @@
 /* eslint-disable no-unneeded-ternary */
 import React, { useState, useEffect } from 'react';
+// import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import className from 'classnames';
 import { getSearchWith } from '../../utils';
@@ -14,7 +16,7 @@ type Props = {
 export const FilterSelector: React.FC<Props> = ({ hotels, setHotels }) => {
   // const [searchParams, setSearchParams] = useSearchParams();
   // const filter = searchParams.get('filter') || '';
-  const [currentSort, setCurrentSort]= useState('')
+  const [currentSort, setCurrentSort] = useState('')
   const [isOpen, setIsOpen] = useState(false);
 
 
@@ -30,7 +32,7 @@ export const FilterSelector: React.FC<Props> = ({ hotels, setHotels }) => {
     const clickedElement = event.target as HTMLElement;
     if (!clickedElement.classList.contains('filter')
       && !clickedElement.classList.contains('filter__select')
-      ) {
+    ) {
       setIsOpen(false)
     }
   };
@@ -40,14 +42,14 @@ export const FilterSelector: React.FC<Props> = ({ hotels, setHotels }) => {
   };
 
   const sorts = [
-    {key: 'price', order: 'asc', name: 'Price (lowest first)'},
-    {key: 'price', order: 'desc', name: 'Price (highest first)'},
-    {key: 'rating', order: 'asc', name: 'Guest rating (lowest first)'},
-    {key: 'rating', order: 'desc', name: 'Guest rating (highest first)'},
-    {key: 'recommended', order: 'asc', name: 'Recommended (lowest first)'},
-    {key: 'recommended', order: 'desc', name: 'Recommended (highest first)'},
-    {key: 'stars', order: 'asc', name: 'Property class (lowest first)'},
-    {key: 'stars', order: 'desc', name: 'Property class (highest first)'},
+    { key: 'price', order: 'asc', name: 'Price (lowest first)' },
+    { key: 'price', order: 'desc', name: 'Price (highest first)' },
+    { key: 'rating', order: 'asc', name: 'Guest rating (lowest first)' },
+    { key: 'rating', order: 'desc', name: 'Guest rating (highest first)' },
+    { key: 'recommended', order: 'asc', name: 'Recommended (lowest first)' },
+    { key: 'recommended', order: 'desc', name: 'Recommended (highest first)' },
+    { key: 'stars', order: 'asc', name: 'Property class (lowest first)' },
+    { key: 'stars', order: 'desc', name: 'Property class (highest first)' },
   ]
 
   const onPressButton = (type: string, order: string, name: string) => {
@@ -67,32 +69,36 @@ export const FilterSelector: React.FC<Props> = ({ hotels, setHotels }) => {
   }
 
   return (
-      <div className='filter'>
-        <span className='filter__sort'>Sort by:</span>
-        <button
-          onClick={handleClick}
-          className={className(
-            'filter__select text-xx-black-500',
-            { 'filter__select--active': isOpen },
-            )}
-        >
-          { currentSort || 'Out of order'}
-        </button>
-
-
-        {isOpen && (
-          <div className='filter__list'>
-            {sorts.map(sort => (
-              <button
-                onClick={() => onPressButton(sort.key, sort.order, sort.name)}
-                key={sort.name}
-                className="filter__option text-x-black-500"
-              >
-                {sort.name}
-              </button>
-            ))}
-          </div>
+    <div className='filter'>
+      <span className='filter__sort'>Sort by:</span>
+      <button
+        onClick={handleClick}
+        className={className(
+          'filter__select text-xx-black-500',
+          { 'filter__select--active': isOpen },
         )}
-      </div>
+      >
+        {currentSort || 'Out of order'}
+      </button>
+
+      <CSSTransition
+        in={isOpen}
+        timeout={300}
+        classNames="my-node"
+        unmountOnExit
+      >
+        <div className='filter__list'>
+          {sorts.map(sort => (
+            <button
+              onClick={() => onPressButton(sort.key, sort.order, sort.name)}
+              key={sort.name}
+              className="filter__option text-x-black-500"
+            >
+              {sort.name}
+            </button>
+          ))}
+        </div>
+      </CSSTransition>
+    </div>
   );
 };

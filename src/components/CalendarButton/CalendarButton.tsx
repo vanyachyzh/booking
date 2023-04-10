@@ -14,13 +14,15 @@ type Props = {
   type: 'up' | 'down',
   title: string,
   dropdown: React.ReactNode,
-  isOpen: boolean,
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  isActive: boolean,
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>,
   setIsAnother: React.Dispatch<React.SetStateAction<boolean>>,
+  // leftActive: React.Dispatch<React.SetStateAction<boolean>>,
+  // rightActive: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 
-export const CalendarButton: React.FC<Props> = ({ title, dropdown, isOpen, setIsOpen, setIsAnother, type }) => {
+export const CalendarButton: React.FC<Props> = ({ title, dropdown, isActive, setIsActive: setIsOpen, setIsAnother, type }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [iconSate, setIconState] = useState<IconState>(IconState.Default)
 
@@ -31,11 +33,14 @@ export const CalendarButton: React.FC<Props> = ({ title, dropdown, isOpen, setIs
     };
   }, []);
 
-  useEffect(() => {
-    if (isOpen) {
-      setIconState(IconState.Active);
-    }
-  }, [isOpen])
+
+  // useEffect(() => {
+  //   if (title !== "Choose a date" && type === "up") {
+  //     setIsAnother(true);
+  //   }
+  // }, [title]);
+
+
 
   const handleClickOutside = (event: MouseEvent) => {
     const clickedElement = event.target as HTMLElement;
@@ -53,40 +58,55 @@ export const CalendarButton: React.FC<Props> = ({ title, dropdown, isOpen, setIs
       && !clickedElement.classList.contains('calendar-button__dropdown')
       ) {
       setIsOpen(false)
-      setIconState(IconState.Default);
+      // setIconState(IconState.Default);
     }
   };
+
 
   const handleClick = (): void => {
     setIsOpen(prev => !prev);
     setIsAnother(false);
-    // setIconState(IconState.Default);
   };
 
-  const onMouseOver = () => {
-    setIconState(IconState.Hover);
-  };
 
-  const onMouseOut = () => {
-    if (!isOpen) {
-      setIconState(IconState.Default);
+  const [isFocused, setIsFocused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (!isFocused) {
+      setIconState(IconState.Hover);
     }
   };
 
-  // const [iconColor, setIconColor] = useState('#868E96');
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    if (!isFocused) {
+      setIconState(IconState.Default);
+    }
+
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+    setIconState(IconState.Active);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+    setIconState(IconState.Default);
+  };
 
   return (
     <>
       <button
         type="button"
         onClick={handleClick}
-        onMouseOver={onMouseOver}
-        onMouseOut={onMouseOut}
-        className={classNames(
-          'calendar-button',
-          'text-xx-gray-500',
-          { 'calendar-button--active': isOpen }
-        )}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className='calendar-button text-xx-gray-500'
       >
         <div className='calendar-button__img'>
           {type === 'up'
@@ -96,7 +116,7 @@ export const CalendarButton: React.FC<Props> = ({ title, dropdown, isOpen, setIs
         {title}
       </button>
 
-      {isOpen && (
+      {isActive && (
         <div
           ref={dropdownRef}
           className='calendar-button__dropdown'

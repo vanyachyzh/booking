@@ -1,3 +1,6 @@
+@import './../../../src/styles/variables.scss';
+@import './../../../src/styles/fonts.scss';
+
 .carousel {
   margin: 0 auto;
   width: 260px;
@@ -28,6 +31,7 @@
     left: 8px;
     transform: translateY(-50%);
     cursor: pointer;
+    transition: $transition;
   }
 
   
@@ -43,6 +47,7 @@
     right: 8px;
     transform: translateY(-50%);
     cursor: pointer;
+    transition: $transition;
   }
 
   &__points {

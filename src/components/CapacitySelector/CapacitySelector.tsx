@@ -19,23 +19,31 @@ const MIN_AMOUNT_PEOPLE = 1;
 const MAX_AMOUNT_PEOPLE = 20;
 
 
-export const CapacitySelector: React.FC<Props> = ({ value, setValue}) => {
+export const CapacitySelector: React.FC<Props> = ({ value, setValue }) => {
   const [iconSateL, setIconStateL] = useState<IconState>(IconState.DefaultGray)
   const [iconSateR, setIconStateR] = useState<IconState>(IconState.DefaultGray)
-  // const [amount, setAmount] = useState(MIN_AMOUNT_PEOPLE);
+
 
 
   return (
     <div
       className='capacity-selector text-xx-gray-500'>
       <button
-        onMouseOver={() => setIconStateL(IconState.HoverGray)}
+        onMouseEnter={() => setIconStateL(IconState.HoverGray)}
         onMouseLeave={() => setIconStateL(IconState.DefaultGray)}
         className='capacity-selector__btn'
         type="button"
-        onClick={() => setValue(prev => prev - 1 > MIN_AMOUNT_PEOPLE
-          ? prev - 1
-          : MIN_AMOUNT_PEOPLE)}
+        name="left"
+        disabled={value === 1}
+        onClick={() => {
+          setValue(prev => prev - 1 > MIN_AMOUNT_PEOPLE
+            ? prev - 1
+            : MIN_AMOUNT_PEOPLE)
+
+          if (value === 2) {
+            setIconStateL(IconState.DefaultGray)
+          }
+        }}
       >
         <MinusIcon state={iconSateL} />
       </button>
@@ -45,13 +53,21 @@ export const CapacitySelector: React.FC<Props> = ({ value, setValue}) => {
       </span>
 
       <button
-        onMouseOver={() => setIconStateR(IconState.HoverGray)}
+        onMouseEnter={() => setIconStateR(IconState.HoverGray)}
         onMouseLeave={() => setIconStateR(IconState.DefaultGray)}
         className='capacity-selector__btn'
         type="button"
-        onClick={() => setValue(prev => prev + 1 < MAX_AMOUNT_PEOPLE
-          ? prev + 1
-          : MAX_AMOUNT_PEOPLE)}
+        name="right"
+        disabled={value === 20}
+        onClick={() => {
+          setValue(prev => prev + 1 < MAX_AMOUNT_PEOPLE
+            ? prev + 1
+            : MAX_AMOUNT_PEOPLE)
+
+          if (value === 19) {
+            setIconStateR(IconState.DefaultGray)
+          }
+        }}
       >
         <PlusIcon state={iconSateR} />
       </button>

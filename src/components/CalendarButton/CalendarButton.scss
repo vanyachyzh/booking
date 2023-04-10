@@ -21,14 +21,23 @@
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+    transition: $transition;
   }
 
   &--active {
     border: 1px solid $blueDefault;
+    color: #212529;
   }
 
   &:hover {
     background-color: $grayX;
     border: 1px solid $grayXXXX;
+    color: #495057;;
+  }
+
+  &:focus {
+    background-color: #fff;
+    border: 1px solid $blueDefault;
+    color: #212529;;
   }
 }

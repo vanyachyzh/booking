@@ -1,5 +1,6 @@
 @import './../../../src/styles/variables.scss';
 @import './../../../src/styles/fonts.scss';
+@import './../../../src/styles/CSStransition.scss';
 
 .category {
 
@@ -42,6 +43,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 50% 50%;
+    transition: $transition;
   }
 
   &__checkbox+label:hover::before {
@@ -90,4 +92,23 @@
       background: url("./../../images/iconss/chevron-up-hover.svg") center right no-repeat;
     }
   }
+}
+
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in-out;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
 }

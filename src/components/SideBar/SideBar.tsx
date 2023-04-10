@@ -1,4 +1,5 @@
 import React from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './SideBar.scss';
 import { useSearchParams } from 'react-router-dom';
 import { getSearchWith } from '../../utils';
@@ -137,29 +138,41 @@ export const SideBar: React.FC = () => {
         </button>
       </section>
 
+
+
       <div className='side-bar__filter'>
-        {filteredKeysArray.map(key => {
-          if (key === 'priceMin'
-            || key === 'priceMax'
-            || key === 'apartmentType'
-            || key === 'stars'
-            || key === 'rating'
+        <TransitionGroup>
+          {filteredKeysArray.map(key => {
+            if (key === 'priceMin'
+              || key === 'priceMax'
+              || key === 'apartmentType'
+              || key === 'stars'
+              || key === 'rating'
             ) {
-            return (
-              <button
-                className='side-bar__delete-btn'
-                onClick={() => uncheckCategory(key)}
-              >
-                {key === 'priceMin' && 'Budget'}
-                {key === 'priceMax' && 'Budget'}
-                {key === 'apartmentType' && 'Type of property'}
-                {key === 'stars' && 'Property class'}
-                {key === 'rating' && 'Guest rating'}
-              </button>
-            )
-          }
-        })}
+              return (
+                <CSSTransition
+                  key={key}
+                  classNames='fade'
+                  timeout={300}
+                >
+                  <button
+                    className='side-bar__delete-btn'
+                    onClick={() => uncheckCategory(key)}
+                  >
+                    {key === 'priceMin' && 'Budget'}
+                    {key === 'priceMax' && 'Budget'}
+                    {key === 'apartmentType' && 'Type of property'}
+                    {key === 'stars' && 'Property class'}
+                    {key === 'rating' && 'Guest rating'}
+                  </button>
+                </CSSTransition>
+              )
+            }
+          })}
+        </TransitionGroup>
       </div>
+
+
 
       <span className='side-bar__title text-xx-black-700'>Budget</span>
       <div className='side-bar__budget'>
@@ -186,6 +199,7 @@ export const SideBar: React.FC = () => {
         />
       </div>
 
+
       <div className='side-bar__category'>
         <CategoryX
           handler={multipleCheckboxHandler}
@@ -201,7 +215,7 @@ export const SideBar: React.FC = () => {
           }
           values={
             ["Bed",
-              "Tere",
+              "Hotel",
               "Apartament",
               "Villa",
               "Room",

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './CategoryX.scss'
 import { NUM_ITEMS_TO_SHOW } from '../../api/booking';
 import { useSearchParams } from 'react-router-dom';
@@ -58,35 +59,48 @@ export const CategoryX: React.FC<Props> = ({
         {title}
       </h3>
 
+
       <ul className='category__list'>
-        {values.slice(0, numItemsToShow).map((value, index) => {
-          return (
-            <li
-              key={value}
-              className='category__item'
-            >
-              <input
-                checked={(currentSearchParametersValues.includes(searchParameterValues[index]))}
-                id={value}
-                name={searchParameterValues[index]}
-                className='category__checkbox'
-                type="checkbox"
-                onChange={onChange}
-              />
+      <TransitionGroup>
 
-              <label
-                className='category__label'
-                htmlFor={value}
+          {values.slice(0, numItemsToShow).map((value, index) => {
+            return (
+              <CSSTransition
+                key={index}
+                classNames='fade'
+                timeout={300}
+                unmountOnExit
               >
-                {value}
-              </label>
+                <li
+                  key={value}
+                  className='category__item'
+                >
+                  <input
+                    checked={(currentSearchParametersValues.includes(searchParameterValues[index]))}
+                    id={value}
+                    name={searchParameterValues[index]}
+                    className='category__checkbox'
+                    type="checkbox"
+                    onChange={onChange}
+                  />
 
-              {/* <span>
+                  <label
+                    className='category__label'
+                    htmlFor={value}
+                  >
+                    {value}
+                  </label>
+
+                  {/* <span>
                 {fetchData(index, searchParameterKey, searchParameterValues[index])}
               </span> */}
-            </li>
-          )
-        })}
+                </li>
+              </CSSTransition>
+
+            )
+          })}
+
+      </TransitionGroup>
       </ul>
 
       {values.length > NUM_ITEMS_TO_SHOW && (

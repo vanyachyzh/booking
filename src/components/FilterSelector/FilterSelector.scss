@@ -1,5 +1,6 @@
 @import './../../../src/styles/variables.scss';
 @import './../../../src/styles/fonts.scss';
+@import './../../../src/styles/CSStransition.scss';
 
 
 .filter {
@@ -45,6 +46,7 @@
     text-align: start;
     padding: 8px 24px;
     cursor: pointer;
+    transition: $transition;
 
     &:hover {
       background: #F1F3F5;

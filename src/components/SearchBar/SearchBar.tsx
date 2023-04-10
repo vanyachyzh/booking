@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import { AuthContext } from '../../App';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import './SearchBar.scss'
 import { getSearchWith, getSimilarCities, searchCityByQuery } from '../../utils';
-import { ExtendedHotelInfo } from '../../types/HotelInfo';
+import { ExtendedHotelInfo, HotelInfo } from '../../types/HotelInfo';
 import Logo from './../../images/Logo InnJoy.svg';
 import { User, BookingDate, IconState } from '../../types';
 import { Calendar } from '../Calendar';
 import { CalendarButton } from '../CalendarButton';
-import { CalendarUpIcon, MapIcon } from '../Icon/Icon';
+import { CalendarUpIcon, MapIcon, MapIconBig } from '../Icon/Icon';
 import { CapacitySelector } from '../CapacitySelector';
 
 type Props = {
@@ -16,6 +16,37 @@ type Props = {
   setCards: (v: ExtendedHotelInfo[]) => void,
   setUser: React.Dispatch<React.SetStateAction<User | null>>
 }
+
+function transformStringTo(str: string) {
+  const words = str.match(/\S+/g);
+
+  if (!words) {
+    return '';
+  }
+
+  const transformedWords = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+
+  const transformedString = transformedWords.join('%20');
+
+  return transformedString;
+}
+
+function reverseTransformString(str: string) {
+  // Замінюємо всі входження "%20" на пробіли за допомогою методу replace() та регулярного виразу.
+  str = str.replace(/%20/g, ' ');
+
+  // Розділяємо рядок на слова за допомогою методу split() та пробілу.
+  const words = str.split(' ');
+
+  // Перетворюємо першу літеру кожного слова на велику, а інші - на малу.
+  const transformedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
+
+  // Об'єднуємо слова знову разом за допомогою методу join().
+  const transformedString = transformedWords.join(' ');
+
+  return transformedString;
+}
+
 
 
 
@@ -36,7 +67,7 @@ function formatDate(dateString: string) {
   const timezoneOffsetMinutes = Math.abs(timezoneOffset % 60);
   const timezone = timezoneOffset < 0 ? "+" : "-";
 
-  
+
   return `${dayOfWeek} ${month} ${day} ${year} ${hour}:${minute}:${second} GMT ${timezone}${timezoneOffsetHours < 10 ? '0' : ''}${timezoneOffsetHours}${timezoneOffsetMinutes < 10 ? '0' : ''}${timezoneOffsetMinutes} (Eastern European Summer Time)`;
 }
 
@@ -49,17 +80,18 @@ const initialDate = {
 
 export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
   // const user = useContext(AuthContext);
+  const [hotelList, setHotelList] = useState<HotelInfo[] | null>(null)
   const [proposedCities, setProposedCities] = useState<string[] | null>();
   const [isProposedVisible, setIsProposedVisible] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const cityParam = searchParams.get('city') || '';
-  const [isFirstOpen, setIsFirstOpen] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
   const [iconState, setIconState] = useState(IconState.Default)
   const [currentDate, setCurrentDate] = useState(new Date());
   const [date, setDate] = useState<BookingDate>(initialDate);
   const [capacity, setCapacity] = useState<number>(1);
-  const [city, setCity] = useState(cityParam);
+  const [city, setCity] = useState(reverseTransformString(cityParam));
   const [nextDate, setNextDate] = useState(new Date(currentDate.getTime() + 30 * 24 * 60 * 60 * 1000));
   const handleClickNext = () => {
     const newCurrentDate = new Date(currentDate.getTime() + 30 * 24 * 60 * 60 * 1000);
@@ -84,15 +116,24 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
   //   end: new Date(Date.parse(formatDate(dateToParam))),
   // }
 
-  useEffect(() => {
-    setProposedCities(searchCityByQuery(cards, city));
-  }, [city])
+  // useEffect(() => {
+  //   setProposedCities(searchCityByQuery(cards, city));
+  // }, [city])
 
   useEffect(() => {
     if (!isProposedVisible) {
       setIconState(IconState.Default)
     }
   }, [isProposedVisible])
+
+  useEffect(() => {
+    const url = 'http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/all'
+    fetch(url)
+      .then(r => r.json())
+      // .then(r => console.log(r))
+      .then(r => setHotelList(r))
+      .then(() => setProposedCities(searchCityByQuery(hotelList, city)))
+  }, [city])
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsProposedVisible(true);
@@ -108,7 +149,7 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
       getSearchWith(
         searchParams,
         {
-          city,
+          city: transformStringTo(city),
           dateFrom: date.start?.toISOString().substring(0, 10) || '',
           dateTo: date.end?.toISOString().substring(0, 10) || '',
           capacity: String(capacity),
@@ -116,6 +157,54 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
       ),)
 
   }
+
+  const [isFocused, setIsFocused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (!isFocused) {
+      setIconState(IconState.Hover);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    if (!isFocused) {
+      setIconState(IconState.Default);
+    }
+
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+    setIconState(IconState.Active);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+    setIconState(IconState.Default);
+  };
+
+
+  const [mapIconState, setMapIconState] = useState(IconState.Default);
+  const [inputClicked, setInputClicked] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleInputClick = () => {
+    setInputClicked(true);
+  };
+
+  const handleButtonClick = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
+
+  const [leftActive, setLeftActive] = useState(false);
+  const [rightActive, setrightActive] = useState(false);
+  
 
   return (
     <header className='header'>
@@ -135,38 +224,48 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
               <MapIcon state={iconState} />
 
               <input
-                onBlur={() => {
-                  setIsProposedVisible(false);
-                }}
+                ref={inputRef}
+                // onMouseEnter={handleMouseEnter}
+                // onMouseLeave={handleMouseLeave}
+                // onFocus={handleFocus}
+                // onBlur={handleBlur}
+                // onBlur={}
                 onFocus={() => {
-                  setIconState(IconState.Active);
+                  handleFocus()
                 }}
-                onMouseOver={() => setIconState(IconState.Hover)}
-                onMouseLeave={() => setIconState(IconState.Default)}
+                onClick={handleInputClick}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
                 placeholder='Enter city'
                 value={city}
                 onChange={onChange}
                 className='header__input text-xx-black-500'
                 type="text"
               />
-{/* 
+
               {isProposedVisible && city && proposedCities?.length !== 0 && (
                 <div className='header__list'>
                   {proposedCities?.map(city => (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setCity(city)
-                        setProposedCities([])
-                      }}
-                      key={city}
-                      className="header__option text-xx-black-500"
-                    >
-                      {city}
-                    </button>
+                    <div className='header__option-container'>
+                      <MapIconBig state={mapIconState} />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCity(city)
+                          setIsProposedVisible(false);
+                        }}
+                        onMouseEnter={() => setMapIconState(IconState.DefaultEye)}
+                        onMouseLeave={() => setMapIconState(IconState.Default)}
+                        key={city}
+                        className="header__option text-xx-black-500"
+                      >
+                        {city}
+                      </button>
+
+                    </div>
                   ))}
                 </div>
-              )} */}
+              )}
             </div>
 
 
@@ -178,8 +277,8 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
               <div className="header__date-btn">
                 <CalendarButton
                   type='up'
-                  isOpen={isFirstOpen}
-                  setIsOpen={setIsFirstOpen}
+                  isActive={isActive}
+                  setIsActive={setIsActive}
                   setIsAnother={setIsSecondOpen}
                   title={date.start ? startDateString : 'Choose a date'}
                   dropdown={
@@ -221,9 +320,9 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
               <div className="header__date-btn">
                 <CalendarButton
                   type='down'
-                  isOpen={isSecondOpen}
-                  setIsOpen={setIsSecondOpen}
-                  setIsAnother={setIsFirstOpen}
+                  isActive={isSecondOpen}
+                  setIsActive={setIsSecondOpen}
+                  setIsAnother={setIsActive}
                   title={date.end ? endDateString : 'Choose a date'}
                   dropdown={
                     <div className='header__calendars'>
@@ -258,7 +357,7 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
 
             <div className='header__item'>
               <span className='header__inscription text-x-white-500'>
-                Capacity
+                Guests
               </span>
 
               <CapacitySelector
@@ -268,7 +367,7 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
             </div>
 
             <button
-              disabled={!city || !date.start || !date.end}
+              // disabled={!city || !date.start || !date.end}
               type="submit"
               className='header__search-btn button'>
             </button>
