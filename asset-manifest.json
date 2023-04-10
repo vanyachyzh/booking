@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/booking/static/css/main.c22840be.css",
-    "main.js": "/booking/static/js/main.5908f17c.js",
+    "main.css": "/booking/static/css/main.a4fb7bdb.css",
+    "main.js": "/booking/static/js/main.9e444fe5.js",
     "static/media/Backgroung Iamge 1 (montains).png": "/booking/static/media/Backgroung Iamge 1 (montains).657fa1abd634cfeecc1b.png",
     "static/media/Hotel Booking-cuate (1) 1.svg": "/booking/static/media/Hotel Booking-cuate (1) 1.d0497853a03b54888e52.svg",
     "static/media/Satoshi-Medium.ttf": "/booking/static/media/Satoshi-Medium.759562088ba19068aef8.ttf",
@@ -14,7 +14,6 @@
     "static/media/Adjusments.svg": "/booking/static/media/Adjusments.4c710a3d821f898c87fa.svg",
     "static/media/map-pin-active.svg": "/booking/static/media/map-pin-active.a343e07c6bb9663fb3e9.svg",
     "static/media/map-pin-default.svg": "/booking/static/media/map-pin-default.cb456db11001c24c07be.svg",
-    "static/media/map-pin-hover.svg": "/booking/static/media/map-pin-hover.fd8e4d48ba5f7bf8d8b0.svg",
     "static/media/Plus-default.svg": "/booking/static/media/Plus-default.1ecef5d969d4646efe97.svg",
     "static/media/Plus-hover.svg": "/booking/static/media/Plus-hover.22e8838a5e3114132d0c.svg",
     "static/media/circle-check.svg": "/booking/static/media/circle-check.334c95ed778f036fc0e2.svg",
@@ -45,11 +44,11 @@
     "static/media/chevron-small-right.svg": "/booking/static/media/chevron-small-right.3c78a6d3f68951509fa9.svg",
     "static/media/left-arrow.svg": "/booking/static/media/left-arrow.e831657a40d75b120dc4.svg",
     "static/media/right-left.svg": "/booking/static/media/right-left.7efc550121917f592b29.svg",
-    "main.c22840be.css.map": "/booking/static/css/main.c22840be.css.map",
-    "main.5908f17c.js.map": "/booking/static/js/main.5908f17c.js.map"
+    "main.a4fb7bdb.css.map": "/booking/static/css/main.a4fb7bdb.css.map",
+    "main.9e444fe5.js.map": "/booking/static/js/main.9e444fe5.js.map"
   },
   "entrypoints": [
-    "static/css/main.c22840be.css",
-    "static/js/main.5908f17c.js"
+    "static/css/main.a4fb7bdb.css",
+    "static/js/main.9e444fe5.js"
   ]
 }
