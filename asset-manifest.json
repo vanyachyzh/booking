@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/booking/static/css/main.ad17cc35.css",
-    "main.js": "/booking/static/js/main.042d51ba.js",
+    "main.css": "/booking/static/css/main.cd2aff11.css",
+    "main.js": "/booking/static/js/main.e0efa37c.js",
     "static/media/Backgroung Iamge 1 (montains).png": "/booking/static/media/Backgroung Iamge 1 (montains).657fa1abd634cfeecc1b.png",
     "static/media/unsplash_gE08jRp3Qw4.svg": "/booking/static/media/unsplash_gE08jRp3Qw4.34c3e74a87ac1479df56.svg",
     "static/media/Hotel Booking-cuate (1) 1.svg": "/booking/static/media/Hotel Booking-cuate (1) 1.d0497853a03b54888e52.svg",
@@ -13,7 +13,6 @@
     "static/media/Logo InnJoy.svg": "/booking/static/media/Logo InnJoy.486e92e5452a422159e228e64d5ebd8c.svg",
     "static/media/gray-star-filled.svg": "/booking/static/media/gray-star-filled.788b14bb12ea3d4c9242.svg",
     "static/media/star-filled-gold.svg": "/booking/static/media/star-filled-gold.b27c552dbb07c8577092.svg",
-    "static/media/Adjusments.svg": "/booking/static/media/Adjusments.4c710a3d821f898c87fa.svg",
     "static/media/Plus-default.svg": "/booking/static/media/Plus-default.1ecef5d969d4646efe97.svg",
     "static/media/Plus-hover.svg": "/booking/static/media/Plus-hover.22e8838a5e3114132d0c.svg",
     "static/media/circle-check.svg": "/booking/static/media/circle-check.334c95ed778f036fc0e2.svg",
@@ -44,11 +43,11 @@
     "static/media/chevron-small-right.svg": "/booking/static/media/chevron-small-right.3c78a6d3f68951509fa9.svg",
     "static/media/left-arrow.svg": "/booking/static/media/left-arrow.e831657a40d75b120dc4.svg",
     "static/media/right-left.svg": "/booking/static/media/right-left.7efc550121917f592b29.svg",
-    "main.ad17cc35.css.map": "/booking/static/css/main.ad17cc35.css.map",
-    "main.042d51ba.js.map": "/booking/static/js/main.042d51ba.js.map"
+    "main.cd2aff11.css.map": "/booking/static/css/main.cd2aff11.css.map",
+    "main.e0efa37c.js.map": "/booking/static/js/main.e0efa37c.js.map"
   },
   "entrypoints": [
-    "static/css/main.ad17cc35.css",
-    "static/js/main.042d51ba.js"
+    "static/css/main.cd2aff11.css",
+    "static/js/main.e0efa37c.js"
   ]
 }
