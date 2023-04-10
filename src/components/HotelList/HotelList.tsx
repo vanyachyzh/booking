@@ -23,7 +23,7 @@ export const HotelList: React.FC<Props> = ({ hotels, setHotels }) => {
 
 
   if (!hotels) {
-    return <div>there is no any hotel</div>
+    return <div className='hotel-list__no-hotel'></div>
   }
   return (
     <div className="hotel-list">

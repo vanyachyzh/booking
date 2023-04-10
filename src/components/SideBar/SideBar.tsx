@@ -18,7 +18,6 @@ export const SideBar: React.FC = () => {
   const apartmentType = searchParams.get('apartmentType') || '';
   const stars = searchParams.get('stars') || '';
 
-  console.log(filteredKeysArray)
 
   const multipleCheckboxHandler = (
     searchParameterKey: string,

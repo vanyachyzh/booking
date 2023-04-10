@@ -28,7 +28,6 @@ export const FilterSelector: React.FC<Props> = ({ hotels, setHotels }) => {
 
   const handleClickOutside = (event: MouseEvent) => {
     const clickedElement = event.target as HTMLElement;
-    console.log(clickedElement)
     if (!clickedElement.classList.contains('filter')
       && !clickedElement.classList.contains('filter__select')
       ) {

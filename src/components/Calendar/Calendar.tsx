@@ -85,7 +85,6 @@ export const Calendar: React.FC<Props> = ({ currentDate, bookingDate, setBooking
     const currentTime = new Date(currentDate.getFullYear(), currentDate.getMonth(), i).getTime();
     const startTime = bookingDate.start?.getTime() || NaN;
     const endTime = bookingDate.end?.getTime() || NaN;
-    console.log(bookingDate.start?.getTime() === new Date(currentDate.getFullYear(), currentDate.getMonth(), i).getTime())
     days.push(
       <div className={classNames(
         { 'wrap--start': startTime && endTime },

@@ -38,7 +38,6 @@ export const RegularCategory: React.FC<Props> = ({
       handler([])
     }
 
-    console.log("was changed")
   }, [checkedItems, checkedItem]);
 
 
@@ -60,7 +59,6 @@ export const RegularCategory: React.FC<Props> = ({
       ]).sort((a, b) => +a - +b) )
     } else {
       handleCheckboxChange(e.target.name, -1)
-      console.log('UNchecked')
 
       setCheckedItems(prev =>{
         const filtered = prev.filter(param => param !== point[1])

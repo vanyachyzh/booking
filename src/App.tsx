@@ -47,7 +47,8 @@ function App() {
             <Route path="signup" element={<SignUp setUser={setUser} />} />
             <Route path="payment" element={<PaymentPage />} />
             <Route path="photos" element={<PhotoPage setUser={setUser} />} />
-            <Route path="*" element={<SuccesPage setUser={setUser}/>} />
+            <Route path="success" element={<SuccesPage setUser={setUser} />} />
+            <Route path="*" element={<ErrorPage setUser={setUser}/>} />
           </Route>
         </Routes>
       </AuthContext.Provider>

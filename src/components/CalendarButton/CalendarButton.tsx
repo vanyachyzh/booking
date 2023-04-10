@@ -39,7 +39,6 @@ export const CalendarButton: React.FC<Props> = ({ title, dropdown, isOpen, setIs
 
   const handleClickOutside = (event: MouseEvent) => {
     const clickedElement = event.target as HTMLElement;
-    console.log(clickedElement)
     if (!clickedElement.classList.contains('calendar-button')
       && !clickedElement.classList.contains('calendar')
       && !clickedElement.classList.contains('weekday')

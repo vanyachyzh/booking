@@ -36,7 +36,6 @@ export const HomePage: React.FC<Props> = ({ setUser }) => {
 
   useEffect(() => {
     const url = 'http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/all'
-    console.log(url)
     fetch(url)
       .then(r => r.json())
       // .then(r => console.log(r))
@@ -51,10 +50,8 @@ export const HomePage: React.FC<Props> = ({ setUser }) => {
         .then(r => r.json())
         // .then(r => console.log(r))
         .then(r => setHotels(r))
-      console.log(url)
     } else {
       const url = 'http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/all'
-      console.log(url)
       fetch(url)
         .then(r => r.json())
         // .then(r => console.log(r))

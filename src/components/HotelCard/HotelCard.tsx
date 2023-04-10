@@ -4,6 +4,7 @@ import ReactSimplyCarousel from 'react-simply-carousel';
 import './HotelCard.scss'
 import Carousel from '../Carousel/Carousel';
 import { ExtendedHotelInfo } from '../../types';
+import { Link } from 'react-router-dom';
 
 type Props = {
   hotel: ExtendedHotelInfo,
@@ -16,8 +17,6 @@ export const HotelCard: React.FC<Props> = ({ hotel }) => {
 
 
   const stars = [];
-
-  console.log(typeof hotel.rating)
 
   for (let i = 0; i < hotel.stars; i++) {
     stars.push(<div key={i} className="card__star"></div>);
@@ -57,8 +56,11 @@ export const HotelCard: React.FC<Props> = ({ hotel }) => {
         <div className="card__section">
           <div className="card__features">
             {hotel.amenities.map(amenity => (
-              <span className='card__feature text-x-green-500'>
-                {amenity}
+              <span
+                key={amenity}
+                className='card__feature text-x-green-500'
+              >
+                {amenity[0] + amenity.slice(1).toLowerCase()}
               </span>
             ))}
           </div>
@@ -91,7 +93,12 @@ export const HotelCard: React.FC<Props> = ({ hotel }) => {
           <span className='card__per text-x-gray-400'>per night</span>
         </div>
 
-        <button className='card__btn button'>View</button>
+        <Link
+          to="/hotel"
+          className='card__btn button'
+        >
+          View
+        </Link>
       </div>
     </div>
   )

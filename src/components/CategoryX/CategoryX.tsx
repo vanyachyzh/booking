@@ -26,17 +26,31 @@ export const CategoryX: React.FC<Props> = ({
   const [searchParams] = useSearchParams();
   const currentSearchParametersValues = searchParams.getAll(searchParameterKey);
 
-  console.log(currentSearchParametersValues)
 
+  console.log(currentSearchParametersValues)
   const onClick = () => {
     setNumItemsToShow(values.length);
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
-  
+
     handler(searchParameterKey, name, checked);
   }
+
+  // const getAmount = async (searchParameterKey: string, searchParameterValue: string) => {
+  //   const response = await fetch(`http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/filter?${searchParameterKey}=${searchParameterValue}`);
+  //   const data = await response.json();
+  //   const amount = data.length;
+  //   return amount;
+  // }
+
+  // function fetchData(index: number, searchParameterKey: string, searchParameterValue: string) {
+  //   return getAmount(searchParameterKey, searchParameterValues[index])
+  //     .then(amount => {
+  //       return amount;
+  //     });
+  // }
 
   return (
     <div className="category">
@@ -52,20 +66,24 @@ export const CategoryX: React.FC<Props> = ({
               className='category__item'
             >
               <input
-                checked={currentSearchParametersValues.includes(value)}
+                checked={(currentSearchParametersValues.includes(searchParameterValues[index]))}
                 id={value}
                 name={searchParameterValues[index]}
                 className='category__checkbox'
                 type="checkbox"
                 onChange={onChange}
               />
-              
+
               <label
                 className='category__label'
                 htmlFor={value}
               >
                 {value}
               </label>
+
+              {/* <span>
+                {fetchData(index, searchParameterKey, searchParameterValues[index])}
+              </span> */}
             </li>
           )
         })}

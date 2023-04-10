@@ -9,17 +9,17 @@ type Props = {
 }
 
 export const SuccesPage: React.FC<Props> = ({ setUser }) => (
-  <div className='error-page'>
+  <div className='success-page'>
     <Header setUser={setUser} />
 
-    <h2 className='error-page__title title-xx-black-700'>
+    <h2 className='success-page__title title-xx-black-700'>
       Hooray, your booking is confirmed!
       <br />
       Get ready for an amazing stay ahead.
     </h2>
 
     <Link
-      className='error-page__btn button'
+      className='success-page__btn button'
       to='/'
     >
       Back to main page

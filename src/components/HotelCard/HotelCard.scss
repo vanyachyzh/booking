@@ -93,6 +93,14 @@
     color: #FFFFFF;
     font-style: 20px;
     font-weight: 500;
+
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 110%;
+    text-align: right;
+    color: #FFFFFF;
   }
 
   &__section1 {
@@ -125,6 +133,9 @@
   }
 
   &__btn {
+    display: flex;
+    justify-content: start;
+    align-items: center;
     width: 140px;
     height: 54px;
     border-radius: 10px;

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../../App';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import './SearchBar.scss'
-import { getSearchWith, getSimilarCities } from '../../utils';
+import { getSearchWith, getSimilarCities, searchCityByQuery } from '../../utils';
 import { ExtendedHotelInfo } from '../../types/HotelInfo';
 import Logo from './../../images/Logo InnJoy.svg';
 import { User, BookingDate, IconState } from '../../types';
@@ -16,6 +16,8 @@ type Props = {
   setCards: (v: ExtendedHotelInfo[]) => void,
   setUser: React.Dispatch<React.SetStateAction<User | null>>
 }
+
+
 
 
 function formatDate(dateString: string) {
@@ -33,11 +35,11 @@ function formatDate(dateString: string) {
   const timezoneOffsetHours = Math.abs(Math.floor(timezoneOffset / 60));
   const timezoneOffsetMinutes = Math.abs(timezoneOffset % 60);
   const timezone = timezoneOffset < 0 ? "+" : "-";
+
   
   return `${dayOfWeek} ${month} ${day} ${year} ${hour}:${minute}:${second} GMT ${timezone}${timezoneOffsetHours < 10 ? '0' : ''}${timezoneOffsetHours}${timezoneOffsetMinutes < 10 ? '0' : ''}${timezoneOffsetMinutes} (Eastern European Summer Time)`;
 }
 
-console.log(formatDate("24-10-2023")); // Mon Oct 24 2023 00:00:00 GMT+0300 (Eastern European Summer Time)
 
 
 const initialDate = {
@@ -46,33 +48,19 @@ const initialDate = {
 }
 
 export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
-
+  // const user = useContext(AuthContext);
+  const [proposedCities, setProposedCities] = useState<string[] | null>();
+  const [isProposedVisible, setIsProposedVisible] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const cityParam = searchParams.get('city') || '';
   const [isFirstOpen, setIsFirstOpen] = useState(false);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
-
-
   const [iconState, setIconState] = useState(IconState.Default)
-
-
-  const user = useContext(AuthContext);
-
-
-  // let currentDate = new Date();
-  // const [currentDate, setCurrentDate] = useState<Date>(new Date());
-  let futureDate = new Date();
-  // futureDate.setDate(currentDate.getDate() + 30);
-
-
-  const onNext = () => {
-    setCurrentDate(prev => new Date(prev.getDate() + 30))
-    console.log("scdasdasdas")
-  }
-
-
   const [currentDate, setCurrentDate] = useState(new Date());
-  console.log(currentDate)
+  const [date, setDate] = useState<BookingDate>(initialDate);
+  const [capacity, setCapacity] = useState<number>(1);
+  const [city, setCity] = useState(cityParam);
   const [nextDate, setNextDate] = useState(new Date(currentDate.getTime() + 30 * 24 * 60 * 60 * 1000));
-
   const handleClickNext = () => {
     const newCurrentDate = new Date(currentDate.getTime() + 30 * 24 * 60 * 60 * 1000);
     setCurrentDate(newCurrentDate);
@@ -80,7 +68,6 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
     const newNextDate = new Date(nextDate.getTime() + 30 * 24 * 60 * 60 * 1000);
     setNextDate(newNextDate);
   };
-
   const handleClickPrev = () => {
     const newCurrentDate = new Date(currentDate.getTime() - 30 * 24 * 60 * 60 * 1000);
     setCurrentDate(newCurrentDate);
@@ -89,108 +76,31 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
     setNextDate(newNextDate);
   };
 
-  const navigate = useNavigate();
-
-
-
-  const [searchParams, setSearchParams] = useSearchParams();
-  const cityParam = searchParams.get('city') || '';
-  const dateFromParam = searchParams.get('dateFrom') || '';
-  const dateToParam = searchParams.get('dateTo') || '';
-  const capacityParam = searchParams.get('capacity') || '';
-
-  const [date, setDate] = useState<BookingDate>(initialDate);
-
+  // const dateFromParam = searchParams.get('dateFrom') || '';
+  // const dateToParam = searchParams.get('dateTo') || '';
+  // const capacityParam = searchParams.get('capacity') || '';
   // {
   //   start: new Date(Date.parse(formatDate(dateFromParam))) ,
   //   end: new Date(Date.parse(formatDate(dateToParam))),
   // }
-  const [capacity, setCapacity] = useState<number>(1);
-  const [city, setCity] = useState(cityParam);
-  // const [dateTo, setDateTo] = useState('');
-  // const [dateFrom, setDateFrom] = useState('');
-
-  const [isProposedVisible, setIsProposedVisible] = useState(false);
-  const [isInVisible, setIsInVisible] = useState(false);
-  const [isOutVisible, setIsOutVisible] = useState(false);
-  const [proposedCities, setProposedCities] = useState<string[] | null>();
-  // const [query, setQuery] = useState('')
-  // const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    setProposedCities(getSimilarCities(cards, cityParam));
-    // console.log(city)
-    // console.log(getSimilarCities(cards, query))
-    console.log(date.start)
+    setProposedCities(searchCityByQuery(cards, city));
+  }, [city])
 
-  }, [date])
+  useEffect(() => {
+    if (!isProposedVisible) {
+      setIconState(IconState.Default)
+    }
+  }, [isProposedVisible])
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsProposedVisible(true);
-    // setSearchParams(
-    //   getSearchWith(
-    //     searchParams,
-    //     { city: event.target.value || null },
-    //   ),
-    // );
-
-    // if (cityParam.length === 1) {
-    //   fetch(`http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/all`)
-    //     .then(r => r.json())
-    //     .then(r => setCards(r))
-    // }
-
     setCity(event.target.value)
   }
 
-
-  const insertCity = (city: string) => {
-    // console.log(city)
-
-    setSearchParams(
-      getSearchWith(
-        searchParams,
-        { city },
-      ),
-    );
-    // setQuery(city);
-
-    // console.log(query)
-    setIsProposedVisible(false);
-
-    fetch(`http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/city?city=${city}&rating?from=1&to=3`)
-      .then(r => r.json())
-      // .then(r => console.log(r))
-
-      .then(r => setCards(r))
-
-    // fetch(`http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/rating?from=1&to=2`)
-    //   .then(r => r.json())
-    //   .then(r => setCards(r))
-  }
-
-  const [isVisibleLogOut, setIsVisibleLogOut] = useState(false)
-
-
-  const onClick = () => {
-    setIsVisibleLogOut(prev => !prev)
-  }
-
-  const onLogOut = () => {
-    setUser(null);
-    navigate('/')
-  }
-
-  // const [startDate, setStartDate] = useState<Date | null>(null);
-  // const [endDate, setEndDate] = useState<Date | null>(null);
-
   const startDateString = `${date.start?.getDate()} ${date.start?.toLocaleString('default', { month: 'long' })}`;
   const endDateString = `${date.end?.getDate()} ${date.end?.toLocaleString('default', { month: 'long' })}`;
-
-  // const handleSelect = (start: Date, end: Date) => {
-  //   setStartDate(start);
-  //   setEndDate(end);
-  // };
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -206,14 +116,6 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
       ),)
 
   }
-
-  const [isFocus, setIsFocus] = useState(false);
-
-  useEffect(() => {
-    if (!isProposedVisible) {
-      setIconState(IconState.Default)
-    }
-  }, [isProposedVisible])
 
   return (
     <header className='header'>
@@ -237,8 +139,7 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
                   setIsProposedVisible(false);
                 }}
                 onFocus={() => {
-                  setIconState(IconState.Active)
-                  setIsFocus(true);
+                  setIconState(IconState.Active);
                 }}
                 onMouseOver={() => setIconState(IconState.Hover)}
                 onMouseLeave={() => setIconState(IconState.Default)}
@@ -248,21 +149,24 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
                 className='header__input text-xx-black-500'
                 type="text"
               />
-
-              {isProposedVisible && cityParam && proposedCities?.length !== 0 && (
+{/* 
+              {isProposedVisible && city && proposedCities?.length !== 0 && (
                 <div className='header__list'>
                   {proposedCities?.map(city => (
                     <button
                       type="button"
-                      onClick={() => insertCity(city)}
-                      key={Math.random()}
+                      onClick={() => {
+                        setCity(city)
+                        setProposedCities([])
+                      }}
+                      key={city}
                       className="header__option text-xx-black-500"
                     >
                       {city}
                     </button>
                   ))}
                 </div>
-              )}
+              )} */}
             </div>
 
 

@@ -39,7 +39,7 @@ export const SignUp: React.FC<Props> = ({ setUser }) => {
   const [surname, setSurname] = useState('');
   const navigate = useNavigate();
   const thesame = password === confirmPassword;
-  console.log(thesame)
+
 
 
 
@@ -119,7 +119,6 @@ export const SignUp: React.FC<Props> = ({ setUser }) => {
         })
           .then(res => {
             if (res.status === 200) {
-              console.log('you are in')
 
               setUser({
                 name,
