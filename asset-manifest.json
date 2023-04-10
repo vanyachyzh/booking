@@ -1,12 +1,13 @@
 {
   "files": {
-    "main.css": "/booking/static/css/main.aef6efe1.css",
-    "main.js": "/booking/static/js/main.44015933.js",
+    "main.css": "/booking/static/css/main.2c65cf41.css",
+    "main.js": "/booking/static/js/main.5f7d5684.js",
     "static/media/Backgroung Iamge 1 (montains).png": "/booking/static/media/Backgroung Iamge 1 (montains).657fa1abd634cfeecc1b.png",
     "static/media/Hotel Booking-cuate (1) 1.svg": "/booking/static/media/Hotel Booking-cuate (1) 1.d0497853a03b54888e52.svg",
     "static/media/Satoshi-Medium.ttf": "/booking/static/media/Satoshi-Medium.759562088ba19068aef8.ttf",
     "static/media/Satoshi-Regular.ttf": "/booking/static/media/Satoshi-Regular.fe762acc7e97cb612805.ttf",
     "static/media/Satoshi-Bold.ttf": "/booking/static/media/Satoshi-Bold.137a52d9f47dd71c6247.ttf",
+    "static/media/404 error.svg": "/booking/static/media/404 error.27e48b93d63a16e71650.svg",
     "static/media/Avatar.svg": "/booking/static/media/Avatar.1bd9735132aa1fa5faa9.svg",
     "static/media/Logo InnJoy.svg": "/booking/static/media/Logo InnJoy.486e92e5452a422159e228e64d5ebd8c.svg",
     "static/media/gray-star-filled.svg": "/booking/static/media/gray-star-filled.788b14bb12ea3d4c9242.svg",
@@ -44,11 +45,11 @@
     "static/media/chevron-small-right.svg": "/booking/static/media/chevron-small-right.3c78a6d3f68951509fa9.svg",
     "static/media/left-arrow.svg": "/booking/static/media/left-arrow.e831657a40d75b120dc4.svg",
     "static/media/right-left.svg": "/booking/static/media/right-left.7efc550121917f592b29.svg",
-    "main.aef6efe1.css.map": "/booking/static/css/main.aef6efe1.css.map",
-    "main.44015933.js.map": "/booking/static/js/main.44015933.js.map"
+    "main.2c65cf41.css.map": "/booking/static/css/main.2c65cf41.css.map",
+    "main.5f7d5684.js.map": "/booking/static/js/main.5f7d5684.js.map"
   },
   "entrypoints": [
-    "static/css/main.aef6efe1.css",
-    "static/js/main.44015933.js"
+    "static/css/main.2c65cf41.css",
+    "static/js/main.5f7d5684.js"
   ]
 }
