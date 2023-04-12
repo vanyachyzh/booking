@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/booking/static/css/main.be12eef5.css",
-    "main.js": "/booking/static/js/main.02df04c2.js",
+    "main.js": "/booking/static/js/main.95001033.js",
     "static/media/unsplash_gE08jRp3Qw4.svg": "/booking/static/media/unsplash_gE08jRp3Qw4.34c3e74a87ac1479df56.svg",
     "static/media/Hotel Booking-cuate (1) 1.svg": "/booking/static/media/Hotel Booking-cuate (1) 1.d0497853a03b54888e52.svg",
     "static/media/Satoshi-Medium.ttf": "/booking/static/media/Satoshi-Medium.759562088ba19068aef8.ttf",
@@ -51,10 +51,10 @@
     "static/media/left-arrow.svg": "/booking/static/media/left-arrow.e831657a40d75b120dc4.svg",
     "static/media/right-left.svg": "/booking/static/media/right-left.7efc550121917f592b29.svg",
     "main.be12eef5.css.map": "/booking/static/css/main.be12eef5.css.map",
-    "main.02df04c2.js.map": "/booking/static/js/main.02df04c2.js.map"
+    "main.95001033.js.map": "/booking/static/js/main.95001033.js.map"
   },
   "entrypoints": [
     "static/css/main.be12eef5.css",
-    "static/js/main.02df04c2.js"
+    "static/js/main.95001033.js"
   ]
 }
