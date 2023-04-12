@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './PhotoPage.scss'
 import { Header } from '../../components/Header';
 import { User } from '../../types';
 import { Navigation } from '../../components/Navigation';
 import { GallerySlider } from '../../components/GallerySlider/GallerySlider';
+import { AuthContext } from '../../App';
 
 let natureLinks = [
   'https://media.gettyimages.com/id/1044029654/photo/lady-gaga-arrives-at-the-premiere-of-warner-bros-pictures-a-star-is-born-at-the-shrine.jpg?s=612x612&w=gi&k=20&c=a8Fwy96QxY25mX1IFlRhKyqYyaLHoJxb7HHU3lI0Q-4=',
@@ -20,6 +21,7 @@ type Props = {
 }
 
 export const PhotoPage: React.FC<Props> = ({ setUser }) => {
+  const context = useContext(AuthContext);
 
   const [currentImage, setCurrentImage] = useState<number>(0);
 
@@ -45,7 +47,7 @@ export const PhotoPage: React.FC<Props> = ({ setUser }) => {
 
       <Link
         className='photo-page__btn text-xx-black-500'
-        to='/'
+        to='/hotel'
       >
         Back
       </Link>
@@ -55,7 +57,7 @@ export const PhotoPage: React.FC<Props> = ({ setUser }) => {
           All photos
         </span>
 
-        {natureLinks.map((photo, index) => (
+        {context?.hotel?.picturesUrl.map((photo, index) => (
           <img
             onClick={() => setCurrentImage(index + 1)}
             className='photo-page__photo'
@@ -70,7 +72,7 @@ export const PhotoPage: React.FC<Props> = ({ setUser }) => {
         <GallerySlider
           currentImage={currentImage}
           setCurrentImage={setCurrentImage}
-          images={natureLinks}
+          images={context?.hotel?.picturesUrl || []}
         />
       )}
     </div>

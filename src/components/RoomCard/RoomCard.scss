@@ -1,0 +1,63 @@
+@import './../../../src/styles/variables.scss';
+@import './../../../src/styles/fonts.scss';
+
+.room-card {
+  width: 300px;
+  box-shadow: $shadow;
+  padding: 16px;
+  border-radius: $rounding;
+
+  &__hotel-name {
+    display: block;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 110%;
+    color: #212529;
+    margin-bottom: 18px;
+  }
+
+  &__amenities {
+    margin-bottom: 15px;
+    // padding-bottom: 100px;
+    height: 136px;
+    border-bottom: 1px solid #F1F3F5;
+  }
+
+  &__amenity {
+    margin-bottom: 12px;
+    height: 18px;
+  }
+
+  &__price {
+    display: block;
+    // float: right;
+    text-align: end;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 110%;
+    color: #212529;
+    margin-bottom: 32px;
+  }
+
+  &__reserve-button {
+    display: block;
+
+    width: 100%;
+  }
+
+  // &__see-more-button {
+  //   margin-top: 24px;
+  //   display: flex;
+  //   width: 83px;
+  //   padding: 0;
+  //   border: none;
+  //   outline: none;
+  //   cursor: pointer;
+  //   background: url("./../../images/iconss/chevron-down-default.svg") center right no-repeat;
+
+  //   &:hover {
+  //     color: $blueHover;
+  //     background: url("./../../images/iconss/chevron-down-hover.svg") center right no-repeat;
+  //   }
+  // }
+}

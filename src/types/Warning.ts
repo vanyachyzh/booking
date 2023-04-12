@@ -1,7 +1,8 @@
 export interface Warning {
-  name: string,
-  surname: string,
-  email: string,
-  password: string,
-  confirmPassword: string,
+  [key: string]: string;
+  email: string;
+  password: string;
+  name: string;
+  surname: string;
+  confirmPassword: string;
 }

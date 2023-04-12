@@ -4,5 +4,7 @@ export interface RoomInfo {
   capacity: number,
   amenities: string[],
   hotelName: string,
+  price: number,
+  apartmentType: string
 }
 

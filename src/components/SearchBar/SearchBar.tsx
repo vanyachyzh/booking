@@ -207,16 +207,16 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
   
 
   return (
-    <header className='header'>
+    <header className='search-bar'>
       <form
         onSubmit={onSubmit}
       >
-        <div className='header__container-x'>
-          <div className='header__search-section'>
+        <div className='search-bar__container-x'>
+          <div className='search-bar__search-section'>
 
-            <div className='header__item'>
+            <div className='search-bar__item'>
               <span
-                className='header__inscription text-x-white-500'
+                className='search-bar__inscription text-x-white-500'
               >
                 Going to
               </span>
@@ -236,17 +236,20 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
                 onClick={handleInputClick}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
+                // onBlur={() => {
+                //   setIsFocused(false);
+                // }}
                 placeholder='Enter city'
                 value={city}
                 onChange={onChange}
-                className='header__input text-xx-black-500'
+                className='search-bar__input text-xx-black-500'
                 type="text"
               />
 
               {isProposedVisible && city && proposedCities?.length !== 0 && (
-                <div className='header__list'>
+                <div className='search-bar__list'>
                   {proposedCities?.map(city => (
-                    <div className='header__option-container'>
+                    <div className='search-bar__option-container'>
                       <MapIconBig state={mapIconState} />
                       <button
                         type="button"
@@ -257,7 +260,7 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
                         onMouseEnter={() => setMapIconState(IconState.DefaultEye)}
                         onMouseLeave={() => setMapIconState(IconState.Default)}
                         key={city}
-                        className="header__option text-xx-black-500"
+                        className="search-bar__option text-xx-black-500"
                       >
                         {city}
                       </button>
@@ -269,12 +272,12 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
             </div>
 
 
-            <div className='header__item'>
-              <span className='header__inscription text-x-white-500'>
+            <div className='search-bar__item'>
+              <span className='search-bar__inscription text-x-white-500'>
                 Check-in
               </span>
 
-              <div className="header__date-btn">
+              <div className="search-bar__date-btn">
                 <CalendarButton
                   type='up'
                   isActive={isActive}
@@ -282,11 +285,11 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
                   setIsAnother={setIsSecondOpen}
                   title={date.start ? startDateString : 'Choose a date'}
                   dropdown={
-                    <div className='header__calendars'>
+                    <div className='search-bar__calendars'>
                       <input
                         onClick={handleClickPrev}
                         type="button"
-                        className="header__button--prev"
+                        className="search-bar__button--prev"
                       />
 
                       <Calendar
@@ -304,7 +307,7 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
                       <input
                         onClick={handleClickNext}
                         type="button"
-                        className="header__button--next"
+                        className="search-bar__button--next"
                       />
                     </div>
                   }
@@ -312,12 +315,12 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
               </div>
             </div>
 
-            <div className='header__item'>
-              <span className='header__inscription text-x-white-500'>
+            <div className='search-bar__item'>
+              <span className='search-bar__inscription text-x-white-500'>
                 Check-out
               </span>
 
-              <div className="header__date-btn">
+              <div className="search-bar__date-btn">
                 <CalendarButton
                   type='down'
                   isActive={isSecondOpen}
@@ -325,11 +328,11 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
                   setIsAnother={setIsActive}
                   title={date.end ? endDateString : 'Choose a date'}
                   dropdown={
-                    <div className='header__calendars'>
+                    <div className='search-bar__calendars'>
                       <input
                         type="button"
                         onClick={handleClickPrev}
-                        className="header__button--prev"
+                        className="search-bar__button--prev"
                       />
 
                       <Calendar
@@ -347,7 +350,7 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
                       <input
                         onClick={handleClickNext}
                         type="button"
-                        className="header__button--next"
+                        className="search-bar__button--next"
                       />
                     </div>
                   }
@@ -355,8 +358,8 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
               </div>
             </div>
 
-            <div className='header__item'>
-              <span className='header__inscription text-x-white-500'>
+            <div className='search-bar__item'>
+              <span className='search-bar__inscription text-x-white-500'>
                 Guests
               </span>
 
@@ -369,13 +372,13 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
             <button
               // disabled={!city || !date.start || !date.end}
               type="submit"
-              className='header__search-btn button'>
+              className='search-bar__search-btn button'>
             </button>
           </div>
         </div>
       </form>
 
 
-    </header >
+    </header>
   )
 };

@@ -18,6 +18,13 @@
     align-items: center;
   }
 
+  &__error {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding-top: 24px;
+  }
+
   &__no-hotel {
     background-color: #F1F3F5;
     height: 100%;

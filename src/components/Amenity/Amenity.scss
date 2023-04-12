@@ -1,0 +1,16 @@
+@import './../../../src/styles/variables.scss';
+@import './../../../src/styles/fonts.scss';
+@import './../../../src/styles/button.scss';
+
+.amenity {
+  width: min-content;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 8px;
+
+  &__image {
+    width: 22px;
+    height: 22px;
+  }
+}

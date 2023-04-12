@@ -1,0 +1,248 @@
+@import './../../../src/styles/variables.scss';
+@import './../../../src/styles/fonts.scss';
+
+
+.photo-row {
+  position: relative;
+  height: 408px;
+  width: 100%;
+  padding: 24px;
+
+  &__btn {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 125px;
+    height: 40px;
+    background-image: url('./../../images/iconss/grid-dots.svg'), url('./../../images/iconss/grid-dots.svg');
+    background-repeat: no-repeat, no-repeat;
+    background-position: center left 14px, center right 14px;
+  }
+
+  &--1-1 {
+    margin: 0 auto;
+    object-fit: cover;
+    width: 684px;
+    height: 360px;
+    border-radius: $rounding;
+    display: block;
+  }
+
+  &--2-1 {
+    display: inline-block;
+    object-fit: cover;
+    width: 684px;
+    height: 360px;
+    border-radius: $rounding;
+  }
+
+  &--2-2 {
+    float: right;
+    display: inline-block;
+    object-fit: cover;
+    width: 684px;
+    height: 360px;
+    border-radius: $rounding;
+  }
+
+  &--3-1 {
+    display: inline-block;
+    object-fit: cover;
+    width: 684px;
+    height: 360px;
+    border-radius: $rounding;
+  }
+
+  &--3-2 {
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    display: inline-block;
+    object-fit: cover;
+    width: 684px;
+    height: 168px;
+    border-radius: $rounding;
+  }
+
+  &--3-3 {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    display: inline-block;
+    object-fit: cover;
+    width: 684px;
+    height: 168px;
+    border-radius: $rounding;
+  }
+
+  &--4-1 {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    display: inline-block;
+    object-fit: cover;
+    width: 324px;
+    height: 168px;
+    border-radius: $rounding;
+  }
+
+  &--4-2 {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    display: inline-block;
+    object-fit: cover;
+    width: 324px;
+    height: 168px;
+    border-radius: $rounding;
+  }
+
+
+  &--4-3 {
+    position: absolute;
+    top: 24px;
+    right: 632px;
+    display: inline-block;
+    object-fit: cover;
+    width: 432px;
+    height: 360px;
+    border-radius: $rounding;
+  }
+
+  &--4-4 {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    display: inline-block;
+    object-fit: cover;
+    width: 584px;
+    height: 360px;
+    border-radius: $rounding;
+  }
+
+  &--5-1 {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    display: inline-block;
+    object-fit: cover;
+    width: 784px;
+    height: 200px;
+    border-radius: $rounding;
+  }
+
+  &--5-2 {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    display: inline-block;
+    object-fit: cover;
+    width: 245px;
+    height: 136px;
+    border-radius: $rounding;
+  }
+
+  &--5-3 {
+    position: absolute;
+    bottom: 24px;
+    left: 293px;
+    display: inline-block;
+    object-fit: cover;
+    width: 245px;
+    height: 136px;
+    border-radius: $rounding;
+  }
+
+  &--5-4 {
+    position: absolute;
+    bottom: 24px;
+    left: 562px;
+    display: inline-block;
+    object-fit: cover;
+    width: 245px;
+    height: 136px;
+    border-radius: $rounding;
+  }
+
+  &--5-5 {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    display: inline-block;
+    object-fit: cover;
+    width: 584px;
+    height: 360px;
+    border-radius: $rounding;
+  }
+
+
+  &--6-1 {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    display: inline-block;
+    object-fit: cover;
+    width: 684px;
+    height: 360px;
+    border-radius: $rounding;
+  }
+
+  &--6-2 {
+    position: absolute;
+    top: 24px;
+    right: 276px;
+    display: inline-block;
+    object-fit: cover;
+    width: 433px;
+    height: 198px;
+    border-radius: $rounding;
+  }
+
+  &--6-3 {
+    position: absolute;
+    bottom: 24px;
+    right: 504px;
+    display: inline-block;
+    object-fit: cover;
+    width: 204px;
+    height: 138px;
+    border-radius: $rounding;
+  }
+
+  &--6-4 {
+    position: absolute;
+    bottom: 24px;
+    right: 276px;
+    display: inline-block;
+    object-fit: cover;
+    width: 204px;
+    height: 138px;
+    border-radius: $rounding;
+  }
+
+  &--6-5 {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    display: inline-block;
+    object-fit: cover;
+    width: 228px;
+    height: 168px;
+    border-radius: $rounding;
+  }
+
+  &--6-6 {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    display: inline-block;
+    object-fit: cover;
+    width: 228px;
+    height: 168px;
+    border-radius: $rounding;
+  }
+}

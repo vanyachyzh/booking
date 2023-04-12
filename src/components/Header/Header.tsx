@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../../App';
-import { Link, useOutletContext, useSearchParams, useNavigate } from 'react-router-dom';
+import { Link, useOutletContext, useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import './Header.scss'
 import { getSearchWith, getSimilarCities } from '../../utils';
 import { ExtendedHotelInfo } from '../../types/HotelInfo';
@@ -15,9 +15,14 @@ type Props = {
 
 
 export const Header: React.FC<Props> = ({ setUser }) => {
-  const user = useContext(AuthContext);
+  const context = useContext(AuthContext);
   const navigate = useNavigate();
   const [isVisibleLogOut, setIsVisibleLogOut] = useState(false)
+
+  const { pathname } = useLocation();
+  const currentPath = pathname.substring(1);
+
+  console.log(pathname === '/login')
 
   const onClick = () => {
     setIsVisibleLogOut(prev => !prev)
@@ -29,46 +34,51 @@ export const Header: React.FC<Props> = ({ setUser }) => {
   }
 
 
+
+
   return (
     <header className='header'>
-      <div className="container">
-        <div className='header__nav'>
+      <div className="header__container">
+        <Link
+          to="/"
+        >
           <img
             className='header__logo'
             src={Logo} alt="InnJoy"
           />
-
-          {user && (
-
-            <div className='header__profile'>
-              <button
-                onClick={onClick}
-                className='header__avatar'
-              >
-              </button>
+        </Link>
 
 
-              {isVisibleLogOut && (
-                  <button
-                    onClick={onLogOut}
-                    className="header__logout"
-                  >
-                    Log Out
-                  </button>
-              )}
-            </div>
+        {context && context.user && (
 
-          )}
-
-          {!user && (
-            <Link
-              to="/login"
-              className='header__login-btn button'
+          <div className='header__profile'>
+            <button
+              onClick={onClick}
+              className='header__avatar'
             >
-              Log In
-            </Link>
-          )}
-        </div>
+            </button>
+
+
+            {isVisibleLogOut && (
+              <button
+                onClick={onLogOut}
+                className="header__logout"
+              >
+                Log Out
+              </button>
+            )}
+          </div>
+
+        )}
+
+        {context && !context.user && pathname !== '/login' && pathname !== '/signup' && (
+          <Link
+            to="/login"
+            className='header__login-btn button'
+          >
+            Log In
+          </Link>
+        )}
       </div>
     </header>
   )

@@ -3,6 +3,8 @@ import './LogIn.scss';
 import { Field } from '../Field';
 import { Link, useNavigate } from 'react-router-dom';
 import { Error, User, Warning } from '../../types';
+import { logIn } from '../../api/booking';
+import { Header } from '../Header';
 
 
 const initialWarnings = {
@@ -17,6 +19,16 @@ const initialError = {
   email: '',
   password: '',
 }
+
+function areAllFieldsEmpty(obj: Warning) {
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key) && obj[key].trim() !== "") {
+      return false;
+    }
+  }
+  return true;
+}
+
 
 
 const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
@@ -35,140 +47,137 @@ export const LogIn: React.FC<Props> = ({ setUser }) => {
   const navigate = useNavigate();
 
 
-  const onPressButton = () => {
-  fetch('http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/login', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json, text/plain, */*',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(
-      {
-        email,
-        password
-      })
-  })
-    .then(res => {
-      if (res.status === 200) {
-        console.log('you are in')
-        setUser({
-          name: "sdfsdfsd",
-          surname: "sdfsd",
-          email,
-          password,
-        })
-        navigate('/')
-      } else {
-        setError(prev => ({
-          ...prev,
-          email: "Your login is already used",
-        }));
-      }
-
-    });
-}
-
-
-  useEffect(() => {
-    console.log(warning)
-  }, [warning])
-
-
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!regex.test(email)) {
-      setWarning(prev => ({
-        ...prev,
-        email: 'Your email is invalid!',
-      }));
+    if (!regex.test(email) || !email || !password) {
+      if (!regex.test(email)) {
+        setWarning(prev => ({
+          ...prev,
+          email: 'Your email is invalid!',
+        }));
+      }
+
+      if (!email) {
+        setWarning(prev => ({
+          ...prev,
+          email: 'You have to fill in this field',
+        }));
+      }
+
+      if (!password) {
+        setWarning(prev => ({
+          ...prev,
+          password: 'You have to fill in this field',
+        }));
+      }
+
+      return;
     }
 
-    if (!email) {
-      setWarning(prev => ({
-        ...prev,
-        email: 'You have to fill in this field',
-      }));
-    }
+    logIn(email, password)
+      .then(res => {
+        if (res.status === 200 && areAllFieldsEmpty(warning)) {
+          // console.log(res)
+          setUser({
+            name: "sdfsdfsd",
+            surname: "sdfsd",
+            email,
+            password,
+          })
+          navigate('/')
+        } else {
+          setError(prev => ({
+            ...prev,
+            email: "Your login is already used",
+          }));
+        }
+      });
 
-    if (!password) {
-      setWarning(prev => ({
-        ...prev,
-        password: 'You have to fill in this field',
-      }));
-    }
-
-    
   }
 
   return (
-    <div className="auth-container">
-      <form onSubmit={onSubmit} className='auth'>
-        {/* <input type='button' className='auth__cross' /> */}
+    <div className="login-page">
+      <section className="login-page__section">
+        <Header setUser={setUser} />
+      </section>
 
-        <h2 className="auth__title title-xx-black-700">
-          Welcome back!
-        </h2>
-
-        <span className='auth__desc text-xx-black-400'>
-          Log in to your account
-        </span>
-
-        <div className="auth__field">
-          <Field
-            value={email}
-            setValue={setEmail}
-            setWarning={setWarning}
-            placeholder='Enter your email address'
-            error={error.email}
-            setError={setError}
-            warning={warning.email}
-            label='email'
-            helper='Invalid email'
-          />
+      <section className="login-page__section">
+        <div className="container">
+        <Link
+          className='login-page__btn text-xx-black-500'
+          to='/'
+        >
+          Back
+        </Link>
         </div>
+      </section>
 
-        <div className="auth__field">
-          <Field
-            value={password}
-            setValue={setPassword}
-            setWarning={setWarning}
-            placeholder='Enter your password (min 8 chars)'
-            error={null}
-            setError={setError}
-            warning={warning.password}
-            label='password'
-            helper='Invalid password'
-          />
-        </div>
+      <section className="login-page__section">
+        <form
+          onSubmit={onSubmit}
+          className='login-page__form'
+        >
+          <h2 className="login-page__title title-xx-black-700">
+            Welcome back!
+          </h2>
 
-        <button
-          type='button'
-          className="auth__forgot-btn text-xx-blue-500">
-          Forgot password?
-        </button>
+          <span className='login-page__desc text-xx-black-400'>
+            Log in to your account
+          </span>
+
+          <div className="login-page__field">
+            <Field
+              value={email}
+              setValue={setEmail}
+              setWarning={setWarning}
+              placeholder='Enter your email address'
+              error={error.email}
+              setError={setError}
+              warning={warning.email}
+              label='email'
+              helper='Invalid email'
+            />
+          </div>
+
+          <div className="login-page__field">
+            <Field
+              value={password}
+              setValue={setPassword}
+              setWarning={setWarning}
+              placeholder='Enter your password (min 8 chars)'
+              error={null}
+              setError={setError}
+              warning={warning.password}
+              label='password'
+              helper='Invalid password'
+            />
+          </div>
+
+          <button
+            type='button'
+            className="login-page__forgot-btn text-xx-blue-500">
+            Forgot password?
+          </button>
 
 
-        <button
-          onClick={onPressButton}
-          type='submit'
-          className="auth__login-btn button">
-          Log in
-        </button>
+          <button
+            type='submit'
+            className="login-page__login-btn button">
+            Log in
+          </button>
 
 
-        <div className='auth__signup-section text-xx-gray-400'>
-          Don’t have an account?
-          <Link
-            to="/signup"
-            className="auth__signup-btn text-xx-blue-500">
-            Sign Up
-          </Link>
-        </div>
-
-
-
-      </form>
+          <div className='login-page__signup-section text-xx-gray-400'>
+            Don’t have an account?
+            <Link
+              to="/signup"
+              className="login-page__signup-btn text-xx-blue-500">
+              Sign Up
+            </Link>
+          </div>
+        </form>
+      </section>
     </div>
   )
 };

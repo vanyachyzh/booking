@@ -2,18 +2,24 @@
 @import './../../../src/styles/fonts.scss';
 
 
+
 .navigation {
-  padding: 17px 0 17px 56px;
-  background-color: $grayXX;
+  margin: 0 auto;
+  padding: 17px 0 17px 0;
+  width: 1440px;
   display: flex;
   justify-content: start;
   align-items: center;
+
+  &__container {
+    background-color: $grayXX;
+  }
 
   &__link {
     padding-right: 20px;
     margin-right: 8px;
     display: block;
-    width: min-content;
+    // width: min-content;
     background: url("./../../images/iconss/chevron-small-right.svg") right no-repeat;
   }
 }

@@ -13,12 +13,10 @@ import { IconState } from '../../types';
 type Props = {
   type: 'up' | 'down',
   title: string,
-  dropdown: React.ReactNode,
+  dropdown?: React.ReactNode,
   isActive: boolean,
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>,
   setIsAnother: React.Dispatch<React.SetStateAction<boolean>>,
-  // leftActive: React.Dispatch<React.SetStateAction<boolean>>,
-  // rightActive: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 

@@ -1,9 +1,10 @@
 import React from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { useSpring, animated } from 'react-spring';
 import './SideBar.scss';
 import { useSearchParams } from 'react-router-dom';
 import { getSearchWith } from '../../utils';
-import { CategoryX } from '../CategoryX';
+import { Category } from '../Category';
 import { RatingCategory } from '../RatingCategory';
 
 export const SideBar: React.FC = () => {
@@ -120,6 +121,13 @@ export const SideBar: React.FC = () => {
       ),)
   }
 
+  const style = useSpring({
+    opacity: filteredKeysArray.length ? 1 : 0,
+    height: filteredKeysArray.length ? "auto" : 0,
+    overflow: 'hidden',
+    config: { duration: 300 }
+  });
+
   return (
     <form
       onSubmit={(e) => {
@@ -140,7 +148,40 @@ export const SideBar: React.FC = () => {
 
 
 
+
       <div className='side-bar__filter'>
+
+        {filteredKeysArray.map(key => {
+          if (key === 'priceMin'
+            || key === 'priceMax'
+            || key === 'apartmentType'
+            || key === 'stars'
+            || key === 'rating'
+          ) {
+            return (
+
+            //   <animated.div style={style}>
+            //   <h1>Hello World!</h1>
+            // </animated.div>
+
+              <button
+                key={key}
+                className='side-bar__delete-btn'
+                onClick={() => uncheckCategory(key)}
+              >
+                {key === 'priceMin' && `$${priceMin}`}
+                {key === 'priceMax' && `$${priceMax}`}
+                {key === 'apartmentType' && 'Type of property'}
+                {key === 'stars' && 'Property class'}
+                {key === 'rating' && 'Guest rating'}
+              </button>
+
+            )
+          }
+        })}
+      </div>
+
+      {/* <div className='side-bar__filter'>
         <TransitionGroup>
           {filteredKeysArray.map(key => {
             if (key === 'priceMin'
@@ -170,7 +211,7 @@ export const SideBar: React.FC = () => {
             }
           })}
         </TransitionGroup>
-      </div>
+      </div> */}
 
 
 
@@ -201,7 +242,7 @@ export const SideBar: React.FC = () => {
 
 
       <div className='side-bar__category'>
-        <CategoryX
+        <Category
           handler={multipleCheckboxHandler}
           title="Type of property"
           searchParameterKey="apartmentType"
@@ -226,7 +267,7 @@ export const SideBar: React.FC = () => {
 
 
       <div className='side-bar__category'>
-        <CategoryX
+        <Category
           handler={singleCheckboxHandler}
           title="Guest rating"
           searchParameterKey="rating"

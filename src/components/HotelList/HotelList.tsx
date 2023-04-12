@@ -24,28 +24,40 @@ function reverseTransformString(str: string) {
 }
 
 type Props = {
+  responseError: boolean
   hotels: ExtendedHotelInfo[] | null
   setHotels: React.Dispatch<React.SetStateAction<ExtendedHotelInfo[] | null>>
 }
 
 function capitalizeWords(str: string): string {
-  return str.replace(/\b\w/g, function(ltr) { return ltr.toUpperCase(); });
+  return str.replace(/\b\w/g, function (ltr) { return ltr.toUpperCase(); });
 }
 
-export const HotelList: React.FC<Props> = ({ hotels, setHotels }) => {
+export const HotelList: React.FC<Props> = ({ hotels, setHotels, responseError }) => {
 
-  const [numItemsToShow, setNumItemsToShow] = useState(4);  const [searchParams, setSearchParams] = useSearchParams();
+  const [numItemsToShow, setNumItemsToShow] = useState(4); const [searchParams, setSearchParams] = useSearchParams();
   const city = searchParams.get('city') || '';
 
 
+  if (responseError) {
+    return (
+      <div className="hotel-list">
+        <h2 className='hotel-list__error title-xx-black-700'>
+          Server error! <br />
+          Please try again later
+        </h2>
+      </div>
+    )
+  }
+
   if (!hotels) {
-    return <div className='hotel-list__no-hotel'></div>
+    return <div className="hotel-list"></div>
   }
   return (
     <div className="hotel-list">
       <div className="hotel-list__top-section">
         <span className='hotel-list__amount title-x-black-700'>
-          {`${reverseTransformString(city) || 'Somewhere'}: ${hotels?.length} properties`}
+          {`${reverseTransformString(city) || 'All hotels'}: ${hotels?.length} properties`}
         </span>
         <div className='hotel-list__section-x'>
           <FilterSelector
@@ -56,11 +68,11 @@ export const HotelList: React.FC<Props> = ({ hotels, setHotels }) => {
       </div>
 
 
-      {hotels?.slice(0, numItemsToShow)?.map(card => {
+      {hotels?.slice(0, numItemsToShow)?.map(hotel => {
         return (
           <HotelCard
-            key={card.id}
-            hotel={card}
+            key={hotel.id}
+            hotel={hotel}
           />
         )
       })

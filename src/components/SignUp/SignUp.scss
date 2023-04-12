@@ -2,36 +2,23 @@
 @import './../../../src/styles/fonts.scss';
 @import './../../../src/styles/button.scss';
 
-.signup-container {
+.signup-page {
   width: 100%;
-
-  position: absolute;
+  margin-bottom: 50px;
   z-index: 10;
 
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-}
+  &__section {
+    width: 100%;
+    margin-bottom: 17px;
+  }
 
-.signup {
-  position: relative;
-  background-color: #fff;
-  padding: 48px;
-  border-radius: $rounding;
-
-  &__cross {
-    width: 24px;
-    height: 24px;
-
-    position: absolute;
-    top: 24px;
-    right: 24px;
-
-    background: url("./../../images/iconss/x.svg") center no-repeat transparent;
-    border: none;
-    transition: $transition;
-    outline: none;
-    cursor: pointer;
+  &__form {
+    margin: 0 auto;
+    width: 448px;
+    // border: 1px solid red;
+    position: relative;
+    background-color: #fff;
+    border-radius: $rounding;
   }
 
   &__title {

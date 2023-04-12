@@ -31,15 +31,20 @@ export const GallerySlider: React.FC<Props> = ({ images, currentImage, setCurren
           alt="Gallery"
         />
 
-        <button
-          className='gallery-slider__btn--prev'
-          onClick={() => setCurrentImage(prev => prev - 1 === 0 ? 1 : prev - 1)}>
-        </button>
+        {currentImage !== 1 && (
+          <button
+            className='gallery-slider__btn--prev'
+            onClick={() => setCurrentImage(prev => prev - 1 === 0 ? 1 : prev - 1)}>
+          </button>
+        )}
 
-        <button
-          className='gallery-slider__btn--next'
-          onClick={() => setCurrentImage(prev => prev + 1 === images.length + 1 ? images.length : prev + 1)}>
-        </button>
+        {currentImage !== images.length && (
+          <button
+            className='gallery-slider__btn--next'
+            onClick={() => setCurrentImage(prev => prev + 1 === images.length + 1 ? images.length : prev + 1)}>
+          </button>
+        )}
+
       </div>
 
       <span className='gallery-slider__amount text-xx-white-400'>

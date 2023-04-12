@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ReactSimplyCarousel from 'react-simply-carousel';
 import './HotelCard.scss'
 import Carousel from '../Carousel/Carousel';
-import { ExtendedHotelInfo } from '../../types';
-import { Link } from 'react-router-dom';
+import { ExtendedHotelInfo, HotelInfo } from '../../types';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../App';
 
 type Props = {
   hotel: ExtendedHotelInfo,
@@ -12,14 +13,30 @@ type Props = {
 
 
 export const HotelCard: React.FC<Props> = ({ hotel }) => {
+  const context = useContext(AuthContext);
+  const navigate = useNavigate();
   const mapUrl
     = `https://google.com/maps/search/${hotel.city}, ${hotel.address}`;
 
 
   const stars = [];
 
+  // const [rating, setRating] = useState(0)
+
+  // useEffect(() => {
+  //   setRating(convertNumber(context?.hotel?.rating || 0))
+  // }, [context])
+  // // const rating = ;
+
   for (let i = 0; i < hotel.stars; i++) {
     stars.push(<div key={i} className="card__star"></div>);
+  }
+
+  const onButtonClick = (hotel: HotelInfo) => {
+    if (context) {
+      context.setHotel(hotel);
+      navigate('/hotel');
+    }
   }
 
   return (
@@ -93,12 +110,13 @@ export const HotelCard: React.FC<Props> = ({ hotel }) => {
           <span className='card__per text-x-gray-400'>per night</span>
         </div>
 
-        <Link
-          to="/hotel"
+        <button
+          // to="/hotel"
+          onClick={() => onButtonClick(hotel)}
           className='card__btn button'
         >
           View
-        </Link>
+        </button>
       </div>
     </div>
   )

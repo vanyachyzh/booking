@@ -2,31 +2,24 @@
 @import './../../../src/styles/fonts.scss';
 @import './../../../src/styles/button.scss';
 
-.container {
-  width: 1440px;
-  margin: 0 auto;
-}
+
 
 .header {
   width: 100%;
+  height: 80px;
+  
   border: 1px solid rgba(214, 213, 213, 0.352);
 
-  &__icon {
-    transition: $transition;
-    
-  }
 
-  &__container-x {
-    padding: 126px 0;
 
-    background: url("./../../images/Backgroung\ Iamge\ 1\ \(montains\).png") bottom center / cover no-repeat;
-  }
 
-  &__nav {
+  &__container {
+    width: 1440px;
+    height: 100%;
+    margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
-    padding: 13px 24px;
   }
 
   &__login-btn {
@@ -34,75 +27,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  &__search-section {
-    width: 1204px;
-    height: 124px;
-
-    margin: 0 auto;
-    padding-bottom: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: end;
-    gap: 24px;
-
-    border-radius: $rounding;
-    background-color: rgba(2, 33, 24, 0.8);
-  }
-
-  &__item {
-    position: relative;
-    width: min-content;
-    height: min-content;
-
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-
-  &__inscription {
-    display: block;
-    width: 100%;
-    margin-bottom: 8px;
-  }
-
-  &__in-btn {
-    width: 169px;
-    height: 54px;
-    padding-right: 18px;
-
-    border: 1.5px solid #fff;
-    border-radius: $rounding;
-    background: url("./../../images/iconss/calendar-up.svg") 13px center / 24px 24px no-repeat #fff;
-
-    text-align: end;
-
-    &:active {
-      border: 1.5px solid $blue;
-      background: url("./../../images/iconss/calendar-up-a.svg") 13px center / 24px 24px no-repeat #fff;
-    }
-  }
-
-  &__out-btn {
-    width: 169px;
-    height: 54px;
-    padding-right: 18px;
-
-    border: 1.5px solid #fff;
-    border-radius: $rounding;
-    background: url("./../../images/iconss/calendar-up.svg") 13px center / 24px 24px no-repeat #fff;
-
-    text-align: end;
-
-    &:active {
-      border: 1.5px solid $blue;
-      background: url("./../../images/iconss/calendar-up-a.svg") 13px center / 24px 24px no-repeat #fff;
-    }
+    margin-left: auto;
   }
 
   &__profile {
     position: relative;
+    margin-left: auto;
   }
 
   &__avatar {
@@ -142,94 +72,6 @@
 
     &:hover {
       background: #F1F3F5;
-    }
-  }
-
-  &__months {
-    position: absolute;
-    right: -194px;
-    top: 85px;
-    z-index: 3;
-
-    padding: 24px 56px;
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    gap: 20px;
-    border-radius: $rounding;
-    background-color: #fff;
-    box-shadow: 24px 46px 21px rgba(117, 117, 117, 0.02), 14px 26px 18px rgba(117, 117, 117, 0.08), 6px 12px 13px rgba(117, 117, 117, 0.13), 2px 3px 7px rgba(117, 117, 117, 0.15), 0px 0px 0px rgba(117, 117, 117, 0.15);
-
-  }
-
-  &__capacity {
-    background-color: #fff;
-    width: 118px;
-    height: 54px;
-    border-radius: $rounding;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
-
-  &__amount {
-    text-align: center;
-    width: 20px;
-    display: block;
-  }
-
-  &__button--prev {
-    position: absolute;
-    left: 21px;
-    top: 192px;
-    background: url("./../../images/iconss/chevron-left.svg") center no-repeat;
-    border: none;
-  }
-
-  &__button--next {
-    position: absolute;
-    right: 21px;
-    top: 192px;
-    background: url("./../../images/iconss/chevron-right.svg") center no-repeat;
-    border: none;
-  }
-
-  &__search-btn {
-    width: 54px;
-    height: 54px;
-    margin-top: 20px;
-
-    border: none;
-    border-radius: $rounding;
-    background: url("./../../images/iconss/arrow-right.svg") 16px center / 24px 24px no-repeat $blue;
-  }
-
-  &__minus {
-    width: 24px;
-    height: 24px;
-    background: url("./../../images/iconss/Minus-default.svg") 4.8px 4.2px / 14px 14px no-repeat #F7F9FB;
-    border-radius: 30px;
-    border: none;
-    transition: $transition;
-    cursor: pointer;
-
-    &:hover {
-      background: url("./../../images/iconss/Minus-hover.svg") 4.8px 4.2px / 14px 14px no-repeat #F1F3F5;
-    }
-  }
-
-  &__plus {
-    width: 24px;
-    height: 24px;
-    background: url("./../../images/iconss/Plus-default.svg") 4.8px 4.2px / 14px 14px no-repeat #F7F9FB;
-    border-radius: 30px;
-    border: none;
-    transition: $transition;
-    cursor: pointer;
-
-    &:hover {
-      background: url("./../../images/iconss/Plus-hover.svg") 4.8px 4.2px / 14px 14px no-repeat #F1F3F5;
     }
   }
 }
