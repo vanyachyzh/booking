@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/booking/static/css/main.be12eef5.css",
-    "main.js": "/booking/static/js/main.95001033.js",
+    "main.css": "/booking/static/css/main.712b7724.css",
+    "main.js": "/booking/static/js/main.b754adc4.js",
     "static/media/unsplash_gE08jRp3Qw4.svg": "/booking/static/media/unsplash_gE08jRp3Qw4.34c3e74a87ac1479df56.svg",
     "static/media/Hotel Booking-cuate (1) 1.svg": "/booking/static/media/Hotel Booking-cuate (1) 1.d0497853a03b54888e52.svg",
     "static/media/Satoshi-Medium.ttf": "/booking/static/media/Satoshi-Medium.759562088ba19068aef8.ttf",
@@ -16,8 +16,12 @@
     "static/media/swimming.svg": "/booking/static/media/swimming.c169e5d008846811992df70267c8cafa.svg",
     "static/media/barbell.svg": "/booking/static/media/barbell.1b4c923fd75557064b88b2afb0043ded.svg",
     "static/media/map-pin-default.svg": "/booking/static/media/map-pin-default.8448d9168853706c5236.svg",
+    "static/media/mood-sad.svg": "/booking/static/media/mood-sad.582b4c8737b346795c3dcb0eaa2f97bb.svg",
+    "static/media/mood-happy.svg": "/booking/static/media/mood-happy.cfdf962a59f379c1dbac8591ddf78d35.svg",
     "static/media/Plus-default.svg": "/booking/static/media/Plus-default.1ecef5d969d4646efe97.svg",
     "static/media/Plus-hover.svg": "/booking/static/media/Plus-hover.22e8838a5e3114132d0c.svg",
+    "static/media/mood-smile-beam.svg": "/booking/static/media/mood-smile-beam.ea94fab6ca461d23d9ff19b8d345218a.svg",
+    "static/media/mood-empty.svg": "/booking/static/media/mood-empty.09beae3d8db81cfdb4a90cf644a1dd8a.svg",
     "static/media/circle-check.svg": "/booking/static/media/circle-check.334c95ed778f036fc0e2.svg",
     "static/media/alert-triangle.svg": "/booking/static/media/alert-triangle.dde02dfee375b92a5f96.svg",
     "static/media/alert-circle.svg": "/booking/static/media/alert-circle.d2641f06abcd77299438.svg",
@@ -39,8 +43,8 @@
     "static/media/chevron-right-white.svg": "/booking/static/media/chevron-right-white.ad602b1cd3cff4fe52b3.svg",
     "static/media/check.svg": "/booking/static/media/check.5f914d16f5bfcdd35754.svg",
     "static/media/back-arrow.svg": "/booking/static/media/back-arrow.f53589f38970c064e42c.svg",
-    "static/media/chevron-left.svg": "/booking/static/media/chevron-left.dab91973d0384f737636.svg",
-    "static/media/chevron-right.svg": "/booking/static/media/chevron-right.5fbde459fc5cdbf98a97.svg",
+    "static/media/chevron-left.svg": "/booking/static/media/chevron-left.75202b13ed79fb96b640.svg",
+    "static/media/chevron-right.svg": "/booking/static/media/chevron-right.d87f9258478de38b147d.svg",
     "static/media/chevron-up.svg": "/booking/static/media/chevron-up.0b3ab34f70c35db623e9.svg",
     "static/media/chevron-down-default.svg": "/booking/static/media/chevron-down-default.b81df6bbe31b11c8f782.svg",
     "static/media/chevron-down-hover.svg": "/booking/static/media/chevron-down-hover.3c098c2e6cc20f9419f2.svg",
@@ -50,11 +54,11 @@
     "static/media/chevron-small-right.svg": "/booking/static/media/chevron-small-right.3c78a6d3f68951509fa9.svg",
     "static/media/left-arrow.svg": "/booking/static/media/left-arrow.e831657a40d75b120dc4.svg",
     "static/media/right-left.svg": "/booking/static/media/right-left.7efc550121917f592b29.svg",
-    "main.be12eef5.css.map": "/booking/static/css/main.be12eef5.css.map",
-    "main.95001033.js.map": "/booking/static/js/main.95001033.js.map"
+    "main.712b7724.css.map": "/booking/static/css/main.712b7724.css.map",
+    "main.b754adc4.js.map": "/booking/static/js/main.b754adc4.js.map"
   },
   "entrypoints": [
-    "static/css/main.be12eef5.css",
-    "static/js/main.95001033.js"
+    "static/css/main.712b7724.css",
+    "static/js/main.b754adc4.js"
   ]
 }
