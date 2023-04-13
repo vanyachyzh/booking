@@ -12,6 +12,12 @@ import { RoomCard } from '../../components/RoomCard';
 import { Header } from '../../components/Header';
 import { Navigation } from '../../components/Navigation';
 import { AuthContext } from '../../App';
+import { Rating } from '../../components/Rating';
+// import Carousel from '../../components/Carousel/Carousel';
+// import Slider from "react-slick";
+import { Slider } from '../../components/Slider';
+import { Comment } from '../../components/Comment';
+import classNames from 'classnames';
 
 const mockk = {
   address
@@ -65,6 +71,7 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
   const context = useContext(AuthContext)
   const [hotel, setHotel] = useState<ExtendedHotelInfo | null>(null)
   const [isFirstOpen, setIsFirstOpen] = useState(false);
+  const [reviews, setReviews] = useState([]);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
   const [monthSetter, setMonthSetter] = useState<BookingDate>({
     start: startMonthSetter,
@@ -72,16 +79,25 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
   })
   const [date, setDate] = useState<BookingDate>(initialDate);
   const [capacity, setCapacity] = useState<number>(1);
+  const [activeAnchor, setActiveAnchor] = useState("#overview");
 
   useEffect(() => {
     if (context !== null && context.hotel) {
       getExtendedHotelInfo(context.hotel)
         .then(r => {
-          // console.log(r)
+
           setHotel(r)
         })
-      // .then(() => console.log(hotel))
+
     }
+    // fetch('http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/sort_reviews_by_hotel2')
+    //   .then(r => r.json())
+
+
+
+    fetch('http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/reviews/1')
+      .then(r => r.json())
+      .then(r => setReviews(r))
   }, [])
 
   const handleClickNext = () => {
@@ -95,6 +111,16 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
 
   if (!context) {
     return null;
+  }
+
+  function handleNavClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    event.preventDefault();
+    const element = document.getElementById(event.currentTarget.hash.slice(1));
+
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setActiveAnchor(event.currentTarget.hash);
+    }
   }
 
   return (
@@ -117,9 +143,45 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
             <PhotoRow />
           </div>
 
+          <div className='hotel-page__section'>
+            <div className='hotel-page__anchors'>
+              <a
+                className={classNames(
+                  'hotel-page__anchor',
+                  {'hotel-page__anchor--active': activeAnchor === "#overview"}
+                )}
+                href="#overview"
+                onClick={handleNavClick}
+              >
+                Overview
+              </a>
 
+              <a
+                className={classNames(
+                  'hotel-page__anchor',
+                  {'hotel-page__anchor--active': activeAnchor === "#rooms"}
+                )}
+                href="#rooms"
+                onClick={handleNavClick}
+              >
+                Rooms
+              </a>
 
-          <section className="hotel-page__section">
+              <a
+                className={classNames(
+                  'hotel-page__anchor',
+                  {'hotel-page__anchor--active': activeAnchor === "#reviews"}
+                )}
+                href="#reviews"
+                onClick={handleNavClick}
+              >
+                Reviews
+              </a>
+
+            </div>
+          </div>
+
+          <section className="hotel-page__section" id="overview">
             <div className="hotel-page__info">
               <span className="hotel-page__place-name">
                 {context.hotel?.city}
@@ -160,7 +222,7 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
                   {context.hotel?.rating}
                 </span>
                 <span className="hotel-page__view-amount text-xx-gray-400">
-                {`${context.hotel?.allReviews} views`}
+                  {`${context.hotel?.allReviews} views`}
                 </span>
 
                 <span className="hotel-page__rating-desc text-xx-black-500">
@@ -273,25 +335,53 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
           </section>
 
 
-          <section className="hotel-page__section">
+          <section className="hotel-page__section" id="rooms">
             <span className="hotel-page__topic title-x-black-700">
               Available rooms
             </span>
+
             <div className="hotel-page__cards">
-              {hotel?.rooms.slice(0, 2).map(room => (
-                <div>
-                  <RoomCard room={room} />
-                </div>
-              ))}
+              <Slider
+                width={948}
+                step={3}
+                items={hotel?.rooms.map(room => (
+                  <div key={room.id}>
+                    <RoomCard room={room} />
+                  </div>
+                )) || []}
+              />
+
             </div>
           </section>
 
-          <section className="hotel-page__section">
+          <section className="hotel-page__section" id="reviews">
+            <span className="hotel-page__topic title-x-black-700">
+              Reviews
+            </span>
 
-          </section>
+            <Rating data={{
+              "0": 11,
+              "1": 7,
+              "2": 6,
+              "3": 11,
+              "4": 2,
+              "5": 6
+            }} />
 
-          <section className="hotel-page__section">
-
+            <div className="hotel-page__reviews">
+              <Slider
+                width={684}
+                step={2}
+                items={reviews.map(review => (
+                  <div>
+                    <Comment
+                      key={review}
+                      data={review}
+                    />
+                  </div>
+                )) || []}
+              />
+            </div>
           </section>
         </div>
       </div>

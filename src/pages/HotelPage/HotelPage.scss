@@ -16,6 +16,30 @@
     margin-top: 17px;
   }
 
+  &__reviews {
+    margin-left: auto;
+    margin-top: auto;
+  }
+
+  &__anchors {
+    border-bottom: 1px solid rgb(175, 175, 175);
+    display: flex;
+    justify-content: start;
+  }
+
+
+  &__anchor {
+    display: block;
+    height: 100%;
+    padding: 8px 20px;
+    
+
+    &--active {
+      border-bottom: 3px solid $green;
+    }
+  }
+
+
   &__cards {
     display: flex;
     align-items: start;
@@ -156,8 +180,10 @@
   }
 
   &__place-name {
+    display: block;
     font-size: 48px;
     font-weight: 700;
+    margin-bottom: 17px;
   }
 
   &__map-link {

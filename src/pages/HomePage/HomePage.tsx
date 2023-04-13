@@ -30,40 +30,39 @@ export const HomePage: React.FC<Props> = ({ setUser }) => {
 
     fetch('http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/all')
       .then(r => r.json())
-      .then(console.log)
-      // .then(data => setHotelList(data))
-      // .catch(error => setResponseError(true))
+      .then(r => setHotelList(r))
 
 
-    fetch('http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(
-        {
-          firstName: "igor",
-          lastName: "igor",
-          email: "12hlhlknlkgj4j@com.com",
-          telephone: "312122",
-          password: "dfsdbkhihuffdjbk1"
-        })
-    }).then(r => console.log(r))
+    // fetch('http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/register', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(
+    //     {
+    //       firstName: "igor",
+    //       lastName: "igor",
+    //       email: "12hlhlknlkgj4j@com.com",
+    //       telephone: "312122",
+    //       password: "dfsdbkhihuffdjbk1"
+    //     })
+    // })
+    // .then(r => console.log(r))
 
   }, [])
 
 
   const login = () => {
+    const data = new URLSearchParams({
+      email: "johny-j1990@gmail.com",
+      password: "joohnyJ29",
+    });
     fetch('http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/login', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
-      body: JSON.stringify(
-        {
-          email: "johny-j1990@gmail.com",
-          password: "joohnyJ29",
-        })
+      body: "username=johny-j1990@gmail.com&password=johnyJ29"
     }).then(console.log)
   }
 
@@ -80,6 +79,7 @@ export const HomePage: React.FC<Props> = ({ setUser }) => {
 
     if ("" !== searchParams.toString()) {
       const url = `http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/filters?${searchParams.toString()}`;
+      // console.log(url)
       fetch(url)
         .then(r => r.json())
         // .then(r => console.log(r))

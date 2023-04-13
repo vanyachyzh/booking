@@ -1,0 +1,57 @@
+@import './../../../src/styles/variables.scss';
+@import './../../../src/styles/fonts.scss';
+
+.comment {
+  position: relative;
+  width: 330px;
+  height: 250px;
+  border: 1px solid rgb(222, 221, 221);
+  border-radius: $rounding;
+  padding: 24px;
+
+  &__info {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 8px;
+  }
+
+  &__photo {
+    // display: block;
+    // margin-bottom: 25px;
+  }
+
+  &__icon {
+    margin-left: auto;
+  }
+
+  &__name {
+    // position: absolute;
+    // top: 32px;
+    // left: 80px;
+    // margin-bottom: 25px;
+  }
+
+  &__text {
+    display: block;
+    height: 88px;
+    overflow: hidden;
+    margin-bottom: 26px;
+  }
+
+  &__button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: $blueDefault;
+
+    &:hover {
+      color: $blueHover;
+    }
+  }
+}

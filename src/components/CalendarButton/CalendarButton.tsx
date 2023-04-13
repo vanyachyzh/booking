@@ -19,6 +19,10 @@ type Props = {
   setIsAnother: React.Dispatch<React.SetStateAction<boolean>>,
 };
 
+// function handleClick(event) {
+//   console.log("Натиснуто на елемент з класом:", event.target.className);
+// }
+
 
 export const CalendarButton: React.FC<Props> = ({ title, dropdown, isActive, setIsActive: setIsOpen, setIsAnother, type }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -26,37 +30,29 @@ export const CalendarButton: React.FC<Props> = ({ title, dropdown, isActive, set
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
+
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, []);
 
-
-  // useEffect(() => {
-  //   if (title !== "Choose a date" && type === "up") {
-  //     setIsAnother(true);
-  //   }
-  // }, [title]);
-
-
-
   const handleClickOutside = (event: MouseEvent) => {
     const clickedElement = event.target as HTMLElement;
+    console.log(clickedElement)
     if (!clickedElement.classList.contains('calendar-button')
       && !clickedElement.classList.contains('calendar')
       && !clickedElement.classList.contains('weekday')
       && !clickedElement.classList.contains('title')
       && !clickedElement.classList.contains('calendar__number')
-      && !clickedElement.classList.contains('header__button--next')
-      && !clickedElement.classList.contains('header__button--prev')
+      && !clickedElement.classList.contains('search-bar__button--prev')
+      && !clickedElement.classList.contains('search-bar__button--next')
       && !clickedElement.classList.contains('calendar__number-out')
       && !clickedElement.classList.contains('calendar')
-      && !clickedElement.classList.contains('header__calendars')
+      && !clickedElement.classList.contains('search-bar__calendars')
       && !clickedElement.classList.contains('day')
       && !clickedElement.classList.contains('calendar-button__dropdown')
       ) {
       setIsOpen(false)
-      // setIconState(IconState.Default);
     }
   };
 

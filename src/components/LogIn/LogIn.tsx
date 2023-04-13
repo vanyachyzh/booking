@@ -89,7 +89,7 @@ export const LogIn: React.FC<Props> = ({ setUser }) => {
         } else {
           setError(prev => ({
             ...prev,
-            email: "Your login is already used",
+            email: "Check email",
           }));
         }
       });
@@ -154,11 +154,11 @@ export const LogIn: React.FC<Props> = ({ setUser }) => {
             />
           </div>
 
-          <button
+          {/* <button
             type='button'
             className="login-page__forgot-btn text-xx-blue-500">
             Forgot password?
-          </button>
+          </button> */}
 
 
           <button

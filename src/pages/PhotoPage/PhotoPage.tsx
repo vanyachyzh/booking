@@ -57,7 +57,8 @@ export const PhotoPage: React.FC<Props> = ({ setUser }) => {
           All photos
         </span>
 
-        {context?.hotel?.picturesUrl.map((photo, index) => (
+        {/* {context?.hotel?.picturesUrl.map((photo, index) => ( */}
+        {natureLinks.map((photo, index) => (
           <img
             onClick={() => setCurrentImage(index + 1)}
             className='photo-page__photo'
@@ -72,7 +73,8 @@ export const PhotoPage: React.FC<Props> = ({ setUser }) => {
         <GallerySlider
           currentImage={currentImage}
           setCurrentImage={setCurrentImage}
-          images={context?.hotel?.picturesUrl || []}
+          // images={context?.hotel?.picturesUrl || []}
+          images={natureLinks}
         />
       )}
     </div>

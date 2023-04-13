@@ -20,7 +20,7 @@ export const RoomCard: React.FC<Props> = ({ room }) => {
     return (
       <div className="room-card">
         <span className="room-card__hotel-name">
-          {room.apartmentType}
+          {room.hotelName}
         </span>
 
         <ul

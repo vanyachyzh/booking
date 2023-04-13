@@ -108,18 +108,6 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
     setNextDate(newNextDate);
   };
 
-  // const dateFromParam = searchParams.get('dateFrom') || '';
-  // const dateToParam = searchParams.get('dateTo') || '';
-  // const capacityParam = searchParams.get('capacity') || '';
-  // {
-  //   start: new Date(Date.parse(formatDate(dateFromParam))) ,
-  //   end: new Date(Date.parse(formatDate(dateToParam))),
-  // }
-
-  // useEffect(() => {
-  //   setProposedCities(searchCityByQuery(cards, city));
-  // }, [city])
-
   useEffect(() => {
     if (!isProposedVisible) {
       setIconState(IconState.Default)
@@ -150,8 +138,8 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
         searchParams,
         {
           city: transformStringTo(city),
-          dateFrom: date.start?.toISOString().substring(0, 10) || '',
-          dateTo: date.end?.toISOString().substring(0, 10) || '',
+          dateFrom: date.start?.toISOString().substring(0, 10) || null,
+          dateTo: date.end?.toISOString().substring(0, 10) || null,
           capacity: String(capacity),
         },
       ),)
@@ -196,8 +184,29 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
   };
 
   const handleButtonClick = () => {
+
     if (inputRef.current) {
       inputRef.current.focus();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    const clickedElement = event.target as HTMLElement;
+    console.log(clickedElement)
+    if (!clickedElement.classList.contains('search-bar__input')
+      && !clickedElement.classList.contains('search-bar__option-container')
+      && !clickedElement.classList.contains('search-bar__list')
+      && !clickedElement.classList.contains('search-bar__option')
+      ) {
+      setIsProposedVisible(false);
     }
   };
 
@@ -225,20 +234,12 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
 
               <input
                 ref={inputRef}
-                // onMouseEnter={handleMouseEnter}
-                // onMouseLeave={handleMouseLeave}
-                // onFocus={handleFocus}
-                // onBlur={handleBlur}
-                // onBlur={}
                 onFocus={() => {
                   handleFocus()
                 }}
                 onClick={handleInputClick}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
-                // onBlur={() => {
-                //   setIsFocused(false);
-                // }}
                 placeholder='Enter city'
                 value={city}
                 onChange={onChange}

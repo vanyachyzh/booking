@@ -1,0 +1,53 @@
+@import './../../../src/styles/variables.scss';
+@import './../../../src/styles/fonts.scss';
+@import './../../../src/styles/button.scss';
+
+.slider {
+  position: relative;
+
+
+  &__items-container {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+
+  &__item {
+    margin-right: auto;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__prev-button {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 5;
+    width: 48px;
+    height: 48px;
+    background: url("./../../images/iconss/chevron-left.svg") center no-repeat #fff;
+    border-radius: 100%;
+    border: none;
+    transform: translate(-50%, -50%);
+    box-shadow: $shadow;
+    cursor: pointer;
+  }
+
+  &__next-button {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    z-index: 5;
+    width: 48px;
+    height: 48px;
+    background: url("./../../images/iconss/chevron-right.svg") center no-repeat #fff;
+    border-radius: 100%;
+    border: none;
+    transform: translate(50%, -50%);
+    box-shadow: $shadow;
+    cursor: pointer;
+  }
+}

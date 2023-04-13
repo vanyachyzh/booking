@@ -22,7 +22,9 @@ export const Header: React.FC<Props> = ({ setUser }) => {
   const { pathname } = useLocation();
   const currentPath = pathname.substring(1);
 
-  console.log(pathname === '/login')
+  useEffect(() => {
+    console.log(isVisibleLogOut)
+  }, [isVisibleLogOut])
 
   const onClick = () => {
     setIsVisibleLogOut(prev => !prev)
@@ -32,6 +34,24 @@ export const Header: React.FC<Props> = ({ setUser }) => {
     setUser(null);
     navigate('/')
   }
+
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    const clickedElement = event.target as HTMLElement;
+    if (!clickedElement.classList.contains('header__logout')
+    && !clickedElement.classList.contains('header__avatar')
+    ) {
+      setIsVisibleLogOut(false);
+    }
+  };
 
 
 
@@ -50,6 +70,7 @@ export const Header: React.FC<Props> = ({ setUser }) => {
 
 
         {context && context.user && (
+
 
           <div className='header__profile'>
             <button
