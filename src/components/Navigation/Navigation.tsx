@@ -6,23 +6,24 @@ import { getSearchWith } from '../../utils';
 import './Navigation.scss'
 import { AuthContext } from '../../App';
 
-// type Props = {
-//   users: User[] | null,
-//   setSelectedPost: React.Dispatch<React.SetStateAction<Post | null>>,
-// };
+type Props = {
+  city: string,
+  address: string,
+  name: string
+};
 
-export const Navigation = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    return null;
-  }
+export const Navigation: React.FC<Props> = ({ city, address, name }) => {
+  // const context = useContext(AuthContext);
+  // if (!context) {
+  //   return null;
+  // }
 
   return (
     <div className='navigation__container'>
       <nav className='navigation text-xx-black-500'>
-        <span className='navigation__link'>{context.hotel?.city}</span>
-        <span className='navigation__link'>{context.hotel?.address}</span>
-        <span className='navigation__link'>{context.hotel?.name}</span>
+        <span className='navigation__link'>{city}</span>
+        <span className='navigation__link'>{address}</span>
+        <span className='navigation__link'>{name}</span>
       </nav>
     </div>
 

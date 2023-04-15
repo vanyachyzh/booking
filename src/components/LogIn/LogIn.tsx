@@ -75,8 +75,11 @@ export const LogIn: React.FC<Props> = ({ setUser }) => {
       return;
     }
 
+
+
     logIn(email, password)
       .then(res => {
+        console.log(res.status, warning, areAllFieldsEmpty(warning))
         if (res.status === 200 && areAllFieldsEmpty(warning)) {
           // console.log(res)
           setUser({
@@ -154,11 +157,11 @@ export const LogIn: React.FC<Props> = ({ setUser }) => {
             />
           </div>
 
-          {/* <button
+          <button
             type='button'
             className="login-page__forgot-btn text-xx-blue-500">
             Forgot password?
-          </button> */}
+          </button>
 
 
           <button

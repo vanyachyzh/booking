@@ -22,17 +22,21 @@ export const getData = async (searchParameters: string) => {
   return data;
 };
 
+// fetch('http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/login', {
+//   method: 'POST',
+//   headers: {
+//     'Content-Type': 'application/x-www-form-urlencoded'
+//   },
+//   body: "username=Kwfwhle1@gmail.com&password=Kwfwhle1gmailcom"
+// }).then(console.log)
+
 export const logIn = async (email: string, password: string) => {
   const response = await fetch(`${authUrl}login`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json",
+      'Content-Type': 'application/x-www-form-urlencoded'
     },
-    body: JSON.stringify({
-      email,
-      password,
-    }),
+    body: `username=${email}&password=${password}`
   });
 
   return response;
@@ -100,6 +104,19 @@ export const getExtendedHotelInfo = async (hotel: HotelInfo) => {
     rooms
   }
 };
+
+export const toNumber = (value: number) => {
+  return Number(`${String(value)[0]}.${String(value)[2]}`)
+}
+
+export const getRating = (number: number) => {
+  if (number >= 5) { return 'Excellent' }
+  if (number >= 4) { return 'Very good' }
+  if (number >= 3) { return 'Good' }
+  if (number >= 2) { return 'Okay' }
+  if (number >= 1) { return 'Poor' }
+  if (number >= 0) { return 'Terrible' }
+}
 
 export const getRatingWord = (rating: number) => {
   if (rating > 9 && rating < 10) {return 'Excellent'}

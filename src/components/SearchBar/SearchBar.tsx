@@ -26,7 +26,7 @@ function transformStringTo(str: string) {
 
   const transformedWords = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
 
-  const transformedString = transformedWords.join('%20');
+  const transformedString = transformedWords.join(' ').replace(/(?<!%20)\s/g, '%20');
 
   return transformedString;
 }
@@ -46,6 +46,15 @@ function reverseTransformString(str: string) {
 
   return transformedString;
 }
+
+function capitalizeWords(str: string): string {
+  const words = str.split(' ');
+
+  const capitalizedWords = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+
+  return capitalizedWords.join(' ');
+}
+
 
 
 
@@ -137,7 +146,7 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
       getSearchWith(
         searchParams,
         {
-          city: transformStringTo(city),
+          city: capitalizeWords(city),
           dateFrom: date.start?.toISOString().substring(0, 10) || null,
           dateTo: date.end?.toISOString().substring(0, 10) || null,
           capacity: String(capacity),

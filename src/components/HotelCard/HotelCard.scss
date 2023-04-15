@@ -19,6 +19,16 @@
     overflow: hidden;
   }
 
+  &__amenity {
+    display: inline-block;
+    margin: 0 8px 8px 0;
+    padding: 3px 8px;
+    border: none;
+    background: #EAFAEE;
+    border-radius: 4px;
+    text-align: center;
+  }
+
   &__info {
     width: 470px;
     display: flex;
@@ -35,12 +45,6 @@
 
   &__map {
     display: block;
-  }
-
-  &__section {
-    // height: min-content;
-    // width: 100%;
-    // border: 1px solid greenyellow;
   }
 
   &__stars {
@@ -105,7 +109,7 @@
 
   &__section1 {
     padding-left: 8px;
-    width: 80px;
+    width: 100px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;

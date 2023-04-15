@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import './HomePage.scss';
 
@@ -9,6 +9,7 @@ import { ExtendedHotelInfo } from '../../types/HotelInfo';
 import { User } from '../../types';
 import { SearchBar } from '../../components/SearchBar';
 import { getData } from '../../api/booking';
+import { AuthContext } from '../../App';
 
 
 type Props = {
@@ -16,38 +17,18 @@ type Props = {
 }
 
 export const HomePage: React.FC<Props> = ({ setUser }) => {
+  const context = useContext(AuthContext);
   const [searchParams] = useSearchParams();
   const [hotelList, setHotelList] = useState<ExtendedHotelInfo[] | null>(null);
   const [responseError, setResponseError] = useState(false);
 
 
-  useEffect(() =>
-   {
-    // getData('all')
-    //   .then(console.log)
-    // .then(data => setHotelList(data))
-    // .catch(error => setResponseError(true))
+  useEffect(() => {
+
 
     fetch('http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/all')
       .then(r => r.json())
       .then(r => setHotelList(r))
-
-
-    // fetch('http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/register', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(
-    //     {
-    //       firstName: "igor",
-    //       lastName: "igor",
-    //       email: "12hlhlknlkgj4j@com.com",
-    //       telephone: "312122",
-    //       password: "dfsdbkhihuffdjbk1"
-    //     })
-    // })
-    // .then(r => console.log(r))
 
   }, [])
 
@@ -62,7 +43,7 @@ export const HomePage: React.FC<Props> = ({ setUser }) => {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      body: "username=johny-j1990@gmail.com&password=johnyJ29"
+      body: "username=Kwfwhle1@gmail.com&password=Kwfwhle1gmailcom"
     }).then(console.log)
   }
 
@@ -79,7 +60,11 @@ export const HomePage: React.FC<Props> = ({ setUser }) => {
 
     if ("" !== searchParams.toString()) {
       const url = `http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/filters?${searchParams.toString()}`;
-      // console.log(url)
+
+
+      const url1 = `http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/filters?city=New%25York&dateFrom=2023-04-12&dateTo=2023-05-23&capacity=1`;
+      console.log(url, url1)
+
       fetch(url)
         .then(r => r.json())
         // .then(r => console.log(r))

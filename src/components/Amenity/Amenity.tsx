@@ -11,12 +11,14 @@ import resaurantImage from './../../images/iconss/icon (tabler)/glass-full.svg';
 import gymImage from './../../images/iconss/icon (tabler)/barbell.svg';
 import parkingImage from './../../images/iconss/icon (tabler)/parking.svg';
 import spaImage from './../../images/iconss/icon (tabler)/bath.svg';
+import classNames from 'classnames';
 
 type Props = {
   type: string,
+  color?: string
 }
 
-export const Amenity: React.FC<Props> = ({ type }) => {
+export const Amenity: React.FC<Props> = ({ type, color }) => {
   const getIcon = (type: string) => {
     switch (type) {
       case 'SPA':
@@ -43,7 +45,12 @@ export const Amenity: React.FC<Props> = ({ type }) => {
   }
 
   return (
-    <div className='amenity'>
+    <div
+      className={classNames(
+        'amenity',
+        { 'amenity--green': color }
+      )}
+    >
       <img
         className='amenity__image text-x-black-500'
         src={getIcon(type)}

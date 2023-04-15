@@ -22,9 +22,9 @@ export const Header: React.FC<Props> = ({ setUser }) => {
   const { pathname } = useLocation();
   const currentPath = pathname.substring(1);
 
-  useEffect(() => {
-    console.log(isVisibleLogOut)
-  }, [isVisibleLogOut])
+  // useEffect(() => {
+  //   console.log(isVisibleLogOut)
+  // }, [isVisibleLogOut])
 
   const onClick = () => {
     setIsVisibleLogOut(prev => !prev)

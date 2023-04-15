@@ -14,8 +14,6 @@ type Props = {
 
 export const RoomCard: React.FC<Props> = ({ room }) => {
 
-  console.log(room)
-
   if (room) {
     return (
       <div className="room-card">

@@ -1,10 +1,11 @@
 /* eslint-disable no-unneeded-ternary */
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import className from 'classnames';
 import { getSearchWith } from '../../utils';
 import './PhotoRow.scss'
 import { AuthContext } from '../../App';
+import { HotelInfo } from '../../types';
 
 // type Props = {
 //   users: User[] | null,
@@ -21,28 +22,39 @@ let natureLinks = [
   'https://img.huffingtonpost.com/asset/63ec9aa72100005600950bbe.jpeg?cache=NW6hQ1GoIB&ops=1778_1000',
 ];
 
-export const PhotoRow = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    return null;
+type Props = {
+  hotel: HotelInfo,
+}
+
+export const PhotoRow: React.FC<Props> = ({ hotel }) => {
+
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const onButtonClick = () => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set('hotel_id', String(hotel.id));
+    const updatedSearchParams = newSearchParams.toString();
+    navigate(`/photos?${updatedSearchParams}`)
   }
   return (
     <div className="container">
       <div className="photo-row">
-        {context.hotel?.picturesUrl.map((image, index, images) => (
+        {hotel.picturesUrl?.map((image, index) => (
           <img
-            className={`photo-row--${images.length}-${index + 1}`}
+            key={index}
+            className={`photo-row--${hotel.picturesUrl?.length}-${index + 1}`}
             src={image}
             alt="Hotel"
           />
         ))}
 
-        <Link
-          to="/photos"
+        <button
+          onClick={onButtonClick}
           className='photo-row__btn button'
         >
           Show all
-        </Link>
+        </button>
       </div>
     </div>
   )

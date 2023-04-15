@@ -272,19 +272,21 @@ export const SideBar: React.FC = () => {
           title="Guest rating"
           searchParameterKey="rating"
           searchParameterValues={
-            ["10",
-              "8",
-              "6",
+            ["5",
               "4",
-              "2"
+              "3",
+              "2",
+              "1",
+              "0"
             ]
           }
           values={
-            ["10 Excellent",
-              "8+ Good",
-              "6+ Okay",
-              "4+ Poor",
-              "2+ Terrible"]
+            ["5 Excellent",
+              "4+ Very good",
+              "3+ Good",
+              "2+ Okay",
+              "1+ Poor",
+              "0+ Terrible"]
           }
         />
       </div>

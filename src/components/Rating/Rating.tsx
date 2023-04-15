@@ -1,36 +1,32 @@
 import React, { useState } from "react";
 import './Rating.scss'
+import { getRating } from "../../api/booking";
 
 
-const getRating = (number: number) => {
-  console.log(number)
-  if (number === 0) { return 'Terrible' }
-  if (number === 1) { return 'Poor' }
-  if (number === 2) { return 'Okay' }
-  if (number === 3) { return 'Good' }
-  if (number === 4) { return 'Very good' }
-  if (number === 5) { return 'Excellent' }
-}
+
 //////////////////////////////////////////////////////////////////////////////////
 
 interface Props {
   data: { [key: string]: number };
+  average: number
 }
 
-export const Rating: React.FC<Props> = ({ data }) => {
-  const gradeAmount = Object.entries(data).reduce((acc, item) => {
+export const Rating: React.FC<Props> = ({ data, average }) => {
+  const gradeTotal = Object.entries(data).reduce((acc, item) => {
     return acc + item[1];
   }, 0);
+
+  // const average = gradeTotal / 
 
   const extendedRatingInfo = [];
 
   for (const grade in data) {
-    extendedRatingInfo.push([grade, data[grade], data[grade] * 100 / gradeAmount, getRating(+grade)])
+    extendedRatingInfo.push([grade, data[grade], data[grade] * 100 / gradeTotal, getRating(+grade)])
   }
 
   return (
     <div className="rating">
-      <span className="rating__value">8.9</span>
+      <span className="rating__value">{average}</span>
       <span className="rating__title">Excellent</span>
 
       <div className="rating__range">

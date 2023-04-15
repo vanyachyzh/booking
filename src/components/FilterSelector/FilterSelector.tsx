@@ -78,7 +78,7 @@ export const FilterSelector: React.FC<Props> = ({ hotels, setHotels }) => {
           { 'filter__select--active': isOpen },
         )}
       >
-        {currentSort || 'Out of order'}
+        {currentSort || 'Recommended (highest first)'}
       </button>
 
       <CSSTransition

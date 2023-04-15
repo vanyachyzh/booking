@@ -59,16 +59,16 @@ export const Category: React.FC<Props> = ({
 
 
       <ul className='category__list'>
-      <TransitionGroup>
+      {/* <TransitionGroup> */}
 
           {values.slice(0, numItemsToShow).map((value, index) => {
             return (
-              <CSSTransition
-                key={index}
-                classNames='fade'
-                timeout={300}
-                unmountOnExit
-              >
+              // <CSSTransition
+              //   key={index}
+              //   classNames='fade'
+              //   timeout={300}
+              //   unmountOnExit
+              // >
                 <li
                   key={value}
                   className='category__item'
@@ -88,17 +88,13 @@ export const Category: React.FC<Props> = ({
                   >
                     {value}
                   </label>
-
-                  {/* <span>
-                {fetchData(index, searchParameterKey, searchParameterValues[index])}
-              </span> */}
                 </li>
-              </CSSTransition>
+            //  </CSSTransition>
 
             )
           })}
 
-      </TransitionGroup>
+      {/* </TransitionGroup> */}
       </ul>
 
       {values.length > NUM_ITEMS_TO_SHOW && (

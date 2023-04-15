@@ -41,6 +41,9 @@
   }
 
   &__btn {
+    cursor: pointer;
+    border: none;
+    outline: none;
     padding-left: 30px;
     margin: 0 0 27px 56px;
     background: url("./../../images/iconss/back-arrow.svg") left 0 center no-repeat;
