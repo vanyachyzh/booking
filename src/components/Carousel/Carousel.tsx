@@ -168,26 +168,33 @@ class Carousel extends Component<Props, State> {
             ))}
           </div>
 
-          <button
-            type="button"
-            className="carousel__button--prev"
-            disabled={isPrevDisabled}
-            onClick={() => {
-              this.swipe('prev');
-            }}
-          >
-          </button>
+          {coordX !== 0 && (
+            <button
+              type="button"
+              className="carousel__button--prev"
+              disabled={isPrevDisabled}
+              onClick={() => {
+                this.swipe('prev');
+              }}
+            >
+            </button>
+          )}
 
-          <button
-            data-cy="Next"
-            type="button"
-            disabled={isNextDisabled}
-            className="carousel__button--next"
-            onClick={() => {
-              this.swipe('next');
-            }}
-          >
-          </button>
+
+          {coordX - itemWidth !== (images.length - 2) * itemWidth && (
+            <button
+              data-cy="Next"
+              type="button"
+              disabled={isNextDisabled}
+              className="carousel__button--next"
+              onClick={() => {
+                this.swipe('next');
+                console.log(coordX, (images.length - 2) * itemWidth)
+              }}
+            >
+            </button>
+          )}
+
 
           {/* <div className="carousel__points">
             {images.map((image, index) => {

@@ -6,7 +6,7 @@ import { PhotoRow } from '../../components/PhotoRow';
 import { Amenity } from '../../components/Amenity';
 import { CalendarButton } from '../../components/CalendarButton';
 import { Calendar } from '../../components/Calendar';
-import { startMonthSetter, endMonthSetter, increaseMonthSetter, decreaseMonthSetter, dateToString, getExtendedHotelInfo, getRatingWord, toNumber, getRating } from '../../api/booking';
+import { startMonthSetter, endMonthSetter, increaseMonthSetter, decreaseMonthSetter, dateToString, getExtendedHotelInfo, getRatingWord, toNumber, getRating, getColor } from '../../api/booking';
 import { CapacitySelector } from '../../components/CapacitySelector';
 import { RoomCard } from '../../components/RoomCard';
 import { Header } from '../../components/Header';
@@ -21,6 +21,7 @@ import classNames from 'classnames';
 import { getSearchWith } from '../../utils';
 import { Loader } from '../../components/Loader';
 import { useSpring, animated } from 'react-spring';
+import { spawn } from 'child_process';
 
 type Props = {
   setUser: React.Dispatch<React.SetStateAction<User | null>>
@@ -62,10 +63,9 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
     config: { duration: 100 },
   });
 
-
   useEffect(() => {
     if (hotel_id) {
-      fetch('http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/all')
+      fetch('https://innjoy.space/hotels/all')
         .then(r => r.json())
         .then(r => {
           const hotel: HotelInfo | null = (r as HotelInfo[]).find((hotel) => hotel.id === +hotel_id) || null
@@ -75,26 +75,23 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
           }
         })
 
-
-
-
       if (dateFrom && dateTo && capacity) {
-        fetch(`http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/apartments/available?${searchParams.toString()}`)
+        fetch(`https://innjoy.space/apartments/available?${searchParams.toString()}`)
           .then(r => r.json())
           .then(r => setRooms(r))
       } else {
-        fetch(`http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/apartments/by_hotel_id?hotelId=${hotel_id}`)
+        fetch(`https://innjoy.space/apartments/by_hotel_id?hotelId=${hotel_id}`)
           .then(r => r.json())
           .then(r => setRooms(r))
       }
 
 
 
-      fetch(`http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/sort_reviews_by_hotel${hotel_id}`)
+      fetch(`https://innjoy.space/hotels/sort_reviews_by_hotel${hotel_id}`)
         .then(r => r.json())
         .then(r => setGradeObject(r))
 
-      fetch(`http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/reviews/${hotel_id}`)
+      fetch(`https://innjoy.space/reviews/${hotel_id}`)
         .then(r => r.json())
         .then(r => setReviews(r))
     }
@@ -203,8 +200,9 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
                   </span>
 
                   <a
-                    href="#"
-                    className="hotel-page__map-link"
+                    href={`https://google.com/maps/search/${hotel.city}, ${hotel.address}`}
+                    target='__blank'
+                    className='hotel-page__map-link'
                   >
                     {hotel?.address}
                   </a>
@@ -231,7 +229,10 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
 
                 <div className="hotel-page__booking-form">
                   <div className="hotel-page__rating">
-                    <span className="hotel-page__rating-num">
+                    <span
+                      style={{ backgroundColor: getColor(hotel?.rating) }}
+                      className="hotel-page__rating-num"
+                    >
                       {toNumber(hotel?.rating || 0)}
                     </span>
                     <span className="hotel-page__view-amount text-xx-gray-400">
@@ -351,17 +352,14 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
                       View available variants
                     </button>
                   </a>
-
-
                 </div>
               </section>
-
 
               <section className="hotel-page__section" id="rooms">
                 <span className="hotel-page__topic title-x-black-700">
                   Available rooms
                 </span>
-                {rooms && (
+                {rooms && rooms.length !== 0 ? (
                   <div className="hotel-page__cards">
                     <Slider
                       width={948}
@@ -373,6 +371,10 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
                       )) || []}
                     />
                   </div>
+                ) : (
+                  <span className='hotel-page__no-rooms text-xx-black-500'>
+                    Oops, there are no available rooms for the dates you selected. Please try another one.
+                  </span>
                 )}
               </section>
 
@@ -389,23 +391,28 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
                 )}
 
                 <div className="hotel-page__reviews">
-                  {reviews && (
-                    <div className="hotel-page__cards">
-                      <Slider
-                        width={684}
-                        step={2}
-                        items={reviews.map(review => (
-                          <div>
-                            <Comment
-                              key={review}
-                              data={review}
-                            />
-                          </div>
-                        )) || []}
-                      />
+                  {reviews.length !== 0
+                    ? (
+                      <div className="hotel-page__cards">
+                        <Slider
+                          width={684}
+                          step={2}
+                          items={reviews.map(review => (
+                            <div>
+                              <Comment
+                                key={review}
+                                data={review}
+                              />
+                            </div>
+                          )) || []}
+                        />
 
-                    </div>
-                  )}
+                      </div>
+                    ) : (
+                      <span className='hotel-page__no-reviews text-xx-black-500'>
+                        No guest reviews yet.
+                      </span>
+                    )}
 
                 </div>
               </section>
@@ -413,7 +420,6 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
           </div>
         </animated.div>
         )}
-
     </>
   )
 };

@@ -137,6 +137,7 @@
     outline: none;
     cursor: pointer;
     background-color: transparent;
+    transition: $transition;
 
     &:hover {
       color: $blueHover;

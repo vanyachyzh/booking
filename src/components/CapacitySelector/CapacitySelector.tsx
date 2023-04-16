@@ -1,29 +1,18 @@
-/* eslint-disable jsx-a11y/alt-text */
-import React, { useEffect, useState, useRef } from 'react';
-import ReactSimplyCarousel from 'react-simply-carousel';
-import './CapacitySelector.scss'
-import Carousel from '../Carousel/Carousel';
-import { ExtendedHotelInfo } from '../../types';
-import Image from './../../images/iconss/calendar-up.svg'
-import { MinusIcon, CalendarUpIcon, PlusIcon } from '../Icon/Icon';
-import classNames from 'classnames';
-import { IconState } from '../../types';
+import React, { useState } from 'react';
+import './CapacitySelector.scss';
 
+import { MinusIcon, PlusIcon } from '../Icon/Icon';
+import { IconState } from '../../types';
+import { MIN_AMOUNT_PEOPLE, MAX_AMOUNT_PEOPLE } from '../../api/booking';
 
 type Props = {
   value: number,
   setValue: React.Dispatch<React.SetStateAction<number>>
 };
 
-const MIN_AMOUNT_PEOPLE = 1;
-const MAX_AMOUNT_PEOPLE = 20;
-
-
 export const CapacitySelector: React.FC<Props> = ({ value, setValue }) => {
   const [iconSateL, setIconStateL] = useState<IconState>(IconState.DefaultGray)
   const [iconSateR, setIconStateR] = useState<IconState>(IconState.DefaultGray)
-
-
 
   return (
     <div

@@ -1,21 +1,12 @@
-import React, { useState } from "react";
-import './Comment.scss'
-import personIcon from './../../images/iconss/Ellipse 8.png';
+import React from "react";
+import './Comment.scss';
+
+import personIcon from './../../images/iconss/User.png';
 import happyIcon from './../../images/iconss/icon (tabler)/mood-happy.svg';
 import emptyIcon from './../../images/iconss/icon (tabler)/mood-empty.svg';
 import smileIcon from './../../images/iconss/icon (tabler)/mood-smile-beam.svg';
 import sadIcon from './../../images/iconss/icon (tabler)/mood-sad.svg';
-
-
-// type Props = {
-//   data: string
-// }
-
-const text = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, corporis! Officia, facilis distinctio. Tempore sunt officia accusantium laborum nisi distinctio! Rerum ex hic quos nihil accusamus blanditiis architecto illo optio?"
-
-const maxLength = 180;
-
-const rating = 5;
+import { CommentInfo } from "../../types";
 
 const getIcon = (rating: number) => {
   if (rating <= 2) {return sadIcon}
@@ -24,15 +15,8 @@ const getIcon = (rating: number) => {
   if (rating <= 5) {return happyIcon}
 }
 
-interface Comment {
-  authorName: string,
-  id: number,
-  rating: number,
-  text: string
-}
-
 type Props = {
-  data: Comment
+  data: CommentInfo
 }
 
 export const Comment: React.FC<Props> = ({ data }) => {
@@ -56,19 +40,14 @@ export const Comment: React.FC<Props> = ({ data }) => {
         />
       </div>
 
-
-
       <span className="comment__text text-xx-black-400">
         {data.text}
       </span>
-
 
       <button className="comment__button">
         Read more
       </button>
 
-
     </div>
   )
 };
-

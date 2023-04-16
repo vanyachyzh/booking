@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import "./Calendar.scss";
-import { BookingDate } from "../../types";
+import React from "react";
 import classNames from "classnames";
+import "./Calendar.scss";
+
+import { BookingDate } from "../../types";
+
 
 interface Props {
   currentDate: Date;
@@ -10,8 +12,7 @@ interface Props {
 }
 
 export const Calendar: React.FC<Props> = ({ currentDate, bookingDate, setBookingDate }) => {
-  // const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const { start, end } = bookingDate;
+  // const { start, end } = bookingDate;
   const setNewBookingDate = (date: Date) => {
     const dateTime = date.getTime();
     const startTime = bookingDate.start?.getTime();
@@ -70,7 +71,7 @@ export const Calendar: React.FC<Props> = ({ currentDate, bookingDate, setBooking
   const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   const days = [];
-  // Render days from previous month
+
   for (let i = monthStartDate.getDay() - 1; i >= 0; i--) {
     const date = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, previousMonthEndDate.getDate() - i);
     days.push(
@@ -79,7 +80,7 @@ export const Calendar: React.FC<Props> = ({ currentDate, bookingDate, setBooking
       </div>
     );
   }
-  // Render days from current month
+
   for (let i = 1; i <= daysInMonth(currentDate.getMonth(), currentDate.getFullYear()); i++) {
     const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
     const currentTime = new Date(currentDate.getFullYear(), currentDate.getMonth(), i).getTime();
@@ -107,7 +108,7 @@ export const Calendar: React.FC<Props> = ({ currentDate, bookingDate, setBooking
       </div>
     );
   }
-  // Render days from next month
+
   for (let i = 1; days.length < 42; i++) {
     const date = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, i);
     days.push(

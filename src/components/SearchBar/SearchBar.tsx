@@ -1,15 +1,15 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
-import { AuthContext } from '../../App';
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import './SearchBar.scss'
-import { getSearchWith, getSimilarCities, searchCityByQuery } from '../../utils';
+import React, { useEffect, useState, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import './SearchBar.scss';
+
+import { getSearchWith, searchCityByQuery } from '../../utils';
 import { ExtendedHotelInfo, HotelInfo } from '../../types/HotelInfo';
-import Logo from './../../images/Logo InnJoy.svg';
 import { User, BookingDate, IconState } from '../../types';
 import { Calendar } from '../Calendar';
 import { CalendarButton } from '../CalendarButton';
-import { CalendarUpIcon, MapIcon, MapIconBig } from '../Icon/Icon';
+import { MapIcon, MapIconBig } from '../Icon/Icon';
 import { CapacitySelector } from '../CapacitySelector';
+import { capitalizeWords, reverseTransformString } from '../../api/booking';
 
 type Props = {
   cards: ExtendedHotelInfo[] | null,
@@ -17,70 +17,39 @@ type Props = {
   setUser: React.Dispatch<React.SetStateAction<User | null>>
 }
 
-function transformStringTo(str: string) {
-  const words = str.match(/\S+/g);
+// function transformStringTo(str: string) {
+//   const words = str.match(/\S+/g);
 
-  if (!words) {
-    return '';
-  }
+//   if (!words) {
+//     return '';
+//   }
 
-  const transformedWords = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+//   const transformedWords = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
 
-  const transformedString = transformedWords.join(' ').replace(/(?<!%20)\s/g, '%20');
+//   const transformedString = transformedWords.join(' ').replace(/(?<!%20)\s/g, '%20');
 
-  return transformedString;
-}
+//   return transformedString;
+// }
 
-function reverseTransformString(str: string) {
-  // Замінюємо всі входження "%20" на пробіли за допомогою методу replace() та регулярного виразу.
-  str = str.replace(/%20/g, ' ');
-
-  // Розділяємо рядок на слова за допомогою методу split() та пробілу.
-  const words = str.split(' ');
-
-  // Перетворюємо першу літеру кожного слова на велику, а інші - на малу.
-  const transformedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
-
-  // Об'єднуємо слова знову разом за допомогою методу join().
-  const transformedString = transformedWords.join(' ');
-
-  return transformedString;
-}
-
-function capitalizeWords(str: string): string {
-  const words = str.split(' ');
-
-  const capitalizedWords = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
-
-  return capitalizedWords.join(' ');
-}
+// function formatDate(dateString: string) {
+//   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+//   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+//   const date = new Date(dateString);
+//   const month = months[date.getMonth()];
+//   const dayOfWeek = daysOfWeek[date.getDay()];
+//   const day = date.getDate();
+//   const year = date.getFullYear();
+//   const hour = date.getHours();
+//   const minute = date.getMinutes();
+//   const second = date.getSeconds();
+//   const timezoneOffset = new Date().getTimezoneOffset();
+//   const timezoneOffsetHours = Math.abs(Math.floor(timezoneOffset / 60));
+//   const timezoneOffsetMinutes = Math.abs(timezoneOffset % 60);
+//   const timezone = timezoneOffset < 0 ? "+" : "-";
 
 
-
-
-
-
-function formatDate(dateString: string) {
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const date = new Date(dateString);
-  const month = months[date.getMonth()];
-  const dayOfWeek = daysOfWeek[date.getDay()];
-  const day = date.getDate();
-  const year = date.getFullYear();
-  const hour = date.getHours();
-  const minute = date.getMinutes();
-  const second = date.getSeconds();
-  const timezoneOffset = new Date().getTimezoneOffset();
-  const timezoneOffsetHours = Math.abs(Math.floor(timezoneOffset / 60));
-  const timezoneOffsetMinutes = Math.abs(timezoneOffset % 60);
-  const timezone = timezoneOffset < 0 ? "+" : "-";
-
-
-  return `${dayOfWeek} ${month} ${day} ${year} ${hour}:${minute}:${second} GMT ${timezone}${timezoneOffsetHours < 10 ? '0' : ''}${timezoneOffsetHours}${timezoneOffsetMinutes < 10 ? '0' : ''}${timezoneOffsetMinutes} (Eastern European Summer Time)`;
-}
-
-
+//   return `${dayOfWeek} ${month} ${day} ${year} ${hour}:${minute}:${second} GMT ${timezone}${timezoneOffsetHours < 10 ? '0' : ''}${timezoneOffsetHours}${timezoneOffsetMinutes < 10 ? '0' : ''}${timezoneOffsetMinutes} (Eastern European Summer Time)`;
+// }
 
 const initialDate = {
   start: null,
@@ -88,7 +57,6 @@ const initialDate = {
 }
 
 export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
-  // const user = useContext(AuthContext);
   const [hotelList, setHotelList] = useState<HotelInfo[] | null>(null)
   const [proposedCities, setProposedCities] = useState<string[] | null>();
   const [isProposedVisible, setIsProposedVisible] = useState(false);
@@ -124,10 +92,9 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
   }, [isProposedVisible])
 
   useEffect(() => {
-    const url = 'http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/all'
+    const url = 'https://innjoy.space/hotels/all'
     fetch(url)
       .then(r => r.json())
-      // .then(r => console.log(r))
       .then(r => setHotelList(r))
       .then(() => setProposedCities(searchCityByQuery(hotelList, city)))
   }, [city])
@@ -152,7 +119,6 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
           capacity: String(capacity),
         },
       ),)
-
   }
 
   const [isFocused, setIsFocused] = useState(false);
@@ -170,7 +136,6 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
     if (!isFocused) {
       setIconState(IconState.Default);
     }
-
   };
 
   const handleFocus = () => {
@@ -178,10 +143,10 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
     setIconState(IconState.Active);
   };
 
-  const handleBlur = () => {
-    setIsFocused(false);
-    setIconState(IconState.Default);
-  };
+  // const handleBlur = () => {
+  //   setIsFocused(false);
+  //   setIconState(IconState.Default);
+  // };
 
 
   const [mapIconState, setMapIconState] = useState(IconState.Default);
@@ -209,7 +174,6 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
 
   const handleClickOutside = (event: MouseEvent) => {
     const clickedElement = event.target as HTMLElement;
-    console.log(clickedElement)
     if (!clickedElement.classList.contains('search-bar__input')
       && !clickedElement.classList.contains('search-bar__option-container')
       && !clickedElement.classList.contains('search-bar__list')
@@ -219,11 +183,9 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
     }
   };
 
-
-  const [leftActive, setLeftActive] = useState(false);
-  const [rightActive, setrightActive] = useState(false);
+  // const [leftActive, setLeftActive] = useState(false);
+  // const [rightActive, setrightActive] = useState(false);
   
-
   return (
     <header className='search-bar'>
       <form
@@ -387,8 +349,6 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
           </div>
         </div>
       </form>
-
-
     </header>
   )
 };

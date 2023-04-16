@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './SignUp.scss';
 import { Field } from '../Field';
 import { Link, useNavigate } from 'react-router-dom';
 import { Warning, Error, User } from '../../types';
 import { Header } from '../Header';
+import { emailRegex, nameRegex, passwordRegex } from '../../api/booking';
 
 
 const initialWarnings = {
@@ -23,10 +24,6 @@ type Props = {
   setUser: React.Dispatch<React.SetStateAction<User | null>>
 }
 
-const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$");
-const nameRegex = new RegExp("^[a-zA-Z]{4,}$");
-
 
 
 
@@ -40,9 +37,6 @@ export const SignUp: React.FC<Props> = ({ setUser }) => {
   const [surname, setSurname] = useState('');
   const navigate = useNavigate();
   const thesame = password === confirmPassword;
-
-
-
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -103,7 +97,7 @@ export const SignUp: React.FC<Props> = ({ setUser }) => {
 
     if (name && email && password && confirmPassword
       && password && confirmPassword && surname && password && emailRegex.test(email)) {
-      fetch('http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/register', {
+      fetch('https://innjoy.space/register', {
         method: 'POST',
         headers: {
           'Accept': 'application/json, text/plain, */*',
@@ -135,13 +129,9 @@ export const SignUp: React.FC<Props> = ({ setUser }) => {
               email: "Your login is already used",
             }));
           }
-
         });
     }
-
   }
-
-
 
   return (
     <div className="signup-page">

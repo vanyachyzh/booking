@@ -13,11 +13,6 @@ type Props = {
 };
 
 export const Navigation: React.FC<Props> = ({ city, address, name }) => {
-  // const context = useContext(AuthContext);
-  // if (!context) {
-  //   return null;
-  // }
-
   return (
     <div className='navigation__container'>
       <nav className='navigation text-xx-black-500'>

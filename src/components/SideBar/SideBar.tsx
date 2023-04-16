@@ -13,7 +13,6 @@ export const SideBar: React.FC = () => {
   const filteredKeysArray = keysArray.filter((item, index) => {
     return keysArray.indexOf(item) === index;
   });
-
   const priceMin = searchParams.get('priceMin') || '';
   const priceMax = searchParams.get('priceMax') || '';
   const rating = searchParams.get('rating') || '';
@@ -146,42 +145,7 @@ export const SideBar: React.FC = () => {
         </button>
       </section>
 
-
-
-
       <div className='side-bar__filter'>
-
-        {filteredKeysArray.map(key => {
-          if (key === 'priceMin'
-            || key === 'priceMax'
-            || key === 'apartmentType'
-            || key === 'stars'
-            || key === 'rating'
-          ) {
-            return (
-
-            //   <animated.div style={style}>
-            //   <h1>Hello World!</h1>
-            // </animated.div>
-
-              <button
-                key={key}
-                className='side-bar__delete-btn'
-                onClick={() => uncheckCategory(key)}
-              >
-                {key === 'priceMin' && `$${priceMin}`}
-                {key === 'priceMax' && `$${priceMax}`}
-                {key === 'apartmentType' && 'Type of property'}
-                {key === 'stars' && 'Property class'}
-                {key === 'rating' && 'Guest rating'}
-              </button>
-
-            )
-          }
-        })}
-      </div>
-
-      {/* <div className='side-bar__filter'>
         <TransitionGroup>
           {filteredKeysArray.map(key => {
             if (key === 'priceMin'
@@ -194,7 +158,7 @@ export const SideBar: React.FC = () => {
                 <CSSTransition
                   key={key}
                   classNames='fade'
-                  timeout={300}
+                  timeout={100}
                 >
                   <button
                     className='side-bar__delete-btn'
@@ -211,7 +175,7 @@ export const SideBar: React.FC = () => {
             }
           })}
         </TransitionGroup>
-      </div> */}
+      </div>
 
 
 
@@ -255,9 +219,9 @@ export const SideBar: React.FC = () => {
               "TOWNHOUSE"]
           }
           values={
-            ["Bed",
+            ["Sleep place",
               "Hotel",
-              "Apartament",
+              "Apartment",
               "Villa",
               "Room",
               "Townhouse"]

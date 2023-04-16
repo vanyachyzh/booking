@@ -1,10 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import './Rating.scss'
-import { getRating } from "../../api/booking";
-
-
-
-//////////////////////////////////////////////////////////////////////////////////
+import { getColor, getRating } from "../../api/booking";
 
 interface Props {
   data: { [key: string]: number };
@@ -16,7 +12,6 @@ export const Rating: React.FC<Props> = ({ data, average }) => {
     return acc + item[1];
   }, 0);
 
-  // const average = gradeTotal / 
 
   const extendedRatingInfo = [];
 
@@ -26,8 +21,15 @@ export const Rating: React.FC<Props> = ({ data, average }) => {
 
   return (
     <div className="rating">
-      <span className="rating__value">{average}</span>
-      <span className="rating__title">Excellent</span>
+      <span
+        style={{ color: getColor(average) }}
+        className="rating__value"
+      >
+        {average}
+      </span>
+      <span className="rating__title">
+        {getRating(average)}
+      </span>
 
       <div className="rating__range">
         {extendedRatingInfo.reverse().map(item => (
@@ -38,7 +40,9 @@ export const Rating: React.FC<Props> = ({ data, average }) => {
           >
 
             <span className="rating__desc text-xx-black-500">
-              {item[0] === "5" ? `${item[0]} ${item[3]}` : `${item[0]}+ ${item[3]}`}
+              {item[0] === "5"
+                ? `${item[0].slice(0, 1)} ${item[3]}`
+                : `${String(item[0]).slice(0, 1)}+ ${item[3]}`}
             </span>
 
             <span className="rating__amount">

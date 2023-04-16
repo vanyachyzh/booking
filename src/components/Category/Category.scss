@@ -32,6 +32,11 @@
     cursor: pointer;
   }
 
+  &__icon {
+    position: absolute;
+    right: 0;
+  }
+
   &__checkbox+label::before {
     content: '';
     width: 24px;
@@ -61,6 +66,7 @@
   }
 
   &__btn-show {
+    position: relative;
     margin-top: 24px;
     display: flex;
     width: 83px;
@@ -68,16 +74,16 @@
     border: none;
     outline: none;
     cursor: pointer;
-    background: url("./../../images/iconss/chevron-down-default.svg") center right no-repeat;
+    background: transparent;
+    transition: $transition;
 
     &:hover {
       color: $blueHover;
-      background: url("./../../images/iconss/chevron-down-hover.svg") center right no-repeat;
     }
   }
 
-
   &__btn-hide {
+    position: relative;
     margin-top: 24px;
     display: flex;
     width: 59px;
@@ -85,11 +91,11 @@
     border: none;
     outline: none;
     cursor: pointer;
-    background: url("./../../images/iconss/chevron-up-default.svg") center right no-repeat;
+    transition: $transition;
+    background-color: transparent;
 
     &:hover {
       color: $blueHover;
-      background: url("./../../images/iconss/chevron-up-hover.svg") center right no-repeat;
     }
   }
 }

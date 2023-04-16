@@ -1,14 +1,8 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState, useRef } from 'react';
-import ReactSimplyCarousel from 'react-simply-carousel';
 import './CalendarButton.scss'
-import Carousel from '../Carousel/Carousel';
-import { ExtendedHotelInfo } from '../../types';
-import Image from './../../images/iconss/calendar-up.svg'
-import { MinusIcon, CalendarUpIcon, CalendarDownIcon } from '../Icon/Icon';
-import classNames from 'classnames';
-import { IconState } from '../../types';
 
+import { CalendarUpIcon, CalendarDownIcon } from '../Icon/Icon';
+import { IconState } from '../../types';
 
 type Props = {
   type: 'up' | 'down',
@@ -19,14 +13,18 @@ type Props = {
   setIsAnother: React.Dispatch<React.SetStateAction<boolean>>,
 };
 
-// function handleClick(event) {
-//   console.log("Натиснуто на елемент з класом:", event.target.className);
-// }
-
-
-export const CalendarButton: React.FC<Props> = ({ title, dropdown, isActive, setIsActive: setIsOpen, setIsAnother, type }) => {
+export const CalendarButton: React.FC<Props> = ({ 
+  title,
+  dropdown,
+  isActive,
+  setIsActive: setIsOpen,
+  setIsAnother,
+  type 
+}) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [iconSate, setIconState] = useState<IconState>(IconState.Default)
+  const [iconSate, setIconState] = useState<IconState>(IconState.Default);
+  const [isFocused, setIsFocused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
@@ -38,7 +36,6 @@ export const CalendarButton: React.FC<Props> = ({ title, dropdown, isActive, set
 
   const handleClickOutside = (event: MouseEvent) => {
     const clickedElement = event.target as HTMLElement;
-    console.log(clickedElement)
     if (!clickedElement.classList.contains('calendar-button')
       && !clickedElement.classList.contains('calendar')
       && !clickedElement.classList.contains('weekday')
@@ -56,15 +53,10 @@ export const CalendarButton: React.FC<Props> = ({ title, dropdown, isActive, set
     }
   };
 
-
   const handleClick = (): void => {
     setIsOpen(prev => !prev);
     setIsAnother(false);
   };
-
-
-  const [isFocused, setIsFocused] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -78,7 +70,6 @@ export const CalendarButton: React.FC<Props> = ({ title, dropdown, isActive, set
     if (!isFocused) {
       setIconState(IconState.Default);
     }
-
   };
 
   const handleFocus = () => {
@@ -120,5 +111,4 @@ export const CalendarButton: React.FC<Props> = ({ title, dropdown, isActive, set
       )}
     </>
   )
-
 };

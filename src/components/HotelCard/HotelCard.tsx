@@ -1,43 +1,37 @@
-/* eslint-disable jsx-a11y/alt-text */
-import React, { useContext, useEffect, useState } from 'react';
-import ReactSimplyCarousel from 'react-simply-carousel';
-import './HotelCard.scss'
+import React, { useContext } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import './HotelCard.scss';
+
 import Carousel from '../Carousel/Carousel';
 import { ExtendedHotelInfo, HotelInfo } from '../../types';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { AuthContext } from '../../App';
 import { Amenity } from '../Amenity';
-import { toNumber } from '../../api/booking';
+import { getColor, getDaysBetweenDates, toNumber } from '../../api/booking';
 import { getRating } from '../../api/booking';
 import { getSearchWith } from '../../utils';
 
 type Props = {
   hotel: ExtendedHotelInfo,
+  amountOfDays?: number,
 };
 
 
 export const HotelCard: React.FC<Props> = ({ hotel }) => {
   const context = useContext(AuthContext);
+  const [searchParams] = useSearchParams();
+  const dateFrom = searchParams.get('dateFrom') || '';
+  const dateTo = searchParams.get('dateTo') || '';
+
+  const days = getDaysBetweenDates(dateFrom, dateTo);
+
   const navigate = useNavigate();
   const mapUrl
     = `https://google.com/maps/search/${hotel.city}, ${hotel.address}`;
-
-
   const stars = [];
-
-  // const [rating, setRating] = useState(0)
-
-  // useEffect(() => {
-  //   setRating(convertNumber(context?.hotel?.rating || 0))
-  // }, [context])
-  // // const rating = ;
-
   for (let i = 0; i < hotel.stars; i++) {
     stars.push(<div key={i} className="card__star"></div>);
   }
-
-  const [searchParams] = useSearchParams();
-
+  
   const onButtonClick = (hotel: HotelInfo) => {
     if (context) {
       context.setHotel(hotel);
@@ -73,6 +67,7 @@ export const HotelCard: React.FC<Props> = ({ hotel }) => {
 
           <a
             href={mapUrl}
+            target='__blank'
             className='card__map text-xx-gray-400'
           >
             {hotel.address}
@@ -94,7 +89,10 @@ export const HotelCard: React.FC<Props> = ({ hotel }) => {
 
         <div className="card__section">
           <div className="card__popular">
-            <span className='card__rating'>
+            <span
+              style={{backgroundColor: getColor(hotel?.rating)}}
+              className='card__rating'
+            >
               {toNumber(hotel?.rating)}
             </span>
 
@@ -110,12 +108,11 @@ export const HotelCard: React.FC<Props> = ({ hotel }) => {
 
       <div className="card__payment">
         <div className='card__price title-x-black-700'>
-          {`$${Math.floor(+hotel.price)}`}
+          {`$${days ? days * Math.floor(+hotel.price) : Math.floor(+hotel.price)}`}
           <span className='card__per text-x-gray-400'>per night</span>
         </div>
 
         <button
-          // to="/hotel"
           onClick={() => onButtonClick(hotel)}
           className='card__btn button'
         >

@@ -2,7 +2,6 @@
 @import './../../../src/styles/fonts.scss';
 
 .card {
-  box-shadow: 0px 0px 9px rgba(97, 97, 97, 0.03), 0px 0px 8px rgba(97, 97, 97, 0.1), 0px 0px 6px rgba(97, 97, 97, 0.17), 0px 0px 3px rgba(97, 97, 97, 0.2), 0px 0px 0px rgba(97, 97, 97, 0.2);
   border: 2px solid black;
   // margin: 25px;
   border-radius: $rounding;
@@ -12,6 +11,11 @@
   display: flex;
   gap: 24px;
   background-color: #fff;
+  transition: $transition;
+
+  &:hover {
+    box-shadow: 0px 0px 9px rgba(97, 97, 97, 0.03), 0px 0px 8px rgba(97, 97, 97, 0.1), 0px 0px 6px rgba(97, 97, 97, 0.17), 0px 0px 3px rgba(97, 97, 97, 0.2), 0px 0px 0px rgba(97, 97, 97, 0.2);
+  }
 
 
   &__carousel {
@@ -27,6 +31,7 @@
     background: #EAFAEE;
     border-radius: 4px;
     text-align: center;
+    color: #2DC954;
   }
 
   &__info {
@@ -45,6 +50,13 @@
 
   &__map {
     display: block;
+    border-bottom: 1px solid #ffffff;
+    width: fit-content;
+    transition: $transition;
+
+    &:hover {
+      border-bottom: 1px solid #868E96;
+    }
   }
 
   &__stars {
@@ -89,7 +101,7 @@
     display: block;
     width: 43px;
     height: 42px;
-    background: #0AA778;
+    // background: #0AA778;
     border-radius: $rounding;
     display: flex;
     justify-content: center;

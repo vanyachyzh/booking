@@ -29,6 +29,10 @@
     width: 100%;
     padding-top: 30px;
     margin-bottom: 16px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   &__amount {

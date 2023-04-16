@@ -6,3 +6,4 @@ export * from './User';
 export * from './BookingDate';
 export * from './IconState';
 export * from './Category';
+export * from './CommentInfo';

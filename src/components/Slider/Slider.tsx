@@ -7,8 +7,6 @@ type Props = {
   step: number,
 }
 
-
-
 export const Slider: React.FC<Props> = ({ items, width, step }) => {
 
   const [segment, setSegment] = useState({
@@ -50,8 +48,6 @@ export const Slider: React.FC<Props> = ({ items, width, step }) => {
     }))
   }
 
-
-
   return (
     <div
       style={{ width: `${width}px` }}
@@ -74,9 +70,6 @@ export const Slider: React.FC<Props> = ({ items, width, step }) => {
         ))}
       </div>
 
-
-
-
       {segment.end !== items.length - 1 && !isShort && (
         <button
           className='slider__next-button'
@@ -85,8 +78,6 @@ export const Slider: React.FC<Props> = ({ items, width, step }) => {
           {/* NEXT */}
         </button>
       )}
-
-
     </div>
   )
 };

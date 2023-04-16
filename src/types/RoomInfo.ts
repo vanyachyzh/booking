@@ -5,6 +5,7 @@ export interface RoomInfo {
   amenities: string[],
   hotelName: string,
   price: number,
-  apartmentType: string
+  apartmentType: string, 
+  name: string
 }
 

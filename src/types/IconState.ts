@@ -7,6 +7,7 @@ export enum IconState {
   DefaultEye = '#868E96',
   HoverEye = '#F1F3F5',
   ActiveEye = '#868E96',
-  DefaultCity = '#868E96'
+  DefaultCity = '#868E96',
+  DarkBlue = '#0B65A5',
 
 }

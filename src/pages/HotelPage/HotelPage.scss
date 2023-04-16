@@ -22,7 +22,7 @@
   }
 
   &__anchors {
-    border-bottom: 1px solid rgb(175, 175, 175);
+    border-bottom: 1px solid #F1F3F5;
     display: flex;
     justify-content: start;
   }
@@ -41,6 +41,7 @@
 
 
   &__cards {
+
     display: flex;
     align-items: start;
     justify-content: start;
@@ -49,6 +50,7 @@
   }
 
   &__section {
+    position: relative;
     padding: 0 143px 0 260px;
     display: flex;
     align-items: start;
@@ -140,12 +142,24 @@
     position: relative;
   }
 
+  &__no-reviews {
+    position: absolute;
+    top: 156px;
+    left: 600px;
+  }
+
+  &__no-rooms {
+    display: block;
+    margin-bottom: 98px;
+    width: 700px;
+  }
+
   &__rating-num {
     position: absolute;
     right: 0;
     width: 43px;
     height: 42px;
-    background: #0AA778;
+    // background: #0AA778;
     border-radius: $rounding;
     display: flex;
     justify-content: center;
@@ -188,12 +202,18 @@
 
   &__map-link {
     display: block;
-    padding-left: 24px;
+    padding-left: 28px;
     width: fit-content;
     background: url("./../../images/iconss/map-pin-default.svg") left center no-repeat;
     font-weight: 400;
     font-size: 16px;
     color: #495057;
     margin-bottom: 65px;
+    border: 1px solid #fff;
+    transition: $transition;
+
+    // &:hover {
+    //   border-bottom: 1px solid #495057;
+    // }
   }
 }

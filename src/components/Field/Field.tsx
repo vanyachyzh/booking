@@ -1,10 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react';
-import './Field.scss'
-import Alert from './../../images/iconss/alert-circle.svg';
+import React from 'react';
+import './Field.scss';
 import classNames from 'classnames';
-import { Warning, Error, IconState } from '../../types';
-import { EyeIcon } from '../Icon/Icon';
 
+import { Warning, Error } from '../../types';
 
 type Props = {
   type?: 'text' | 'password',
@@ -18,9 +16,10 @@ type Props = {
   setValue: (value: string) => void,
   setWarning?: React.Dispatch<React.SetStateAction<Warning>>
   setError?: React.Dispatch<React.SetStateAction<Error>>
-  pattern?: RegExp
-}
-
+  pattern?: RegExp,
+  number?: boolean,
+  maxLength?: number
+};
 
 export const Field: React.FC<Props> = ({
   placeholder,
@@ -35,6 +34,7 @@ export const Field: React.FC<Props> = ({
   setError,
   pattern,
   type = 'text',
+  maxLength,
 }) => {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
@@ -55,45 +55,25 @@ export const Field: React.FC<Props> = ({
     }
   }
 
-
-  // const [isPasswordHidden, setIsPasswordHidden] = useState(false);
-  // const [iconState, setIconState] = useState(IconState.DefaultEye);
-  // const [isActive, setIsActive] = useState(false);
-  // const myInput = useRef<HTMLInputElement>(null);
-
-
-  // const handleButtonClick = () => {
-  //   if (myInput.current) {
-  //     myInput.current.focus();
-  //   }
-  // };
-
-  // useEffect(() => {
-
-  //   if (isPasswordHidden) {
-  //     setIconState(IconState.ActiveEye)
-  //   }
-  // }, [isPasswordHidden])
-
   return (
     <div className='field'>
       {label && (
-        <span className='field__label text-x-black-400'>
+        <span className='field__label text-x-black-500'>
           {label[0].toUpperCase() + label.slice(1)}
         </span>
       )}
 
-
       <input
         autoComplete='off'
         name={label}
+        maxLength={maxLength}
         value={value}
-        onChange={onChange}
+        onChange={(e) => {
+          onChange(e)
+        }}
         className={classNames(
           'field__input',
           { 'field__input--success': pattern?.test(value) && password },
-          // { 'field__input--active': isActive },
-          // { 'field__input--hidden': isPasswordHidden }
         )}
         type={type}
         placeholder={placeholder}
@@ -110,20 +90,6 @@ export const Field: React.FC<Props> = ({
           {warning}
         </span>
       )}
-
-      {/* <button
-        onMouseOver={() => setIconState(IconState.HoverEye)}
-        onMouseLeave={() => setIconState(IconState.DefaultEye)}
-        onClick={() => {
-          setIsPasswordHidden(prev => !prev);
-          setIsActive(true);
-          handleButtonClick();
-        }}
-        className='field__eye'>
-        <EyeIcon state={iconState} />
-      </button> */}
-
     </div>
-
   )
 };

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import './LogIn.scss';
-import { Field } from '../Field';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import './LogIn.scss';
+
+import { Field } from '../Field';
 import { Error, User, Warning } from '../../types';
 import { logIn } from '../../api/booking';
 import { Header } from '../Header';
@@ -29,15 +30,11 @@ function areAllFieldsEmpty(obj: Warning) {
   return true;
 }
 
-
-
 const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-
 
 type Props = {
   setUser: React.Dispatch<React.SetStateAction<User | null>>
 }
-
 
 export const LogIn: React.FC<Props> = ({ setUser }) => {
   const [email, setEmail] = useState('')
@@ -54,7 +51,7 @@ export const LogIn: React.FC<Props> = ({ setUser }) => {
       if (!regex.test(email)) {
         setWarning(prev => ({
           ...prev,
-          email: 'Your email is invalid!',
+          email: 'Your email is incorrect!',
         }));
       }
 
@@ -75,13 +72,10 @@ export const LogIn: React.FC<Props> = ({ setUser }) => {
       return;
     }
 
-
-
     logIn(email, password)
       .then(res => {
         console.log(res.status, warning, areAllFieldsEmpty(warning))
         if (res.status === 200 && areAllFieldsEmpty(warning)) {
-          // console.log(res)
           setUser({
             name: "sdfsdfsd",
             surname: "sdfsd",
@@ -96,7 +90,6 @@ export const LogIn: React.FC<Props> = ({ setUser }) => {
           }));
         }
       });
-
   }
 
   return (
@@ -163,13 +156,11 @@ export const LogIn: React.FC<Props> = ({ setUser }) => {
             Forgot password?
           </button>
 
-
           <button
             type='submit'
             className="login-page__login-btn button">
             Log in
           </button>
-
 
           <div className='login-page__signup-section text-xx-gray-400'>
             Don’t have an account?

@@ -37,7 +37,7 @@ export const PhotoPage: React.FC<Props> = ({ setUser }) => {
 
   useEffect(() => {
     if (hotel_id) {
-      fetch('http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/all')
+      fetch('https://innjoy.space/hotels/all')
         .then(r => r.json())
         .then(r => {
           const hotel: HotelInfo | null = (r as HotelInfo[]).find((hotel) => hotel.id === +hotel_id) || null

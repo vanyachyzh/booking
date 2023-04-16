@@ -7,7 +7,6 @@ type Props = {
   handler: (searchParameterKey: string, searchParameterValue: string, checked: boolean) => void
 }
 
-
 export const RatingCategory: React.FC<Props> = ({ handler }) => {
   const [searchParams] = useSearchParams();
   const currentStars = searchParams.getAll('stars');

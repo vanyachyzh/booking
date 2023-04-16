@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import './GallerySlider.scss'
-import { Link } from 'react-router-dom';
+import './GallerySlider.scss';
 
 interface Props {
   images: string[];
@@ -8,7 +7,11 @@ interface Props {
   setCurrentImage: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const GallerySlider: React.FC<Props> = ({ images, currentImage, setCurrentImage }) => {
+export const GallerySlider: React.FC<Props> = ({
+  images,
+  currentImage,
+  setCurrentImage
+}) => {
   const handleClick = (index: number) => {
     setCurrentImage(index + 1);
   };
@@ -65,7 +68,3 @@ export const GallerySlider: React.FC<Props> = ({ images, currentImage, setCurren
     </div>
   );
 };
-
-
-
-

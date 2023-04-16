@@ -1,10 +1,5 @@
 .hotel-list {
   background-color: #F1F3F5;
-  // background-color: #1d78d2;
-  // display: flex;
-  // flex-wrap: wrap;
-  // justify-content: center;
-  // align-items: start;
   display: block;
   width: 1086px;
   height: 100%;
@@ -23,6 +18,10 @@
     width: 100%;
     text-align: center;
     padding-top: 24px;
+  }
+
+  &__error-title {
+    margin-bottom: 8px;
   }
 
   &__no-hotel {

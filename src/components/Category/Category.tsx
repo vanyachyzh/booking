@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import './Category.scss'
-import { NUM_ITEMS_TO_SHOW } from '../../api/booking';
 import { useSearchParams } from 'react-router-dom';
+import './Category.scss';
+
+import { NUM_ITEMS_TO_SHOW } from '../../api/booking';
+import { IconState } from '../../types';
+import { DownIcon, UpIcon } from '../Icon/Icon';
 
 type Props = {
   title: string,
@@ -24,11 +26,13 @@ export const Category: React.FC<Props> = ({
   handler,
 }) => {
   const [numItemsToShow, setNumItemsToShow] = useState(NUM_ITEMS_TO_SHOW);
+  const [iconSate, setIconState] = useState(IconState.Active);
   const [searchParams] = useSearchParams();
   const currentSearchParametersValues = searchParams.getAll(searchParameterKey);
 
   const onClick = () => {
     setNumItemsToShow(values.length);
+    setIconState(IconState.Active)
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,20 +40,6 @@ export const Category: React.FC<Props> = ({
 
     handler(searchParameterKey, name, checked);
   }
-
-  // const getAmount = async (searchParameterKey: string, searchParameterValue: string) => {
-  //   const response = await fetch(`http://travelers-env.eba-udpubcph.eu-north-1.elasticbeanstalk.com/hotels/filter?${searchParameterKey}=${searchParameterValue}`);
-  //   const data = await response.json();
-  //   const amount = data.length;
-  //   return amount;
-  // }
-
-  // function fetchData(index: number, searchParameterKey: string, searchParameterValue: string) {
-  //   return getAmount(searchParameterKey, searchParameterValues[index])
-  //     .then(amount => {
-  //       return amount;
-  //     });
-  // }
 
   return (
     <div className="category">
@@ -59,42 +49,39 @@ export const Category: React.FC<Props> = ({
 
 
       <ul className='category__list'>
-      {/* <TransitionGroup> */}
+        {/* <TransitionGroup> */}
+        {values.slice(0, numItemsToShow).map((value, index) => {
+          return (
+            // <CSSTransition
+            //   key={index}
+            //   classNames='fade'
+            //   timeout={300}
+            //   unmountOnExit
+            // >
+            <li
+              key={value}
+              className='category__item'
+            >
+              <input
+                checked={(currentSearchParametersValues.includes(searchParameterValues[index]))}
+                id={value}
+                name={searchParameterValues[index]}
+                className='category__checkbox'
+                type="checkbox"
+                onChange={onChange}
+              />
 
-          {values.slice(0, numItemsToShow).map((value, index) => {
-            return (
-              // <CSSTransition
-              //   key={index}
-              //   classNames='fade'
-              //   timeout={300}
-              //   unmountOnExit
-              // >
-                <li
-                  key={value}
-                  className='category__item'
-                >
-                  <input
-                    checked={(currentSearchParametersValues.includes(searchParameterValues[index]))}
-                    id={value}
-                    name={searchParameterValues[index]}
-                    className='category__checkbox'
-                    type="checkbox"
-                    onChange={onChange}
-                  />
-
-                  <label
-                    className='category__label'
-                    htmlFor={value}
-                  >
-                    {value}
-                  </label>
-                </li>
+              <label
+                className='category__label'
+                htmlFor={value}
+              >
+                {value}
+              </label>
+            </li>
             //  </CSSTransition>
-
-            )
-          })}
-
-      {/* </TransitionGroup> */}
+          )
+        })}
+        {/* </TransitionGroup> */}
       </ul>
 
       {values.length > NUM_ITEMS_TO_SHOW && (
@@ -102,14 +89,23 @@ export const Category: React.FC<Props> = ({
           {numItemsToShow === 3
             ? (
               <button
+                onMouseLeave={() => setIconState(IconState.Active)}
+                onMouseEnter={() => setIconState(IconState.DarkBlue)}
                 onClick={onClick}
                 className='category__btn-show text-xx-blue-500'>
+                <DownIcon state={iconSate} />
                 Show all
               </button>
             ) : (
               <button
-                onClick={() => setNumItemsToShow(3)}
+                onMouseLeave={() => setIconState(IconState.Active)}
+                onMouseEnter={() => setIconState(IconState.DarkBlue)}
+                onClick={() => {
+                  setNumItemsToShow(3)
+                  setIconState(IconState.Active)
+                }}
                 className='category__btn-hide text-xx-blue-500'>
+                <UpIcon state={iconSate} />
                 Hide
               </button>
             )
