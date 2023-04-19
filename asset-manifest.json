@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/booking/static/css/main.a7f154ef.css",
+    "main.css": "/booking/static/css/main.41851c8d.css",
     "main.js": "/booking/static/js/main.8f32f9df.js",
     "static/media/Backgroung Iamge 1 (montains).png": "/booking/static/media/Backgroung Iamge 1 (montains).657fa1abd634cfeecc1b.png",
     "static/media/Hotel Booking-cuate (1) 1.svg": "/booking/static/media/Hotel Booking-cuate (1) 1.d0497853a03b54888e5252728f0518e7.svg",
@@ -67,11 +67,11 @@
     "static/media/chevron-small-right.svg": "/booking/static/media/chevron-small-right.3c78a6d3f68951509fa9.svg",
     "static/media/left-arrow.svg": "/booking/static/media/left-arrow.e831657a40d75b120dc4.svg",
     "static/media/right-left.svg": "/booking/static/media/right-left.7efc550121917f592b29.svg",
-    "main.a7f154ef.css.map": "/booking/static/css/main.a7f154ef.css.map",
+    "main.41851c8d.css.map": "/booking/static/css/main.41851c8d.css.map",
     "main.8f32f9df.js.map": "/booking/static/js/main.8f32f9df.js.map"
   },
   "entrypoints": [
-    "static/css/main.a7f154ef.css",
+    "static/css/main.41851c8d.css",
     "static/js/main.8f32f9df.js"
   ]
 }
