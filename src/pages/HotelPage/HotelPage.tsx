@@ -195,7 +195,7 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
               <section className="hotel-page__section" id="overview">
                 <div className="hotel-page__info">
                   <span className="hotel-page__place-name">
-                    {hotel?.city}
+                    {hotel?.name}
                   </span>
 
                   <a

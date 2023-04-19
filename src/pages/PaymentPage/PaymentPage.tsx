@@ -122,7 +122,7 @@ export const PaymentPage: React.FC<Props> = ({ setUser }) => {
                 className='payment-page__data'>
                 <div className='payment-page__topic-section'>
                   <h1 className='payment-page__topic title-x-black-700'>
-                    Guest details
+                    Guest Details
                   </h1>
 
                   <span
@@ -223,7 +223,7 @@ export const PaymentPage: React.FC<Props> = ({ setUser }) => {
                     placeholder='XXXX XXXX XXXX XXXX'
                     label='Card number'
                     pattern={cardRegex}
-                    maxLength={14}
+                    maxLength={16}
                   />
                 </div>
 

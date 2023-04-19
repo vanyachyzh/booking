@@ -3,9 +3,13 @@
 
 .payment-page {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: start;
+  gap: 142px;
   padding: 40px 260px;
+  // background-color: #2DC954;
+
+
   &__data {
     width: 449px;
     // border: 1px solid black;

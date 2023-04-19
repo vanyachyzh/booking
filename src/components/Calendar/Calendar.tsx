@@ -13,6 +13,10 @@ interface Props {
 
 export const Calendar: React.FC<Props> = ({ currentDate, bookingDate, setBookingDate }) => {
   // const { start, end } = bookingDate;
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(today.getDate() - 1);
+
   const setNewBookingDate = (date: Date) => {
     const dateTime = date.getTime();
     const startTime = bookingDate.start?.getTime();
@@ -83,17 +87,23 @@ export const Calendar: React.FC<Props> = ({ currentDate, bookingDate, setBooking
 
   for (let i = 1; i <= daysInMonth(currentDate.getMonth(), currentDate.getFullYear()); i++) {
     const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
-    const currentTime = new Date(currentDate.getFullYear(), currentDate.getMonth(), i).getTime();
+    // const dateTime = date.getTime();
+    // const currentTime = new Date(currentDate.getFullYear(), currentDate.getMonth(), i).getTime();
+    const currentTime = date.getTime();
+    console.log(date, new Date(currentDate.getFullYear(), currentDate.getMonth(), i))
     const startTime = bookingDate.start?.getTime() || NaN;
     const endTime = bookingDate.end?.getTime() || NaN;
     days.push(
-      <div className={classNames(
-        { 'wrap--start': startTime && endTime },
-        { 'wrap--end': startTime && endTime }
-      )}
+      <div
+        key={i}
+        className={classNames(
+          { 'wrap--start': startTime && endTime },
+          { 'wrap--end': startTime && endTime }
+        )}
       >
         <button
-        type="button"
+          disabled={currentTime < yesterday.getTime()}
+          type="button"
           key={i}
           className={classNames(
             'day',

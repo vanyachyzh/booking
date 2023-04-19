@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import './HotelCard.scss';
 
 import Carousel from '../Carousel/Carousel';
@@ -32,7 +32,7 @@ export const HotelCard: React.FC<Props> = ({ hotel }) => {
   for (let i = 0; i < hotel.stars; i++) {
     stars.push(<div key={i} className="card__star"></div>);
   }
-  
+
   const onButtonClick = (hotel: HotelInfo) => {
     if (context) {
       context.setHotel(hotel);
@@ -60,7 +60,11 @@ export const HotelCard: React.FC<Props> = ({ hotel }) => {
 
       <div className="card__info">
         <div className="card__section">
-          <h2 className='card__name title-x-black-700'>{hotel?.name}</h2>
+          <Link
+            to={`/hotel?hotel_id=${hotel.id}`}
+            className='card__name title-x-black-700'>
+            {hotel?.name}
+          </Link>
 
           <div className="card__stars">
             {stars}
@@ -91,7 +95,7 @@ export const HotelCard: React.FC<Props> = ({ hotel }) => {
         <div className="card__section">
           <div className="card__popular">
             <span
-              style={{backgroundColor: getColor(hotel?.rating)}}
+              style={{ backgroundColor: getColor(hotel?.rating) }}
               className='card__rating'
             >
               {toNumber(hotel?.rating)}

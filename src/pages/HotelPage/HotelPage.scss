@@ -119,7 +119,7 @@
     position: relative;
 
     &--active {
-      border: 2px solid #2DC954;
+      border: 2px solid #E23A3A;
 
       &::after {
         content: "Please select the reservation dates";
@@ -133,7 +133,7 @@
         font-weight: 500;
         font-size: 14px;
         line-height: 140%;
-        color: #2DC954;
+        color: #E23A3A;
         padding-left: 20px;
         background: url("./../../images/iconss/Green.svg") left center no-repeat;
         border: none;
