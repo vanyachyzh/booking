@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/booking/static/css/main.6577c25e.css",
+    "main.css": "/booking/static/css/main.5c43293a.css",
     "main.js": "/booking/static/js/main.2c1f675a.js",
     "static/media/Backgroung Iamge 1 (montains).png": "/booking/static/media/Backgroung Iamge 1 (montains).657fa1abd634cfeecc1b.png",
     "static/media/Hotel Booking-cuate (1) 1.svg": "/booking/static/media/Hotel Booking-cuate (1) 1.d0497853a03b54888e5252728f0518e7.svg",
@@ -33,7 +33,7 @@
     "static/media/circle-check.svg": "/booking/static/media/circle-check.334c95ed778f036fc0e2.svg",
     "static/media/alert-triangle.svg": "/booking/static/media/alert-triangle.dde02dfee375b92a5f96.svg",
     "static/media/sofa.svg": "/booking/static/media/sofa.c9430c0ef26db27719d358c8800c2deb.svg",
-    "static/media/Green.svg": "/booking/static/media/Green.c34d0afde86854e90ed0.svg",
+    "static/media/Green.svg": "/booking/static/media/Green.362d8746736a45581f5b.svg",
     "static/media/info-circle.svg": "/booking/static/media/info-circle.92f8b4407d00c0b8c7fbaf048b2d74cc.svg",
     "static/media/alert-circle.svg": "/booking/static/media/alert-circle.d2641f06abcd77299438.svg",
     "index.html": "/booking/index.html",
@@ -67,11 +67,11 @@
     "static/media/chevron-small-right.svg": "/booking/static/media/chevron-small-right.3c78a6d3f68951509fa9.svg",
     "static/media/left-arrow.svg": "/booking/static/media/left-arrow.e831657a40d75b120dc4.svg",
     "static/media/right-left.svg": "/booking/static/media/right-left.7efc550121917f592b29.svg",
-    "main.6577c25e.css.map": "/booking/static/css/main.6577c25e.css.map",
+    "main.5c43293a.css.map": "/booking/static/css/main.5c43293a.css.map",
     "main.2c1f675a.js.map": "/booking/static/js/main.2c1f675a.js.map"
   },
   "entrypoints": [
-    "static/css/main.6577c25e.css",
+    "static/css/main.5c43293a.css",
     "static/js/main.2c1f675a.js"
   ]
 }
