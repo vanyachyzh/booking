@@ -69,6 +69,13 @@
 
     transition: $transition;
 
+    &--password {
+      background-color: red;
+      -webkit-text-security: disc;
+      -moz-text-security: disc;
+      text-security: disc;
+    }
+
     &::placeholder {
       font-size: 16px;
       font-family: 'Satoshi', sans-serif;

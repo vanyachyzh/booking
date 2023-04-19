@@ -4,7 +4,9 @@ import { client } from "../utils";
 const BASE_URL = 'https://innjoy.space/';
 
 
-export const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+// export const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+export const emailRegex = /^(?=.{1,64}$)\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+
 export const passwordRegex = new RegExp(
   "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$"
 );
@@ -12,7 +14,7 @@ export const nameRegex = new RegExp("^[a-zA-Z]{4,}$");
 export const dateRegex = new RegExp("^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|30)$");
 export const phoneRegex = /^\d{9}$/;
 export const cvcRegex = /^\d{3}$/;
-export const cardRegex = /^\d{14}$/;
+export const cardRegex = /^\d{16}$/;
 
 export const fees = 3;
 

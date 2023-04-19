@@ -18,7 +18,8 @@ type Props = {
   setError?: React.Dispatch<React.SetStateAction<Error>>
   pattern?: RegExp,
   number?: boolean,
-  maxLength?: number
+  maxLength?: number,
+  isPassword?: boolean
 };
 
 export const Field: React.FC<Props> = ({
@@ -35,6 +36,7 @@ export const Field: React.FC<Props> = ({
   pattern,
   type = 'text',
   maxLength,
+  isPassword
 }) => {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);

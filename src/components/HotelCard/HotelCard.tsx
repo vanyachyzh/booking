@@ -23,6 +23,7 @@ export const HotelCard: React.FC<Props> = ({ hotel }) => {
   const dateTo = searchParams.get('dateTo') || '';
 
   const days = getDaysBetweenDates(dateFrom, dateTo);
+  console.log(hotel.rating)
 
   const navigate = useNavigate();
   const mapUrl
@@ -109,7 +110,9 @@ export const HotelCard: React.FC<Props> = ({ hotel }) => {
       <div className="card__payment">
         <div className='card__price title-x-black-700'>
           {`$${days ? days * Math.floor(+hotel.price) : Math.floor(+hotel.price)}`}
-          <span className='card__per text-x-gray-400'>per night</span>
+          <span className='card__per text-x-gray-400'>
+            {days ? `per ${days} nights` : `per night`}
+          </span>
         </div>
 
         <button

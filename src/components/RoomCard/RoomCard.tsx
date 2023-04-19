@@ -9,15 +9,18 @@ import { getDaysBetweenDates } from '../../api/booking';
 
 type Props = {
   room: RoomInfo | undefined,
+  setIsWarning: React.Dispatch<React.SetStateAction<boolean>>
 };
 
-export const RoomCard: React.FC<Props> = ({ room }) => {
+export const RoomCard: React.FC<Props> = ({ room, setIsWarning }) => {
   const context = useContext(AuthContext);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const hotel_id = searchParams.get('hotel_id') || '';
   const dateFrom = searchParams.get('dateFrom') || '';
   const dateTo = searchParams.get('dateTo') || '';
+
+  // console.log(room)
 
   const days = getDaysBetweenDates(dateFrom, dateTo);
 
@@ -31,6 +34,7 @@ export const RoomCard: React.FC<Props> = ({ room }) => {
 
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
+        setIsWarning(true)
       }
 
       return;

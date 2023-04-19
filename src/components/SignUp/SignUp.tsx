@@ -95,8 +95,11 @@ export const SignUp: React.FC<Props> = ({ setUser }) => {
       }));
     }
 
-    if (name && email && password && confirmPassword
-      && password && confirmPassword && surname && password && emailRegex.test(email)) {
+    if (nameRegex.test(name)
+      && passwordRegex.test(password) 
+      && passwordRegex.test(confirmPassword) 
+      && nameRegex.test(surname)
+      && emailRegex.test(email)) {
       fetch('https://innjoy.space/register', {
         method: 'POST',
         headers: {
@@ -224,7 +227,7 @@ export const SignUp: React.FC<Props> = ({ setUser }) => {
               placeholder='Repeat the password'
               error={null}
               warning={warning.password}
-              label='password'
+              label='Confirm the password'
               helper='Invalid password'
               value={confirmPassword}
               setValue={setConfirmPassword}

@@ -21,7 +21,6 @@ import classNames from 'classnames';
 import { getSearchWith } from '../../utils';
 import { Loader } from '../../components/Loader';
 import { useSpring, animated } from 'react-spring';
-import { spawn } from 'child_process';
 
 type Props = {
   setUser: React.Dispatch<React.SetStateAction<User | null>>
@@ -38,7 +37,8 @@ type Grades = {
 
 
 export const HotelPage: React.FC<Props> = ({ setUser }) => {
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
+  const [isWarning, setIsWarning] = useState(false);
   const [hotel, setHotel] = useState<HotelInfo | null>(null)
   const [isFirstOpen, setIsFirstOpen] = useState(false);
   const [reviews, setReviews] = useState([]);
@@ -118,6 +118,7 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
   }
 
   const onButtonClick = () => {
+    setIsWarning(false);
     setSearchParams(
       getSearchWith(
         searchParams,
@@ -129,11 +130,9 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
       ),)
   }
 
-
   return (
     <>
       <Header setUser={setUser} />
-
 
       {!hotel
         ? <Loader />
@@ -227,7 +226,10 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
                   </div>
                 </div>
 
-                <div className="hotel-page__booking-form">
+                <div className={classNames(
+                  "hotel-page__booking-form",
+                  {"hotel-page__booking-form--active": isWarning}
+                )}>
                   <div className="hotel-page__rating">
                     <span
                       style={{ backgroundColor: getColor(hotel?.rating) }}
@@ -366,7 +368,7 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
                       step={3}
                       items={rooms.map(room => (
                         <div key={room.id}>
-                          <RoomCard room={room} />
+                          <RoomCard setIsWarning={setIsWarning} room={room} />
                         </div>
                       )) || []}
                     />

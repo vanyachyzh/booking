@@ -3,7 +3,6 @@
 
 .card {
   border: 2px solid black;
-  // margin: 25px;
   border-radius: $rounding;
   width: 1038px;
   border: 1px solid #F1F3F5;
@@ -16,7 +15,6 @@
   &:hover {
     box-shadow: 0px 0px 9px rgba(97, 97, 97, 0.03), 0px 0px 8px rgba(97, 97, 97, 0.1), 0px 0px 6px rgba(97, 97, 97, 0.17), 0px 0px 3px rgba(97, 97, 97, 0.2), 0px 0px 0px rgba(97, 97, 97, 0.2);
   }
-
 
   &__carousel {
     border-radius: 8px;
@@ -59,6 +57,10 @@
     }
   }
 
+  &__grade {
+    width: 100%;
+  }
+
   &__stars {
     display: flex;
     justify-content: start;
@@ -73,7 +75,6 @@
     background: url("./../../images/iconss/gray-star-filled.svg") center no-repeat;
   }
 
-  &__features {}
 
   &__feature {
     display: inline-block;

@@ -186,7 +186,7 @@ export const PaymentPage: React.FC<Props> = ({ setUser }) => {
 
                 <div className='payment-page__topic-section'>
                   <h1 className='payment-page__topic title-x-black-700'>
-                    Payment method
+                    Payment Method
                   </h1>
 
                   <span
@@ -294,7 +294,7 @@ export const PaymentPage: React.FC<Props> = ({ setUser }) => {
               <div className='payment-page__cards'>
                 <div className='payment-page__card'>
                   <h1 className='payment-page__topic--card title-x-black-700'>
-                    Special Requests
+                    Booking Details
                   </h1>
 
                   <div className='payment-page__rating'>

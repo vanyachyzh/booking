@@ -22,10 +22,10 @@ export const PhotoRow: React.FC<Props> = ({ hotel }) => {
   return (
     <div className="container">
       <div className="photo-row">
-        {hotel.picturesUrl?.map((image, index) => (
+        {hotel.picturesUrl?.slice(0, 5).map((image, index) => (
           <img
             key={index}
-            className={`photo-row--${hotel.picturesUrl?.length}-${index + 1}`}
+            className={`photo-row--${hotel.picturesUrl?.slice(0, 5).length}-${index + 1}`}
             src={image}
             alt="Hotel"
           />

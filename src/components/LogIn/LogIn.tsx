@@ -147,6 +147,7 @@ export const LogIn: React.FC<Props> = ({ setUser }) => {
               warning={warning.password}
               label='password'
               helper='Invalid password'
+              type='password'
             />
           </div>
 
