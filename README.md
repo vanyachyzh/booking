@@ -1,5 +1,9 @@
 # innjoy Booking Service
 
+[Demo link](https://vanyachyzh.github.io/booking/)
+
+[Figma design](https://www.figma.com/file/I5juSYeeeLvXLjfLVhYyO0/Hotel-Web-Service?node-id=35-50&t=1MAWHCzbYY9v3QtJ-0)
+
 innjoy is a web-based booking service that allows users to search and book hotels, rooms, villas, and various other types of accommodations in different parts of the world. This document provides an overview of the INNJOY booking service and describes how to use it.
 
 ## Features
@@ -30,7 +34,7 @@ innjoy offers the following features:
 
 To use innjoy, follow these steps:
 
-1. Go to innjoy.com.
+1. Go to (https://vanyachyzh.github.io/booking/)
 2. Enter the destination, check-in and check-out dates, and the number of guests.
 3. Use the filters to narrow down your search results.
 4. Sort the search results by price, rating, or stars.
