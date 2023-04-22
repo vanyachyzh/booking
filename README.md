@@ -6,8 +6,8 @@ innjoy is a web-based booking service that allows users to search and book hotel
 
 INNJOY offers the following features:
 
-+Search for accommodations in different parts of the world
-+Select check-in and check-out dates and the number of guests
++ Search for accommodations in different parts of the world
++ Select check-in and check-out dates and the number of guests
 Filter search results by price, rating, and stars
 Sort search results by price, rating, and stars
 Read reviews from other users
