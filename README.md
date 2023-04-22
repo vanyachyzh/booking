@@ -34,7 +34,7 @@ innjoy offers the following features:
 
 To use innjoy, follow these steps:
 
-1. Go to (https://vanyachyzh.github.io/booking/)
+1. Go to https://vanyachyzh.github.io/booking/
 2. Enter the destination, check-in and check-out dates, and the number of guests.
 3. Use the filters to narrow down your search results.
 4. Sort the search results by price, rating, or stars.
