@@ -43,6 +43,8 @@ export const CalendarButton: React.FC<Props> = ({
       && !clickedElement.classList.contains('calendar__number')
       && !clickedElement.classList.contains('search-bar__button--prev')
       && !clickedElement.classList.contains('search-bar__button--next')
+      && !clickedElement.classList.contains('hotel-page__button--prev')
+      && !clickedElement.classList.contains('hotel-page__button--next')
       && !clickedElement.classList.contains('calendar__number-out')
       && !clickedElement.classList.contains('calendar')
       && !clickedElement.classList.contains('search-bar__calendars')

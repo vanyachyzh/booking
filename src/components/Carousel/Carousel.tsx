@@ -157,9 +157,9 @@ class Carousel extends Component<Props, State> {
               transition: `transform ${animationDuration}ms ease-in-out`,
             }}
           >
-            {images.map(image => (
+            {images.map((image, index)=> (
               <img
-                key={image}
+                key={image + index}
                 className='carousel__image'
                 src={image}
                 alt="1"

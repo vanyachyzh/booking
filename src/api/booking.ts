@@ -1,4 +1,4 @@
-import { BookingDate, ExtendedHotelInfo, HotelInfo } from "../types";
+import { BookingDate, ExtendedHotelInfo, HotelInfo, User } from "../types";
 import { client } from "../utils";
 
 const BASE_URL = 'https://innjoy.space/';
@@ -38,16 +38,6 @@ export function capitalizeWords(str: string): string {
 
   return capitalizedWords.join(' ');
 }
-
-// export function reverseTransformString(str: string) {
-//   str = str.replace(/%20/g, ' ');
-//   const words = str.split(' ');
-//   const transformedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
-//   const transformedString = transformedWords.join(' ');
-
-//   return transformedString;
-// }
-
 
 export const COUNTRY_CODES = ["+1", "+44", "+49", "+33", "+39", "+34", "+81", "+86", "+61", "+55", "+91", "+62", "+52", "+82", "+20", "+90", "+92", "+234"]
 
@@ -98,8 +88,6 @@ export const endMonthSetter = new Date(
   startMonthSetter.getTime() + 30 * 24 * 60 * 60 * 1000
 );
 
-// type StateHandler = (value: React.SetStateAction<Date>) => void
-
 export const increaseMonthSetter = (
   monthSetter: BookingDate,
   setMonthSetter: React.Dispatch<React.SetStateAction<BookingDate>>
@@ -134,15 +122,13 @@ export const dateToString = (date: Date | null) => {
     : "";
 };
 
-// export function reverseTransformString(str: string) {
-//   str = str.replace(/%20/g, " ");
-//   const words = str.split(" ");
-//   const transformedWords = words.map(
-//     (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-//   );
-//   const transformedString = transformedWords.join(" ");
-//   return transformedString;
-// }
+export const stringToDate = (dateString: string): Date | null => {
+  if (dateString) {
+    return new Date(dateString);
+  }
+
+  return null;
+};
 
 export const getExtendedHotelInfo = async (hotel: HotelInfo) => {
   const response = await fetch(
@@ -303,3 +289,18 @@ export function calculateBookingCosts({
 
   return { subtotal, taxAmount, total };
 }
+
+export const addUserToLocalStorage = (user: User) => {
+  localStorage.setItem(
+    'user',
+    JSON.stringify(user),
+  );
+};
+
+export const deleteUserToLocalStorage = () => {
+  localStorage.removeItem('user');
+};
+
+export const checkUser = () => {
+  return !!localStorage.getItem('user');
+};

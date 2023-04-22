@@ -5,13 +5,9 @@ import './Header.scss';
 import { AuthContext } from '../../App';
 import Logo from './../../images/Logo InnJoy.svg';
 import { User } from '../../types';
+import { checkUser, deleteUserToLocalStorage } from '../../api/booking';
 
-type Props = {
-  setUser: React.Dispatch<React.SetStateAction<User | null>>
-}
-
-export const Header: React.FC<Props> = ({ setUser }) => {
-  const context = useContext(AuthContext);
+export const Header: React.FC = () => {
   const navigate = useNavigate();
   const [isVisibleLogOut, setIsVisibleLogOut] = useState(false)
   const { pathname } = useLocation();
@@ -29,7 +25,8 @@ export const Header: React.FC<Props> = ({ setUser }) => {
   }
 
   const onLogOut = () => {
-    setUser(null);
+    // setUser(null);
+    deleteUserToLocalStorage();
     navigate('/')
   }
 
@@ -54,7 +51,7 @@ export const Header: React.FC<Props> = ({ setUser }) => {
           />
         </Link>
 
-        {context && context.user && (
+        {checkUser() && (
           <div className='header__profile'>
             <button
               onClick={onClick}
@@ -73,8 +70,7 @@ export const Header: React.FC<Props> = ({ setUser }) => {
           </div>
         )}
 
-        {context
-          && !context.user
+        {!checkUser()
           && pathname !== '/login'
           && pathname !== '/signup'
           && (

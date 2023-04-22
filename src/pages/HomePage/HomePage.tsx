@@ -11,12 +11,7 @@ import { SearchBar } from '../../components/SearchBar';
 import { getData } from '../../api/booking';
 import { AuthContext } from '../../App';
 
-
-type Props = {
-  setUser: React.Dispatch<React.SetStateAction<User | null>>
-}
-
-export const HomePage: React.FC<Props> = ({ setUser }) => {
+export const HomePage: React.FC = () => {
   const context = useContext(AuthContext);
   const [searchParams] = useSearchParams();
   const [hotelList, setHotelList] = useState<ExtendedHotelInfo[] | null>(null);
@@ -46,7 +41,7 @@ export const HomePage: React.FC<Props> = ({ setUser }) => {
   const afterlogin = () => {
     fetch(`https://innjoy.space/users/user`)
       .then(r => r.json())
-      .then(console.log)
+      // .then(console.log)
   }
 
 
@@ -90,7 +85,7 @@ export const HomePage: React.FC<Props> = ({ setUser }) => {
 
 
       const url1 = `https://innjoy.space/hotels/filters?city=New%25York&dateFrom=2023-04-12&dateTo=2023-05-23&capacity=1`;
-      console.log(url, url1)
+      // console.log(url, url1)
 
       fetch(url)
         .then(r => r.json())
@@ -122,14 +117,8 @@ export const HomePage: React.FC<Props> = ({ setUser }) => {
         Login
       </button> */}
       <div className='homepage'>
-        <Header
-          setUser={setUser}
-        />
-        <SearchBar
-          cards={hotelList}
-          setCards={setHotelList}
-          setUser={setUser}
-        />
+        <Header />
+        <SearchBar />
         <div className="containerr">
           <SideBar />
           <div className='homepage__cards'>

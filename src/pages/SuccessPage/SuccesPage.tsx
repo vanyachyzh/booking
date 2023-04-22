@@ -6,11 +6,8 @@ import { User } from '../../types';
 import { Loader } from '../../components/Loader';
 import Success from './../../images/iconss/Hotel Booking-cuate (1) 1.svg';
 
-type Props = {
-  setUser: React.Dispatch<React.SetStateAction<User | null>>
-}
 
-export const SuccesPage: React.FC<Props> = ({ setUser }) => {
+export const SuccesPage: React.FC = () => {
   const [showElement, setShowElement] = useState(false);
 
   useEffect(() => {
@@ -23,7 +20,7 @@ export const SuccesPage: React.FC<Props> = ({ setUser }) => {
   if (showElement) {
     return (
       <div className='success-page'>
-        <Header setUser={setUser} />
+        <Header />
 
         <img
           className='success-page__image'
@@ -49,7 +46,7 @@ export const SuccesPage: React.FC<Props> = ({ setUser }) => {
   } else {
     return (
       <div className='success-page'>
-        <Header setUser={setUser} />
+        <Header />
 
         <Loader />
       </div>

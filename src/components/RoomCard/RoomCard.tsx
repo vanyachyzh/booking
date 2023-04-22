@@ -5,7 +5,7 @@ import { RoomInfo } from '../../types';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Amenity } from '../Amenity';
 import { AuthContext } from '../../App';
-import { getDaysBetweenDates } from '../../api/booking';
+import { checkUser, getDaysBetweenDates } from '../../api/booking';
 
 type Props = {
   room: RoomInfo | undefined,
@@ -20,13 +20,13 @@ export const RoomCard: React.FC<Props> = ({ room, setIsWarning }) => {
   const dateFrom = searchParams.get('dateFrom') || '';
   const dateTo = searchParams.get('dateTo') || '';
 
-  // console.log(room)
-
   const days = getDaysBetweenDates(dateFrom, dateTo);
 
   const onButtonClick = () => {
-    if (context && !context.user) {
+    if (!checkUser()) {
       navigate(`/login`);
+      
+      return;
     }
 
     if (!dateFrom || !dateTo) {

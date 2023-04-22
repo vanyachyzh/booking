@@ -4,7 +4,7 @@ import './LogIn.scss';
 
 import { Field } from '../Field';
 import { Error, User, Warning } from '../../types';
-import { logIn } from '../../api/booking';
+import { addUserToLocalStorage, logIn } from '../../api/booking';
 import { Header } from '../Header';
 
 
@@ -32,11 +32,7 @@ function areAllFieldsEmpty(obj: Warning) {
 
 const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
-type Props = {
-  setUser: React.Dispatch<React.SetStateAction<User | null>>
-}
-
-export const LogIn: React.FC<Props> = ({ setUser }) => {
+export const LogIn: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [warning, setWarning] = useState<Warning>(initialWarnings)
@@ -76,12 +72,13 @@ export const LogIn: React.FC<Props> = ({ setUser }) => {
       .then(res => {
         console.log(res.status, warning, areAllFieldsEmpty(warning))
         if (res.status === 200 && areAllFieldsEmpty(warning)) {
-          setUser({
-            name: "sdfsdfsd",
-            surname: "sdfsd",
-            email,
-            password,
-          })
+          addUserToLocalStorage({
+              name: "sdfsdfsd",
+              surname: "sdfsd",
+              email,
+              password,
+            });
+
           navigate('/')
         } else {
           setError(prev => ({
@@ -95,7 +92,7 @@ export const LogIn: React.FC<Props> = ({ setUser }) => {
   return (
     <div className="login-page">
       <section className="login-page__section">
-        <Header setUser={setUser} />
+        <Header />
       </section>
 
       <section className="login-page__section">
@@ -148,6 +145,7 @@ export const LogIn: React.FC<Props> = ({ setUser }) => {
               label='password'
               helper='Invalid password'
               type='password'
+              // readonly={true}
             />
           </div>
 

@@ -4,8 +4,7 @@ import { Field } from '../Field';
 import { Link, useNavigate } from 'react-router-dom';
 import { Warning, Error, User } from '../../types';
 import { Header } from '../Header';
-import { emailRegex, nameRegex, passwordRegex } from '../../api/booking';
-
+import { addUserToLocalStorage, emailRegex, nameRegex, passwordRegex } from '../../api/booking';
 
 const initialWarnings = {
   name: '',
@@ -20,14 +19,7 @@ const initialError = {
   password: '',
 }
 
-type Props = {
-  setUser: React.Dispatch<React.SetStateAction<User | null>>
-}
-
-
-
-
-export const SignUp: React.FC<Props> = ({ setUser }) => {
+export const SignUp: React.FC = () => {
   const [warning, setWarning] = useState<Warning>(initialWarnings);
   const [error, setError] = useState<Error>(initialError)
   const [email, setEmail] = useState('')
@@ -117,8 +109,7 @@ export const SignUp: React.FC<Props> = ({ setUser }) => {
       })
         .then(res => {
           if (res.status === 200) {
-
-            setUser({
+            addUserToLocalStorage({
               name,
               surname,
               email,
@@ -139,7 +130,7 @@ export const SignUp: React.FC<Props> = ({ setUser }) => {
   return (
     <div className="signup-page">
       <section className="signup-page__section">
-        <Header setUser={setUser} />
+        <Header />
       </section>
 
       <section className="signup-page__section">
@@ -218,6 +209,7 @@ export const SignUp: React.FC<Props> = ({ setUser }) => {
               setWarning={setWarning}
               pattern={passwordRegex}
               password={thesame}
+              isPassword={true}
             />
           </div>
 
@@ -234,6 +226,7 @@ export const SignUp: React.FC<Props> = ({ setUser }) => {
               setWarning={setWarning}
               pattern={passwordRegex}
               password={thesame}
+              isPassword={true}
             />
           </div>
 

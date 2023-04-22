@@ -1,20 +1,18 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import './HotelPage.scss'
-import { BookingDate, ExtendedHotelInfo, HotelInfo, RoomInfo, User } from '../../types';
+import { BookingDate, HotelInfo, RoomInfo, User } from '../../types';
 import { PhotoRow } from '../../components/PhotoRow';
 import { Amenity } from '../../components/Amenity';
 import { CalendarButton } from '../../components/CalendarButton';
 import { Calendar } from '../../components/Calendar';
-import { startMonthSetter, endMonthSetter, increaseMonthSetter, decreaseMonthSetter, dateToString, getExtendedHotelInfo, getRatingWord, toNumber, getRating, getColor } from '../../api/booking';
+import { startMonthSetter, endMonthSetter, increaseMonthSetter, decreaseMonthSetter, dateToString, toNumber, getRating, getColor, stringToDate } from '../../api/booking';
 import { CapacitySelector } from '../../components/CapacitySelector';
 import { RoomCard } from '../../components/RoomCard';
 import { Header } from '../../components/Header';
 import { Navigation } from '../../components/Navigation';
 import { AuthContext } from '../../App';
 import { Rating } from '../../components/Rating';
-// import Carousel from '../../components/Carousel/Carousel';
-// import Slider from "react-slick";
 import { Slider } from '../../components/Slider';
 import { Comment } from '../../components/Comment';
 import classNames from 'classnames';
@@ -22,41 +20,38 @@ import { getSearchWith } from '../../utils';
 import { Loader } from '../../components/Loader';
 import { useSpring, animated } from 'react-spring';
 
-type Props = {
-  setUser: React.Dispatch<React.SetStateAction<User | null>>
-}
 
-const initialDate = {
-  start: null,
-  end: null,
-}
 
 type Grades = {
   [key: string]: number
 }
 
-
-export const HotelPage: React.FC<Props> = ({ setUser }) => {
-  const context = useContext(AuthContext);
+export const HotelPage: React.FC = () => {
   const [isWarning, setIsWarning] = useState(false);
   const [hotel, setHotel] = useState<HotelInfo | null>(null)
   const [isFirstOpen, setIsFirstOpen] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [gradesObject, setGradeObject] = useState<Grades | null>(null)
   const [isSecondOpen, setIsSecondOpen] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const hotel_id = searchParams.get('hotel_id') || '';
+  const dateFromParam = searchParams.get('dateFrom') || '';
+  const dateToParam = searchParams.get('dateTo') || '';
+  const capacityParam = searchParams.get('capacity') || '';
   const [monthSetter, setMonthSetter] = useState<BookingDate>({
     start: startMonthSetter,
     end: endMonthSetter,
-  })
-  const [date, setDate] = useState<BookingDate>(initialDate);
-  const [capacity, setCapacity] = useState<number>(1);
+  });
+  const [date, setDate] = useState<BookingDate>({
+    start: stringToDate(dateFromParam),
+    end: stringToDate(dateToParam),
+  });
+  const [capacity, setCapacity] = useState<number>(+capacityParam || 1);
   const [activeAnchor, setActiveAnchor] = useState("#overview");
 
   const [rooms, setRooms] = useState<RoomInfo[] | null>(null)
-  const [searchParams, setSearchParams] = useSearchParams();
-  const hotel_id = searchParams.get('hotel_id') || '';
-  const dateFrom = searchParams.get('dateFrom') || '';
-  const dateTo = searchParams.get('dateTo') || '';
+
+
 
   const fadeAnim = useSpring({
     opacity: hotel ? 1 : 0,
@@ -75,7 +70,7 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
           }
         })
 
-      if (dateFrom && dateTo && capacity) {
+      if (dateFromParam && dateToParam && capacity) {
         fetch(`https://innjoy.space/apartments/available?${searchParams.toString()}`)
           .then(r => r.json())
           .then(r => setRooms(r))
@@ -132,7 +127,7 @@ export const HotelPage: React.FC<Props> = ({ setUser }) => {
 
   return (
     <>
-      <Header setUser={setUser} />
+      <Header />
 
       {!hotel
         ? <Loader />

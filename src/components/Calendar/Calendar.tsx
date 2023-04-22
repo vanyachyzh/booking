@@ -90,7 +90,6 @@ export const Calendar: React.FC<Props> = ({ currentDate, bookingDate, setBooking
     // const dateTime = date.getTime();
     // const currentTime = new Date(currentDate.getFullYear(), currentDate.getMonth(), i).getTime();
     const currentTime = date.getTime();
-    console.log(date, new Date(currentDate.getFullYear(), currentDate.getMonth(), i))
     const startTime = bookingDate.start?.getTime() || NaN;
     const endTime = bookingDate.end?.getTime() || NaN;
     days.push(

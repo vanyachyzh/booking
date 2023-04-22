@@ -9,11 +9,8 @@ import { ExtendedHotelInfo, HotelInfo, RoomInfo, User } from '../../types';
 import { Loader } from '../../components/Loader';
 import { AuthContext } from '../../App';
 
-type Props = {
-  setUser: React.Dispatch<React.SetStateAction<User | null>>
-}
 
-export const PaymentPage: React.FC<Props> = ({ setUser }) => {
+export const PaymentPage: React.FC = () => {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
@@ -52,7 +49,7 @@ export const PaymentPage: React.FC<Props> = ({ setUser }) => {
 
   useEffect(() => {
     if (context && context.room) {
-      console.log(context.room)
+
       setRoomName(context.room.name);
       setRoomPrice(context.room.price);
     }
@@ -99,9 +96,7 @@ export const PaymentPage: React.FC<Props> = ({ setUser }) => {
 
   return (
     <>
-      <Header
-        setUser={setUser}
-      />
+      <Header />
       {showElement
         ? (
           <>

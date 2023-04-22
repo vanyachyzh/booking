@@ -48,15 +48,15 @@ function App() {
       <AuthContext.Provider value={authContextValue}>
         <Routes>
           <Route path="/">
-            <Route index element={<HomePage setUser={setUser} />} />
-            <Route path="login" element={<LogIn setUser={setUser}/>} />
-            <Route path="signup" element={<SignUp setUser={setUser} />} />
-            <Route path="payment" element={<PaymentPage setUser={setUser} />} />
-            <Route path="photos" element={<PhotoPage setUser={setUser} />} />
-            <Route path="success" element={<SuccesPage setUser={setUser} />} />
-            <Route path="hotel" element={<HotelPage setUser={setUser} />} />
-            <Route path="reserve" element={<HotelPage setUser={setUser} />} />
-            <Route path="*" element={<ErrorPage setUser={setUser}/>} />
+            <Route index element={<HomePage />} />
+            <Route path="login" element={<LogIn />} />
+            <Route path="signup" element={<SignUp />} />
+            <Route path="payment" element={<PaymentPage />} />
+            <Route path="photos" element={<PhotoPage />} />
+            <Route path="success" element={<SuccesPage />} />
+            <Route path="hotel" element={<HotelPage />} />
+            <Route path="reserve" element={<HotelPage />} />
+            <Route path="*" element={<ErrorPage/>} />
           </Route>
         </Routes>
       </AuthContext.Provider>

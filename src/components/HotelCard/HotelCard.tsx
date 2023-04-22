@@ -23,7 +23,7 @@ export const HotelCard: React.FC<Props> = ({ hotel }) => {
   const dateTo = searchParams.get('dateTo') || '';
 
   const days = getDaysBetweenDates(dateFrom, dateTo);
-  console.log(hotel.rating)
+  // console.log(hotel.rating)
 
   const navigate = useNavigate();
   const mapUrl

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ClipboardEventHandler } from 'react';
 import './Field.scss';
 import classNames from 'classnames';
 
@@ -19,7 +19,8 @@ type Props = {
   pattern?: RegExp,
   number?: boolean,
   maxLength?: number,
-  isPassword?: boolean
+  isPassword?: boolean,
+  readonly?: boolean
 };
 
 export const Field: React.FC<Props> = ({
@@ -36,7 +37,8 @@ export const Field: React.FC<Props> = ({
   pattern,
   type = 'text',
   maxLength,
-  isPassword
+  isPassword, 
+  readonly
 }) => {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
@@ -57,6 +59,12 @@ export const Field: React.FC<Props> = ({
     }
   }
 
+  const handleCopy: ClipboardEventHandler<HTMLInputElement> = (event) => {
+    if (isPassword) {
+      event.preventDefault();
+    }
+  }
+
   return (
     <div className='field'>
       {label && (
@@ -66,6 +74,8 @@ export const Field: React.FC<Props> = ({
       )}
 
       <input
+        onCopy={handleCopy}
+        readOnly={readonly}
         autoComplete='off'
         name={label}
         maxLength={maxLength}

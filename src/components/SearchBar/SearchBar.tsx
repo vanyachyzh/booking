@@ -9,80 +9,37 @@ import { Calendar } from '../Calendar';
 import { CalendarButton } from '../CalendarButton';
 import { MapIcon, MapIconBig } from '../Icon/Icon';
 import { CapacitySelector } from '../CapacitySelector';
-import { capitalizeWords, reverseTransformString } from '../../api/booking';
+import { capitalizeWords, decreaseMonthSetter, endMonthSetter, increaseMonthSetter, reverseTransformString, startMonthSetter, stringToDate } from '../../api/booking';
 
-type Props = {
-  cards: ExtendedHotelInfo[] | null,
-  setCards: (v: ExtendedHotelInfo[]) => void,
-  setUser: React.Dispatch<React.SetStateAction<User | null>>
-}
-
-// function transformStringTo(str: string) {
-//   const words = str.match(/\S+/g);
-
-//   if (!words) {
-//     return '';
-//   }
-
-//   const transformedWords = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
-
-//   const transformedString = transformedWords.join(' ').replace(/(?<!%20)\s/g, '%20');
-
-//   return transformedString;
-// }
-
-// function formatDate(dateString: string) {
-//   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-//   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-//   const date = new Date(dateString);
-//   const month = months[date.getMonth()];
-//   const dayOfWeek = daysOfWeek[date.getDay()];
-//   const day = date.getDate();
-//   const year = date.getFullYear();
-//   const hour = date.getHours();
-//   const minute = date.getMinutes();
-//   const second = date.getSeconds();
-//   const timezoneOffset = new Date().getTimezoneOffset();
-//   const timezoneOffsetHours = Math.abs(Math.floor(timezoneOffset / 60));
-//   const timezoneOffsetMinutes = Math.abs(timezoneOffset % 60);
-//   const timezone = timezoneOffset < 0 ? "+" : "-";
-
-
-//   return `${dayOfWeek} ${month} ${day} ${year} ${hour}:${minute}:${second} GMT ${timezone}${timezoneOffsetHours < 10 ? '0' : ''}${timezoneOffsetHours}${timezoneOffsetMinutes < 10 ? '0' : ''}${timezoneOffsetMinutes} (Eastern European Summer Time)`;
-// }
-
-const initialDate = {
-  start: null,
-  end: null,
-}
-
-export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
+export const SearchBar: React.FC= () => {
   const [hotelList, setHotelList] = useState<HotelInfo[] | null>(null)
   const [proposedCities, setProposedCities] = useState<string[] | null>();
   const [isProposedVisible, setIsProposedVisible] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const cityParam = searchParams.get('city') || '';
+  const capacityParam = searchParams.get('capacity') || '';
+  const dateFromParam = searchParams.get('dateFrom') || '';
+  const dateToParam = searchParams.get('dateTo') || '';
   const [isActive, setIsActive] = useState(false);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
   const [iconState, setIconState] = useState(IconState.Default)
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [date, setDate] = useState<BookingDate>(initialDate);
-  const [capacity, setCapacity] = useState<number>(1);
+  const [date, setDate] = useState<BookingDate>({
+    start: stringToDate(dateFromParam),
+    end: stringToDate(dateToParam),
+  });
+  const [capacity, setCapacity] = useState<number>(+capacityParam || 1);
   const [city, setCity] = useState(reverseTransformString(cityParam));
-  const [nextDate, setNextDate] = useState(new Date(currentDate.getTime() + 30 * 24 * 60 * 60 * 1000));
+  const [monthSetter, setMonthSetter] = useState<BookingDate>({
+    start: startMonthSetter,
+    end: endMonthSetter,
+  })
+
   const handleClickNext = () => {
-    const newCurrentDate = new Date(currentDate.getTime() + 30 * 24 * 60 * 60 * 1000);
-    setCurrentDate(newCurrentDate);
-
-    const newNextDate = new Date(nextDate.getTime() + 30 * 24 * 60 * 60 * 1000);
-    setNextDate(newNextDate);
+    increaseMonthSetter(monthSetter, setMonthSetter);
   };
-  const handleClickPrev = () => {
-    const newCurrentDate = new Date(currentDate.getTime() - 30 * 24 * 60 * 60 * 1000);
-    setCurrentDate(newCurrentDate);
 
-    const newNextDate = new Date(nextDate.getTime() - 30 * 24 * 60 * 60 * 1000);
-    setNextDate(newNextDate);
+  const handleClickPrev = () => {
+    decreaseMonthSetter(monthSetter, setMonthSetter);
   };
 
   useEffect(() => {
@@ -90,6 +47,14 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
       setIconState(IconState.Default)
     }
   }, [isProposedVisible])
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     const url = 'https://innjoy.space/hotels/all'
@@ -143,34 +108,13 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
     setIconState(IconState.Active);
   };
 
-  // const handleBlur = () => {
-  //   setIsFocused(false);
-  //   setIconState(IconState.Default);
-  // };
-
-
   const [mapIconState, setMapIconState] = useState(IconState.Default);
-  const [inputClicked, setInputClicked] = useState(false);
+  // const [inputClicked, setInputClicked] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleInputClick = () => {
-    setInputClicked(true);
-  };
-
-  const handleButtonClick = () => {
-
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
+  // const handleInputClick = () => {
+  //   // setInputClicked(true);
+  // };
 
   const handleClickOutside = (event: MouseEvent) => {
     const clickedElement = event.target as HTMLElement;
@@ -180,12 +124,10 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
       && !clickedElement.classList.contains('search-bar__option')
       ) {
       setIsProposedVisible(false);
+      setIconState(IconState.Default)
     }
   };
 
-  // const [leftActive, setLeftActive] = useState(false);
-  // const [rightActive, setrightActive] = useState(false);
-  
   return (
     <header className='search-bar'>
       <form
@@ -208,7 +150,7 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
                 onFocus={() => {
                   handleFocus()
                 }}
-                onClick={handleInputClick}
+                // onClick={handleInputClick}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 placeholder='Enter city'
@@ -265,13 +207,13 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
                       />
 
                       <Calendar
-                        currentDate={currentDate}
+                        currentDate={monthSetter.start || new Date()}
                         bookingDate={date}
                         setBookingDate={setDate}
                       />
 
                       <Calendar
-                        currentDate={nextDate}
+                        currentDate={monthSetter.end || new Date()}
                         bookingDate={date}
                         setBookingDate={setDate}
                       />
@@ -308,13 +250,13 @@ export const SearchBar: React.FC<Props> = ({ cards, setCards, setUser }) => {
                       />
 
                       <Calendar
-                        currentDate={currentDate}
+                        currentDate={monthSetter.start || new Date()}
                         bookingDate={date}
                         setBookingDate={setDate}
                       />
 
                       <Calendar
-                        currentDate={nextDate}
+                        currentDate={monthSetter.end || new Date()}
                         bookingDate={date}
                         setBookingDate={setDate}
                       />

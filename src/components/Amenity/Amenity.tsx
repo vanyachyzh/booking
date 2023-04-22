@@ -23,6 +23,7 @@ import sofaImage from './../../images/iconss/icon (tabler)/sofa.svg';
 import gardenImage from './../../images/iconss/icon (tabler)/droplet-half-filled.svg';
 import toiletImage from './../../images/iconss/icon (tabler)/info-circle.svg';
 import washImage from './../../images/iconss/icon (tabler)/wash-machine.svg';
+import balconyImage from './../../images/iconss/Balcony.svg';
 
 
 type Props = {

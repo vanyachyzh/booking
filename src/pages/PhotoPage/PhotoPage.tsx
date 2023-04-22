@@ -6,16 +6,11 @@ import { HotelInfo, User } from '../../types';
 import { Navigation } from '../../components/Navigation';
 import { GallerySlider } from '../../components/GallerySlider/GallerySlider';
 import { AuthContext } from '../../App';
-// import { getSearchWith } from '../../utils';
 import { Loader } from '../../components/Loader';
 import { animated, config, useSpring } from 'react-spring';
 
 
-type Props = {
-  setUser: React.Dispatch<React.SetStateAction<User | null>>
-}
-
-export const PhotoPage: React.FC<Props> = ({ setUser }) => {
+export const PhotoPage: React.FC = () => {
   const context = useContext(AuthContext);
 
   const [currentImage, setCurrentImage] = useState<number>(0);
@@ -75,7 +70,7 @@ export const PhotoPage: React.FC<Props> = ({ setUser }) => {
 
       className='photo-page'
     >
-      <Header setUser={setUser} />
+      <Header />
 
       {!hotel
         ? <Loader />
@@ -99,7 +94,7 @@ export const PhotoPage: React.FC<Props> = ({ setUser }) => {
                 All photos
               </span>
 
-              {hotel?.picturesUrl.map((photo, index) => (
+              {hotel?.picturesUrl.slice(0, 6).map((photo, index) => (
                 <img
                   onClick={() => setCurrentImage(index + 1)}
                   className='photo-page__photo'
@@ -119,7 +114,7 @@ export const PhotoPage: React.FC<Props> = ({ setUser }) => {
         <GallerySlider
           currentImage={currentImage}
           setCurrentImage={setCurrentImage}
-          images={hotel?.picturesUrl || []}
+          images={hotel?.picturesUrl.slice(0, 7) || []}
         />
       )}
       </animated.div>

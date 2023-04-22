@@ -188,6 +188,8 @@ export const SideBar: React.FC = () => {
           onChange={(event) => inputHandler("priceMin", event.target.value)}
           className='side-bar__budget-from'
           type="number"
+          // pattern="[1-9]"
+          // onKeyDown={}
           min={0}
           step={1}
           placeholder='From'
@@ -198,6 +200,7 @@ export const SideBar: React.FC = () => {
           onChange={(event) => inputHandler("priceMax", event.target.value)}
           className='side-bar__budget-to'
           type="number"
+          // pattern="[1-9]"
           min={0}
           step={1}
           placeholder='To'
